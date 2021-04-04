@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true,
   },
   "extends": [
     "airbnb", 
@@ -23,10 +24,14 @@
     // "react",
     // "jsx-a11y",
     // "prettier",
-    // "@typescript-eslint"
+    "@typescript-eslint"
   ],
   "rules": {
     "@typescript-eslint/no-var-requires":"off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/no-extraneous-dependencies": [
+      "error", { "devDependencies": true }
+    ],
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/extensions": [
       "error",
@@ -36,9 +41,8 @@
         "jsx": "never",
         "ts": "never",
         "tsx": "never"
-      }
-   ]
-  },
+      }]
+    },
   "settings": {
     "import/resolver": {
       "node": {
