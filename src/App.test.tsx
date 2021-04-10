@@ -5,9 +5,9 @@ import { render } from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
-  it('renders title', () => {
+  it('renders app logo', () => {
     const { container } = render(<App />);
 
-    expect(container).toHaveTextContent('hello');
+    expect(container).toHaveTextContent('로고');
   });
 });
