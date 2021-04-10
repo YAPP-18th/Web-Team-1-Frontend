@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+button {
+  font-size: 1em;
+}
+
+html {
+  font-size: 16px;
+  background: #F6F5F0;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1440px;
+  font-size: 1rem;
+  font-family: 'Spoqa Han Sans Neo';
+  color: #000;
+  font-size: 16px;
+  word-break: keep-all;
+}
