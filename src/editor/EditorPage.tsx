@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import 'Style/style.css';
+import './templateStyle.css';
 
 const EditorPage = (): JSX.Element => {
   const editorRef = useRef<Editor>(null);
