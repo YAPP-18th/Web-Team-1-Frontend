@@ -21,6 +21,7 @@
   "homepage": "https://github.com/YAPP-18th/Web-Team-1-Frontend#readme",
   "dependencies": {
     "@loadable/component": "^5.14.1",
+    "@toast-ui/editor": "^2.5.1",
     "@toast-ui/react-editor": "^2.5.1",
     "axios": "^0.21.1",
     "cross-env": "^7.0.3",
