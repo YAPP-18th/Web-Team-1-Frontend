@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Viewer } from '@toast-ui/react-editor';
 import styled from 'styled-components';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import 'Style/style.css';
+import './templateStyle.css';
 
 const StyledViewPage = styled.div`
   width: 1000px;
