@@ -10,7 +10,7 @@ const StyledViewPage = styled.div`
   padding: 20px;
 `;
 
-const ViewPage = (): JSX.Element => {
+const ViewPage = () => {
   const viewerRef = useRef<Viewer>(null);
   const [value] = useState('<p>hello~</p>');
   useEffect(() => {

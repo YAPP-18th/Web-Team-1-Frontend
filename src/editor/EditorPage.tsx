@@ -3,7 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import './templateStyle.css';
 
-const EditorPage = (): JSX.Element => {
+const EditorPage = () => {
   const editorRef = useRef<Editor>(null);
 
   const clickConsole = () => {
