@@ -27,5 +27,6 @@
       "@utils/*": ["utils/*"]
     }
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  "exclude": ["./**/*.test.tsx"]
 }

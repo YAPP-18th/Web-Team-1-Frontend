@@ -8,6 +8,6 @@ describe('App', () => {
   it('renders app logo', () => {
     const { container } = render(<App />);
 
-    expect(container).toHaveTextContent('로고');
+    expect(container).toHaveTextContent('돌아보다,');
   });
 });
