@@ -5,9 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve",
+    "build": "cross-env NODE_ENV=production webpack",
+    "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx,js,jsx}",
     "test:unit": "jest",
     "test:watch": "npm run test:unit -- --watchAll --coverage --verbose",
-    "coverage": "npm run test:unit -- --coverage"
+    "coverage": "npm run test:unit -- --coverage",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -21,7 +26,13 @@
   "homepage": "https://github.com/YAPP-18th/Web-Team-1-Frontend#readme",
   "dependencies": {
     "@loadable/component": "^5.14.1",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-knobs": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
@@ -39,6 +50,7 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.13.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@types/jest": "^26.0.22",
@@ -73,6 +85,7 @@
     "ts-jest": "^26.5.4",
     "ts-loader": "^8.0.18",
     "typescript": "^4.0.7",
+    "url-loader": "^4.1.1",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
