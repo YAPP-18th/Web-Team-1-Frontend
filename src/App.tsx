@@ -1,48 +1,110 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
-import Button from './components/Button';
-
-import { images } from './assets';
-
 const App = () => {
   return (
-    <Container>
-      <Header>
-        <Logo>돌아보다,</Logo>
-        <div>
-          <Button width="148px" height="40px" image={images.buttons.hand} background="#acaba5">
-            바로 회고하기
-          </Button>
-          <button type="button">사이드 메뉴</button>
+    <>
+      <header>
+        <h1>돌아보다,</h1>
+        <button type="button">회원가입 / 로그인</button>
+      </header>
+
+      <main>
+        <div className="select-group">
+          <select>
+            <option value="1">오늘 하루,</option>
+          </select>
+          <select>
+            <option value="1">많은 생각을 했고,</option>
+            <option value="2">유독 정신없고,</option>
+          </select>
+          <select>
+            <option value="1">회고가 필요하다면?</option>
+            <option value="2">길고 지루하게,</option>
+          </select>
         </div>
-      </Header>
-    </Container>
+
+        <div>
+          <nav className="categories">
+            <label htmlFor="total">
+              <input type="checkbox" id="total" name="total" />
+              전체
+            </label>
+            <label htmlFor="marketing">
+              <input type="checkbox" id="marketing" name="marketing" />
+              마케팅
+            </label>
+            <label htmlFor="design">
+              <input type="checkbox" id="design" name="design" />
+              디자인
+            </label>
+            <label htmlFor="managing">
+              <input type="checkbox" id="managing" name="managing" />
+              기획
+            </label>
+            <label htmlFor="develop">
+              <input type="checkbox" id="develop" name="develop" />
+              개발
+            </label>
+          </nav>
+          <form className="article-search">
+            <select>
+              <option value="title">제목</option>
+              <option value="description">내용</option>
+            </select>
+            <input type="search" placeholder="검색하세요" />
+            <input type="submit" />
+          </form>
+        </div>
+
+        <div className="articles">
+          <ul>
+            <li>
+              <article>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
+                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
+                tempora dolorem repellendus voluptates, ipsa nihil autem?
+              </article>
+            </li>
+            <li>
+              <article>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
+                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
+                tempora dolorem repellendus voluptates, ipsa nihil autem?
+              </article>
+            </li>
+            <li>
+              <article>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
+                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
+                tempora dolorem repellendus voluptates, ipsa nihil autem?
+              </article>
+            </li>
+            <li>
+              <article>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
+                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
+                tempora dolorem repellendus voluptates, ipsa nihil autem?
+              </article>
+            </li>
+            <li>
+              <article>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
+                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
+                tempora dolorem repellendus voluptates, ipsa nihil autem?
+              </article>
+            </li>
+            <li>
+              <article>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
+                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
+                tempora dolorem repellendus voluptates, ipsa nihil autem?
+              </article>
+            </li>
+          </ul>
+        </div>
+      </main>
+    </>
   );
 };
-
-const Logo = styled.h1`
-  font-family: RIDIBatang;
-  color: #acaba5;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 32px;
-  letter-spacing: -0.06em;
-`;
-
-const Header = styled.header`
-  margin-top: 56px;
-  border: 1px solid red;
-  display: flex;
-  justify-content: space-between;
-  height: 40px;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  height: 1024px;
-  position: relative;
-`;
 
 export default App;
