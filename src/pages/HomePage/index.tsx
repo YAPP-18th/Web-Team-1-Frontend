@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Categories from '../../components/Categories';
+import Cards from '../../components/Cards';
+
 export default function HomePage() {
   return (
     <>
@@ -18,53 +21,7 @@ export default function HomePage() {
           </select>
         </div>
         <Categories />
-
-        <div className="articles">
-          <ul>
-            <li>
-              <article>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
-                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
-                tempora dolorem repellendus voluptates, ipsa nihil autem?
-              </article>
-            </li>
-            <li>
-              <article>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
-                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
-                tempora dolorem repellendus voluptates, ipsa nihil autem?
-              </article>
-            </li>
-            <li>
-              <article>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
-                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
-                tempora dolorem repellendus voluptates, ipsa nihil autem?
-              </article>
-            </li>
-            <li>
-              <article>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
-                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
-                tempora dolorem repellendus voluptates, ipsa nihil autem?
-              </article>
-            </li>
-            <li>
-              <article>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
-                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
-                tempora dolorem repellendus voluptates, ipsa nihil autem?
-              </article>
-            </li>
-            <li>
-              <article>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse
-                expedita iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate
-                tempora dolorem repellendus voluptates, ipsa nihil autem?
-              </article>
-            </li>
-          </ul>
-        </div>
+        <Cards />
       </main>
     </>
   );
