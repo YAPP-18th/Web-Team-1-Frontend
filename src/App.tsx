@@ -1,6 +1,8 @@
 import React from 'react';
 
-const App = () => {
+import { Route, Switch } from 'react-router-dom';
+
+function HomePage() {
   return (
     <>
       <header>
@@ -104,6 +106,14 @@ const App = () => {
         </div>
       </main>
     </>
+  );
+}
+
+const App = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+    </Switch>
   );
 };
 
