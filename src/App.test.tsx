@@ -15,7 +15,7 @@ describe('App', () => {
     );
   }
 
-  it('renders app logo', () => {
+  it('"돌아보다," title을 볼 수 있다.', () => {
     const { container } = renderApp({ path: '/' });
 
     expect(container).toHaveTextContent('돌아보다,');
