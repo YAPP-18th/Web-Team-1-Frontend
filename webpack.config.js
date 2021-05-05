@@ -28,6 +28,7 @@ module.exports = () => {
         '@components': path.resolve(__dirname, 'src', 'components'),
         '@hooks': path.resolve(__dirname, 'src', 'hooks'),
         '@pages': path.resolve(__dirname, 'src', 'pages'),
+        '@styles': path.resolve(__dirname, 'src', 'styles'),
         '@static': path.resolve(__dirname, 'src', 'static'),
         '@store': path.resolve(__dirname, 'src', 'store'),
         '@types': path.resolve(__dirname, 'src', 'types'),
