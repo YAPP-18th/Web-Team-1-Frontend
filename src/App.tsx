@@ -1,51 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
 import { GlobalStyle } from '@styles/index';
 
-import Button from './components/Button';
-
-import { images } from './assets';
+import Header from './components/Header';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Container>
-        <Header>
-          <Logo>돌아보다,</Logo>
-          <div>
-            <Button width="148px" height="40px" image={images.buttons.hand} background="#acaba5">
-              바로 회고하기
-            </Button>
-            <button type="button">사이드 메뉴</button>
-          </div>
-        </Header>
-      </Container>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route component={NotFound} />
+      </Switch>
     </>
   );
 };
-
-const Logo = styled.h1`
-  font-family: RIDIBatang;
-  color: #acaba5;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 32px;
-  letter-spacing: -0.06em;
-`;
-
-const Header = styled.header`
-  margin-top: 56px;
-  border: 1px solid red;
-  display: flex;
-  justify-content: space-between;
-  height: 40px;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  height: 1024px;
-  position: relative;
-`;
 
 export default App;
