@@ -4,7 +4,7 @@ interface Props {
   percent: number;
 }
 
-const ScrollBarBackground = styled.div`
+export const ScrollBarBackground = styled.div`
   position: fixed;
   width: 100%;
   height: 8px;
@@ -13,7 +13,7 @@ const ScrollBarBackground = styled.div`
   background-color: #cdccc6;
 `;
 
-const ScrollBarContent = styled(ScrollBarBackground).attrs<Props>(({ percent }) => ({
+export const ScrollBarContent = styled(ScrollBarBackground).attrs<Props>(({ percent }) => ({
   style: {
     width: `${percent}%`,
   },
