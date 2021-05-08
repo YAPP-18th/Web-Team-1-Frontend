@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ColorType } from 'types/Styles';
+import { ColorType } from '#types/Styles';
 
 export interface Props {
   backgroundColor?: ColorType;

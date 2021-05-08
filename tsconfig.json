@@ -15,16 +15,16 @@
     "resolveJsonModule": true,
     "baseUrl": "src",
     "paths": {
-      "@apis/*": ["apis/*"],
-      "@common/*": ["common/*"],
-      "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
-      "@pages/*": ["pages/*"],
-      "@static/*": ["static/*"],
-      "@styles/*": ["styles/*"],
-      "@reducers/*": ["reducers/*"],
-      "@typings/*": ["typings/*"],
-      "@utils/*": ["utils/*"]
+      "#apis/*": ["apis/*"],
+      "#common/*": ["common/*"],
+      "#components/*": ["components/*"],
+      "#hooks/*": ["hooks/*"],
+      "#pages/*": ["pages/*"],
+      "#static/*": ["static/*"],
+      "#styles/*": ["styles/*"],
+      "#reducers/*": ["reducers/*"],
+      "#types/*": ["types/*"],
+      "#utils/*": ["utils/*"]
     }
   },
   "include": ["./src/**/*", "**/*.ts", "**/*.tsx"],

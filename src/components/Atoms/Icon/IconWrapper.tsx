@@ -1,6 +1,6 @@
 import React, { FunctionComponent, RefObject, memo } from 'react';
 import classnames from 'classnames';
-import { ColorType } from 'types/Styles';
+import { ColorType } from '#types/Styles';
 import * as S from './style';
 
 export interface Props {

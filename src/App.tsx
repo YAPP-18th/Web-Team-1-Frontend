@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { GlobalStyle } from '@styles/index';
+import { GlobalStyle } from '#styles/index';
 
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
