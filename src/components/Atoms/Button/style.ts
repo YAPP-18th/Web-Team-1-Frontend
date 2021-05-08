@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ColorType, ButtonColor } from 'types/Styles';
+import { ColorType, ButtonColor } from '#types/Styles';
 
 export interface Props {
   buttonColor?: ButtonColor;
@@ -12,10 +12,16 @@ const defaultStyle = (
   hoverColor?: ColorType,
   textColor?: ColorType,
 ) => css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 16px;
+  border-radius: 60px;
   border: none;
   cursor: pointer;
   background: ${backgroundColor || 'none'};
-  color: ${textColor || 'black'};
+  color: ${textColor || 'white'};
   &:disabled {
     cursor: default;
     background: ${disabledColor || backgroundColor || 'none'} !important;

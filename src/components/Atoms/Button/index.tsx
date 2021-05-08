@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { ButtonColor } from 'types/Styles';
+import { ButtonColor } from '#types/Styles';
 import * as S from './style';
 
 export interface Props {
