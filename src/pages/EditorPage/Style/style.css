@@ -1,0 +1,6 @@
+.custom tbody tr td {
+  min-width: 300px;
+}
+.custom thead {
+  display: none;
+}
