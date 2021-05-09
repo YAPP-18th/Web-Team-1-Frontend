@@ -3,6 +3,8 @@ import React from 'react';
 import Categories from '../../components/Categories';
 import Cards from '../../components/Cards';
 
+import { cardsFixtures } from '../../fixtures/cards';
+
 export default function HomePage() {
   return (
     <>
@@ -21,7 +23,7 @@ export default function HomePage() {
           </select>
         </div>
         <Categories />
-        <Cards />
+        <Cards cards={cardsFixtures} />
       </main>
     </>
   );

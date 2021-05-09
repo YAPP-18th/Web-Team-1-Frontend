@@ -1,51 +1,26 @@
 import React from 'react';
 
-export default function Cards() {
+interface Card {
+  id: number;
+  title: string;
+  description: string;
+}
+interface Props {
+  cards: Card[];
+}
+
+export default function Cards({ cards }: Props) {
   return (
     <div className="articles">
       <ul>
-        <li>
-          <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse expedita
-            iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate tempora
-            dolorem repellendus voluptates, ipsa nihil autem?
-          </article>
-        </li>
-        <li>
-          <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse expedita
-            iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate tempora
-            dolorem repellendus voluptates, ipsa nihil autem?
-          </article>
-        </li>
-        <li>
-          <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse expedita
-            iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate tempora
-            dolorem repellendus voluptates, ipsa nihil autem?
-          </article>
-        </li>
-        <li>
-          <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse expedita
-            iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate tempora
-            dolorem repellendus voluptates, ipsa nihil autem?
-          </article>
-        </li>
-        <li>
-          <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse expedita
-            iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate tempora
-            dolorem repellendus voluptates, ipsa nihil autem?
-          </article>
-        </li>
-        <li>
-          <article>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum illo optio esse expedita
-            iusto, repellat commodi dolorum! Minima, veniam provident. Ex non voluptate tempora
-            dolorem repellendus voluptates, ipsa nihil autem?
-          </article>
-        </li>
+        {cards.map(({ id, title, description }) => (
+          <li key={id}>
+            <article>
+              <h1>{title}</h1>
+              <section>{description}</section>
+            </article>
+          </li>
+        ))}
       </ul>
     </div>
   );
