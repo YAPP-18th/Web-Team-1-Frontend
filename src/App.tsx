@@ -6,6 +6,8 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import NotFound from './pages/NotFound';
+import EditorPage from '#pages/EditorPage';
+import ViewPage from '#pages/ViewPage';
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/editor" component={EditorPage} />
+        <Route exact path="/view" component={ViewPage} />
         <Route component={NotFound} />
       </Switch>
     </>
