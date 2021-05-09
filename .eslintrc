@@ -2,7 +2,7 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true,
+    "jest": true
   },
   "extends": [
     "airbnb", 
@@ -43,9 +43,10 @@
         "ts": "never",
         "tsx": "never"
       }]
-    },
+  },
   "settings": {
     "import/resolver": {
+      "typescript": {},
       "node": {
         "paths": ["src"],
         "extensions": [".d.ts", ".ts", ".tsx", ".js"]
