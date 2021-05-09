@@ -12,7 +12,7 @@ const StyledViewPage = styled.div`
 
 const ViewPage = (): JSX.Element => {
   const viewerRef = useRef<Viewer>(null);
-  const [value] = useState('<p>hello~</p>');
+  const [initialValue] = useState('<p>hello~</p>');
   useEffect(() => {
     if (viewerRef.current !== null) {
       const content = localStorage.getItem('content');
@@ -24,7 +24,7 @@ const ViewPage = (): JSX.Element => {
 
   return (
     <StyledViewPage>
-      <Viewer initialValue={value} ref={viewerRef} />
+      <Viewer initialValue={initialValue} ref={viewerRef} />
     </StyledViewPage>
   );
 };
