@@ -1,9 +1,8 @@
 import React from 'react';
 
 import Categories from '../../components/Categories';
-import Cards from '../../components/Cards';
 
-import { cardsFixtures } from '../../fixtures/cards';
+import CardsContainer from '#containers/CardsContainer';
 
 export default function HomePage() {
   return (
@@ -23,7 +22,7 @@ export default function HomePage() {
           </select>
         </div>
         <Categories />
-        <Cards cards={cardsFixtures} />
+        <CardsContainer />
       </main>
     </>
   );

@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import Cards from './index';
 
-import { cardsFixtures } from '../../fixtures/cards';
+import { cardsFixtures } from '#fixtures/cards';
 
 describe('Cards', () => {
   it('카드 형태의 게시글을 볼 수 있다.', () => {
