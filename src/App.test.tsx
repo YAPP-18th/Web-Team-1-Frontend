@@ -9,8 +9,6 @@ import { cardsFixtures } from '#fixtures/cards';
 
 import App from './App';
 
-jest.mock('react-redux');
-
 describe('App', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) =>

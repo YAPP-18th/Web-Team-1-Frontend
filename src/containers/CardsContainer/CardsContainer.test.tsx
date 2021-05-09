@@ -7,8 +7,6 @@ import CardsContainer from '#containers/CardsContainer';
 
 import { cardsFixtures } from '#fixtures/cards';
 
-jest.mock('react-redux');
-
 describe('CardsContainer', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) =>
