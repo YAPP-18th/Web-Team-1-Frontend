@@ -7,12 +7,7 @@ const { actions, reducer: cardsReducer } = createSlice({
   initialState: {
     cards: cardsFixtures,
   },
-  reducers: {
-    clickCard(state, { payload: cardId }) {
-      console.log('cardId: ', cardId);
-    },
-  },
+  reducers: {},
 });
 
-export const { clickCard } = actions;
 export default cardsReducer;
