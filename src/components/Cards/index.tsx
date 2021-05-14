@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 import color from '#styles/color';
 
-import { images } from '../../assets';
-
 interface Card {
   id: number;
   title: string;
@@ -13,6 +11,7 @@ interface Card {
   description: string;
   tags: string[];
   user: string;
+  userPhoto: string;
   createdAt: string;
 }
 interface Props {
@@ -23,7 +22,7 @@ export default function Cards({ cards }: Props) {
   return (
     <div className="articles">
       <CardList>
-        {cards.map(({ id, title, category, description, tags, user, createdAt }) => (
+        {cards.map(({ id, title, category, description, tags, user, userPhoto, createdAt }) => (
           <CardItem key={id}>
             <article>
               <Title>{title}</Title>
@@ -37,7 +36,7 @@ export default function Cards({ cards }: Props) {
               {/* TODO: 댓글, 공유 표시 */}
             </article>
             <User>
-              <UserPhoto userPhoto={images.UserPhoto} />
+              <UserPhoto userPhoto={userPhoto} />
               {user}
               <CreatedAt>{createdAt}</CreatedAt>
             </User>
