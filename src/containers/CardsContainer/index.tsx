@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAppSelector } from '#hooks/react-redux';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 import Cards from '#components/Cards';
 
