@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import color from '#styles/color';
 
+import { images } from '../../assets';
+
 interface Card {
   id: number;
   title: string;
@@ -35,6 +37,7 @@ export default function Cards({ cards }: Props) {
               {/* TODO: 댓글, 공유 표시 */}
             </article>
             <User>
+              <UserPhoto userPhoto={images.UserPhoto} />
               {user}
               <CreatedAt>{createdAt}</CreatedAt>
             </User>
@@ -121,11 +124,25 @@ const User = styled.div`
   line-height: 14px;
   letter-spacing: -0.04em;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   padding-top: 19px;
 `;
 
+const UserPhoto = styled.figure<{ userPhoto: string }>`
+  background-image: ${(props) => `url(${props.userPhoto})`};
+  background-color: #dddddd;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 4px;
+`;
+
 const CreatedAt = styled.div`
+  margin-left: auto;
   font-family: Helvetica Neue;
   font-size: 12px;
   line-height: 14px;
