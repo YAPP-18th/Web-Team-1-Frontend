@@ -1,4 +1,8 @@
-const color = {
+interface colorTypes {
+  [key: string]: string;
+}
+
+const color: colorTypes = {
   green: '#6E8551',
   red: '#D56D5D',
   blue: '#6A84E1',
