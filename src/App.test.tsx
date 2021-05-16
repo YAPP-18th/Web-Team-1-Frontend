@@ -2,11 +2,24 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+
+import { cardsFixtures } from '#fixtures/cards';
 
 import App from './App';
 
 describe('App', () => {
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        cardsReducer: {
+          cards: cardsFixtures,
+        },
+      }),
+    );
+  });
+
   function renderApp({ path }) {
     return render(
       <MemoryRouter initialEntries={[path]}>

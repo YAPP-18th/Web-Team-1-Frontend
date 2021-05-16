@@ -18,13 +18,15 @@
       "#apis/*": ["apis/*"],
       "#common/*": ["common/*"],
       "#components/*": ["components/*"],
+      "#containers/*": ["containers/*"],
       "#hooks/*": ["hooks/*"],
       "#pages/*": ["pages/*"],
       "#static/*": ["static/*"],
       "#styles/*": ["styles/*"],
       "#reducers/*": ["reducers/*"],
       "#types/*": ["types/*"],
-      "#utils/*": ["utils/*"]
+      "#utils/*": ["utils/*"],
+      "#fixtures/*": ["fixtures/*"]
     }
   },
   "include": ["./src/**/*", "**/*.ts", "**/*.tsx"],

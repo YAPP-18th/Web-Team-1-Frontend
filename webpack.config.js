@@ -26,6 +26,7 @@ module.exports = () => {
         '#apis': path.resolve(__dirname, 'src', 'apis'),
         '#common': path.resolve(__dirname, 'src', 'common'),
         '#components': path.resolve(__dirname, 'src', 'components'),
+        '#containers': path.resolve(__dirname, 'src', 'containers'),
         '#hooks': path.resolve(__dirname, 'src', 'hooks'),
         '#pages': path.resolve(__dirname, 'src', 'pages'),
         '#styles': path.resolve(__dirname, 'src', 'styles'),
@@ -33,6 +34,7 @@ module.exports = () => {
         '#store': path.resolve(__dirname, 'src', 'store'),
         '#types': path.resolve(__dirname, 'src', 'types'),
         '#utils': path.resolve(__dirname, 'src', 'utils'),
+        '#fixtures': path.resolve(__dirname, 'src', 'fixtures'),
       },
     },
     devServer: {
