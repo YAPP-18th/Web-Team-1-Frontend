@@ -8,8 +8,6 @@
     "build": "cross-env NODE_ENV=production webpack",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx,js,jsx}",
-    "test:unit": "jest",
-    "test:watch": "npm run test:unit -- --watchAll --coverage --verbose",
     "coverage": "npm run test:unit -- --coverage",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
