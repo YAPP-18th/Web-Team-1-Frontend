@@ -27,8 +27,6 @@ export const Category = styled.div`
   }
 `;
 
-export const Input = styled.input``;
-
 export const Label = styled.label<Props>`
   display: flex;
   justify-content: center;
@@ -47,5 +45,12 @@ export const Label = styled.label<Props>`
   letter-spacing: -0.04em;
   & span {
     margin-left: 2px;
+  }
+`;
+
+export const Input = styled.input`
+  display: none;
+  &:checked + ${Label} {
+    background-color: #acaba5;
   }
 `;
