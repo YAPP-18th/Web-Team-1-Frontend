@@ -17,6 +17,7 @@ html {
 
 body {
   margin: 0 auto;
+  padding: 0 104px 0 104px;
   max-width: 1440px;
   font-size: 1rem;
   font-family: 'Spoqa Han Sans Neo';
