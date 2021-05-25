@@ -1,4 +1,5 @@
 import React from 'react';
+import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 
 export default function SearchForm() {
@@ -13,8 +14,8 @@ export default function SearchForm() {
         </ul>
       </S.Dropdown>
       <S.SearchField>
-        <input type="search" placeholder="어떤 글을 찾으시나요?" />
-        <input type="submit" value="찾기" />
+        <input type="text" placeholder="어떤 글을 찾으시나요?" />
+        <IconWrapper icon={IconPaths.Search} />
       </S.SearchField>
     </S.SearchBox>
   );

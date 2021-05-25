@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SearchBox = styled.form`
+export const SearchBox = styled.div`
   display: flex;
   padding: 16px 20px 14px 20px;
   background-color: #fefefe;
@@ -9,11 +9,6 @@ export const SearchBox = styled.form`
   width: 441px;
   height: 48px;
 
-  font-family: Apple SD Gothic Neo;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: -0.04em;
   color: #acaba5;
 `;
 
@@ -54,4 +49,18 @@ export const Dropdown = styled.div`
 
 export const DefaultOption = styled.div``;
 
-export const SearchField = styled.div``;
+export const SearchField = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & input {
+    outline: none;
+    width: 286px;
+    padding: 0 10px;
+    margin-right: auto;
+    border: 0;
+  }
+  & input::-webkit-input-placeholder {
+    color: #cdccc6;
+  }
+`;
