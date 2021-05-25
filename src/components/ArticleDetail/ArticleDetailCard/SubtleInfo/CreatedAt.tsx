@@ -5,7 +5,7 @@ interface Props {
   date: string;
 }
 
-const StyledDate = styled.p`
+const StyledCreatedAt = styled.p`
   font-family: Helvetica Neue;
   font-style: normal;
   font-weight: normal;
@@ -18,8 +18,8 @@ const StyledDate = styled.p`
   color: #666666;
   margin-left: 16px;
 `;
-const Date = ({ date }: Props) => {
-  return <StyledDate>{date} </StyledDate>;
+const CreatedAt = ({ date }: Props) => {
+  return <StyledCreatedAt>{date} </StyledCreatedAt>;
 };
 
-export default Date;
+export default CreatedAt;

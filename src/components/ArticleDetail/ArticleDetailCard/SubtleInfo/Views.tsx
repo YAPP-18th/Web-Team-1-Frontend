@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  read: number;
+  count: number;
 }
 const StyledViews = styled.p`
   font-family: Helvetica Neue;
@@ -15,8 +15,8 @@ const StyledViews = styled.p`
   color: #666666;
 `;
 
-const Views = ({ read }: Props) => {
-  return <StyledViews> · {read}min read</StyledViews>;
+const Views = ({ count }: Props) => {
+  return <StyledViews> · {count}min read</StyledViews>;
 };
 
 export default Views;
