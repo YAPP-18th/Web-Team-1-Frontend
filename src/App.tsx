@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage';
 import NotFound from './pages/NotFound';
 import EditorPage from '#pages/EditorPage';
 import ViewPage from '#pages/ViewPage';
+import ArticleDetailPage from '#pages/ArticleDetailPage';
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/editor" component={EditorPage} />
         <Route exact path="/view" component={ViewPage} />
+        <Route exact path="/articleDetail/:id" component={ArticleDetailPage} />
+
         <Route component={NotFound} />
       </Switch>
     </>
