@@ -5,7 +5,7 @@ import { articleDetailFixture as mockup } from '#fixtures/articleDetail';
 import Category from './Category';
 import Title from './Title';
 
-import SubtleInfo from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo';
+import SubtleInfo from '#components/ArticleView/ArticleDetail/SubtleInfo';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'codemirror/lib/codemirror.css';
 // import './Style/style.css';
@@ -15,7 +15,8 @@ const StyleArticleCard = styled.div`
   box-shadow: 0px 5px 20px rgba(205, 204, 198, 0.25);
   border-radius: 29px;
   padding: 56px 200px 64px 100px;
-  margin: 0 208px 50px 104px;
+  /* margin: 0 0 50px 104px; */
+  width: 1128px;
 `;
 
 const StyledViewer = styled.div`

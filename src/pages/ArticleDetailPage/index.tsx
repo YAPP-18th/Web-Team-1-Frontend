@@ -1,11 +1,11 @@
 import React from 'react';
-import { ArticleDetailCard, ProgressBar } from '#components/ArticleDetail';
+import { ArticleDetail, ProgressBar } from '#components/ArticleView';
 
 const ArticleDetailPage = () => {
   return (
     <>
       <ProgressBar />
-      <ArticleDetailCard />
+      <ArticleDetail />
     </>
   );
 };

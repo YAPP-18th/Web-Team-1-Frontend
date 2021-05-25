@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Author from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/Author';
-import CreatedAt from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/CreatedAt';
-import Views from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/Views';
+import Author from '#components/ArticleView/ArticleDetail/SubtleInfo/Author';
+import CreatedAt from '#components/ArticleView/ArticleDetail/SubtleInfo/CreatedAt';
+import Views from '#components/ArticleView/ArticleDetail/SubtleInfo/Views';
 
 interface Props {
   view: number;
