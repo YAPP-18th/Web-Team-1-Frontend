@@ -11,7 +11,6 @@ interface Props {
     nickname: string;
     picture: string;
   };
-
   date: string;
 }
 
