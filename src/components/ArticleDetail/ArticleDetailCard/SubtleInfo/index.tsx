@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Author from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/Author';
 import Date from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/Date';
-import ReadCount from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/ReadCount';
+import Views from '#components/ArticleDetail/ArticleDetailCard/SubtleInfo/Views';
 
 interface Props {
   view: number;
@@ -25,7 +25,7 @@ const SubtleInfo = ({ user, date, view }: Props) => {
     <StyledSubtleInfo>
       <Author imgSrc={user.picture} name={user.nickname} />
       <Date date={date} />
-      <ReadCount read={view} />
+      <Views count={view} />
     </StyledSubtleInfo>
   );
 };

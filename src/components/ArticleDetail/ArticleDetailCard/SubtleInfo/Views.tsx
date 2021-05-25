@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface Props {
   read: number;
 }
-const StyledReadCount = styled.p`
+const StyledViews = styled.p`
   font-family: Helvetica Neue;
   font-style: normal;
   font-weight: normal;
@@ -15,8 +15,8 @@ const StyledReadCount = styled.p`
   color: #666666;
 `;
 
-const ReadCount = ({ read }: Props) => {
-  return <StyledReadCount> · {read}min read</StyledReadCount>;
+const Views = ({ read }: Props) => {
+  return <StyledViews> · {read}min read</StyledViews>;
 };
 
-export default ReadCount;
+export default Views;
