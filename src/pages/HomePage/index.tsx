@@ -3,6 +3,7 @@ import React from 'react';
 import { Categories } from '#components/Atoms';
 
 import CardsContainer from '#containers/CardsContainer';
+import ArticleModalContainer from '#containers/ArticleModalContainer';
 
 export default function HomePage() {
   return (
@@ -23,6 +24,9 @@ export default function HomePage() {
         </div>
         <Categories />
         <CardsContainer />
+
+        {/* 헤더의 바로 작성하기 버튼 대신 임시로 쓰이는 버튼입니다. */}
+        <ArticleModalContainer />
       </main>
     </>
   );
