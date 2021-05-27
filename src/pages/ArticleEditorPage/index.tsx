@@ -1,10 +1,10 @@
 import React from 'react';
-import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
+import ArticleEditorContainer from '#containers/ArticleEditorContainer';
 
 const ArticleEditorPage = () => {
   return (
     <>
-      <ArticleEditor />
+      <ArticleEditorContainer />
     </>
   );
 };
