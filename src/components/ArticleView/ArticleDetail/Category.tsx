@@ -7,19 +7,21 @@ interface Props {
 }
 
 const Category = ({ category }: Props) => {
-  const categories: { [key: string]: string } = {
-    마케팅: 'red',
-    디자인: 'blue',
-    기획: 'purple',
-    개발: 'yellow',
+  const categories: { [key: string]: Array<string> } = {
+    marketing: ['red', '마케팅'],
+    design: ['blue', '디자인'],
+    plan: ['purple', '기획'],
+    develop: ['yellow', '개발'],
   };
 
   return (
     <>
-      <Button buttonColor={{ background: color[categories[category]] }}>
-        {category}
-        <IconWrapper icon={IconPaths.Glitter} />
-      </Button>
+      {category && (
+        <Button buttonColor={{ background: color[categories[category][0]] }}>
+          {categories[category][1]}
+          <IconWrapper icon={IconPaths.Bulb} />
+        </Button>
+      )}
     </>
   );
 };
