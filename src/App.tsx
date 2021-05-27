@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound';
 import EditorPage from '#pages/EditorPage';
 import ViewPage from '#pages/ViewPage';
 import ArticleDetailPage from '#pages/ArticleDetailPage';
+import ArticleEditorPage from '#pages/ArticleEditorPage';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route exact path="/editor" component={EditorPage} />
         <Route exact path="/view" component={ViewPage} />
         <Route exact path="/articleDetail/:id" component={ArticleDetailPage} />
+        <Route exact path="/articleEditor" component={ArticleEditorPage} />
 
         <Route component={NotFound} />
       </Switch>

@@ -27,6 +27,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "camelcase": "off",
     "@typescript-eslint/no-var-requires":"off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.tsx"]}],
