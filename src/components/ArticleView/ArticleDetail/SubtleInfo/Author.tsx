@@ -23,6 +23,7 @@ const StyledName = styled.p`
 
 const StyledImg = styled.div<ImgProps>`
   background-image: url(${(props) => props.imgSrc});
+  background-size: cover;
   width: 32px;
   height: 32px;
 
