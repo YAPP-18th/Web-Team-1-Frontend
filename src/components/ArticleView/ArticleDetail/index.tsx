@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Viewer } from '@toast-ui/react-editor';
+import { ArticleDetailData } from 'api/articleViewApi';
 import styled from 'styled-components';
-import { articleDetailFixture as mockup } from '#fixtures/articleDetail';
 import Category from './Category';
 import Title from './Title';
 
@@ -9,6 +9,10 @@ import SubtleInfo from '#components/ArticleView/ArticleDetail/SubtleInfo';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'codemirror/lib/codemirror.css';
 // import './Style/style.css';
+
+interface Props {
+  data: ArticleDetailData;
+}
 
 const StyleArticleCard = styled.div`
   background-color: #fefefe;
@@ -36,21 +40,21 @@ const StyledViewer = styled.div`
   }
 `;
 
-const ArticleDetailCard = () => {
+const ArticleDetailCard = ({ data }: Props) => {
+  const { contents, category, title, nickname, profile, view, created_at } = data;
   const viewerRef = useRef<Viewer>(null);
+
   useEffect(() => {
     if (viewerRef.current !== null) {
-      const { content } = mockup;
-      if (content) {
-        viewerRef.current.getInstance().setMarkdown(content);
-      }
+      viewerRef.current.getInstance().setMarkdown(contents);
     }
-  }, []);
+  }, [contents]);
+
   return (
     <StyleArticleCard>
-      <Category category={mockup.category} />
-      <Title text={mockup.title} />
-      <SubtleInfo user={mockup.user} view={mockup.view} date={mockup.date} />
+      <Category category={category} />
+      <Title text={title} />
+      <SubtleInfo nickname={nickname} profile={profile} view={view} date={created_at} />
       <StyledViewer>
         <Viewer ref={viewerRef} />
       </StyledViewer>
