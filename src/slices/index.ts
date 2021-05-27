@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import cardsReducer from './cardsSlice';
+import articleEditorReducer from './articleEditorSlice';
 
 export const store = configureStore({
   reducer: {
     cardsReducer,
+    articleEditorReducer,
   },
 });
 
