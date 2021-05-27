@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: () => void;
   isWarning: boolean;
   toggle: () => void;
 }

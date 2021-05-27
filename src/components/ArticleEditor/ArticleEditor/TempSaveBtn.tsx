@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconPaths, IconWrapper, Button } from '#components/Atoms/index';
+import { Button } from '#components/Atoms/index';
 import { color } from '#styles/index';
 
 interface Props {

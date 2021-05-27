@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Editor } from '@toast-ui/react-editor';
 import TitleInput from '#components/ArticleEditor/ArticleEditor/TitleInput';
@@ -7,7 +7,7 @@ import TempSaveBtn from './TempSaveBtn';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  editorRef: React.MutableRefObject<any>;
+  editorRef: React.MutableRefObject<Editor | null>;
   onClick: () => void;
 }
 

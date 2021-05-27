@@ -23,7 +23,7 @@ const ArticleModalContainer = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const onClickWriteBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onClickWriteBtn = () => {
     // 카테고리 유효성 검사
     if (data.category === '') {
       setWarning(true);
