@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Categories } from '#components/Atoms';
+import { Categories, SearchForm } from '#components/Atoms';
 
 import CardsContainer from '#containers/CardsContainer';
 
@@ -22,6 +22,7 @@ export default function HomePage() {
           </select>
         </div>
         <Categories />
+        <SearchForm />
         <CardsContainer />
       </main>
     </>
