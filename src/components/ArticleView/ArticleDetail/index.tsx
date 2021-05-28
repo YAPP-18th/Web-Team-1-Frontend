@@ -6,6 +6,7 @@ import Category from './Category';
 import Title from './Title';
 
 import SubtleInfo from '#components/ArticleView/ArticleDetail/SubtleInfo';
+import TagList from './TagList';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'codemirror/lib/codemirror.css';
 // import './Style/style.css';
@@ -40,8 +41,12 @@ const StyledViewer = styled.div`
   }
 `;
 
+const StyledTag = styled.div`
+  display: flex;
+`;
+
 const ArticleDetailCard = ({ data }: Props) => {
-  const { contents, category, title, nickname, profile, view, created_at } = data;
+  const { contents, category, title, nickname, profile, view, created_at, tag } = data;
   const viewerRef = useRef<Viewer>(null);
 
   useEffect(() => {
@@ -52,7 +57,10 @@ const ArticleDetailCard = ({ data }: Props) => {
 
   return (
     <StyleArticleCard>
-      <Category category={category} />
+      <StyledTag>
+        <Category category={category} />
+        <TagList tag={tag} />
+      </StyledTag>
       <Title text={title} />
       <SubtleInfo nickname={nickname} profile={profile} view={view} date={created_at} />
       <StyledViewer>
