@@ -6,20 +6,42 @@ interface Props {
   category: string;
 }
 
+interface CategoryType {
+  color: string;
+  title: string;
+  icon: React.FunctionComponent;
+}
+
 const Category = ({ category }: Props) => {
-  const categories: { [key: string]: Array<string> } = {
-    marketing: ['red', '마케팅'],
-    design: ['blue', '디자인'],
-    plan: ['purple', '기획'],
-    develop: ['yellow', '개발'],
+  const categories: { [key: string]: CategoryType } = {
+    marketing: {
+      color: 'red',
+      title: '마케팅',
+      icon: IconPaths.Writing,
+    },
+    design: {
+      color: 'blue',
+      title: '디자인',
+      icon: IconPaths.Palette,
+    },
+    plan: {
+      color: 'purple',
+      title: '기획',
+      icon: IconPaths.Bulb,
+    },
+    develop: {
+      color: 'yellow',
+      title: '개발',
+      icon: IconPaths.Laptop,
+    },
   };
 
   return (
     <>
       {category && (
-        <Button buttonColor={{ background: color[categories[category][0]] }}>
-          {categories[category][1]}
-          <IconWrapper icon={IconPaths.Bulb} />
+        <Button buttonColor={{ background: color[categories[category].color] }}>
+          {categories[category].title}
+          <IconWrapper icon={categories[category].icon} />
         </Button>
       )}
     </>
