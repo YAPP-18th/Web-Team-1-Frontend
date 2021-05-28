@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
-import { postArticle, PostArticleData } from 'api/articleEditorApi';
+import { postArticle, PostArticleData } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 

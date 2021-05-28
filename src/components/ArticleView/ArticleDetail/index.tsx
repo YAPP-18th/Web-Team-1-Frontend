@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Viewer } from '@toast-ui/react-editor';
-import { ArticleDetailData } from 'api/articleViewApi';
 import styled from 'styled-components';
+import { ArticleDetailData } from '#apis/articleViewApi';
 import Category from './Category';
 import Title from './Title';
 
