@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 
 export default function SearchForm() {
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState({
     isOpen: false,
     defaultOption: '제목+내용',
@@ -26,9 +27,21 @@ export default function SearchForm() {
     });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent): void => {
+      if (dropdownRef && !dropdownRef.current?.contains(event.target as Node)) {
+        setState({ ...state, isOpen: false });
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
   return (
     <S.SearchBox>
-      <S.Dropdown>
+      <S.Dropdown ref={dropdownRef}>
         <S.DropdownHeader onClick={toggling}>{defaultOption}</S.DropdownHeader>
         {isOpen && (
           <S.DropdownList>
