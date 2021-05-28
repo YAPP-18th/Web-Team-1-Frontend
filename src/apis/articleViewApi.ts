@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import instance from '#apis/common';
 
 export interface ArticleDetailData {
   category: string;
@@ -14,7 +15,7 @@ export interface ArticleDetailData {
 
 export const getArticleDetail = async (index: string): Promise<AxiosResponse | null> => {
   try {
-    const res = await axios.get(`http://15.165.67.119:9000/api/v1/posts/${index}`);
+    const res = await instance.get(`/posts/${index}`);
     return res.data;
   } catch (error) {
     /* eslint-disable no-console */

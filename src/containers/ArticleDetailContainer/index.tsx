@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getArticleDetail } from 'api/articleViewApi';
+import { getArticleDetail } from '#apis/articleViewApi';
 import { ArticleDetail } from '#components/ArticleView';
 
 interface Props {

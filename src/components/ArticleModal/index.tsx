@@ -34,7 +34,7 @@ const StyledModal = styled.div`
   max-width: 100%;
   padding: 50px 60px;
   width: 416px;
-  height: 520px;
+  height: 620px;
 `;
 
 const CloseBtn = styled.button`
@@ -75,9 +75,7 @@ const Label = styled.small`
   color: #333333;
 `;
 
-const Select = styled.select.attrs(() => ({
-  name: 'category',
-}))`
+const Select = styled.select`
   margin-bottom: 12px;
   width: 296px;
   height: 48px;
@@ -86,6 +84,14 @@ const Select = styled.select.attrs(() => ({
   padding: 12px 16px;
   border: none;
 `;
+
+const CategorySelect = styled(Select).attrs(() => ({
+  name: 'category',
+}))``;
+
+const TemplateSelect = styled(Select).attrs(() => ({
+  name: 'templateIdx',
+}))``;
 
 const Input = styled.input.attrs(() => ({
   type: 'text',
@@ -139,13 +145,23 @@ const ArticleModal = ({ onChange, onClick, isWarning, toggle }: Props) => {
           <ModalHeader>글 설정</ModalHeader>
           <ModalBody>
             <Label>카테고리</Label>
-            <Select onChange={onChange}>
+            <CategorySelect onChange={onChange}>
               <option value="">선택하세요</option>
               <option value="marketing">마케팅</option>
               <option value="design">디자인</option>
               <option value="plan">기획</option>
               <option value="develop">개발</option>
-            </Select>
+            </CategorySelect>
+            <Label>템플릿</Label>
+            <TemplateSelect onChange={onChange}>
+              <option value="">선택하세요</option>
+              <option value={1}>4F</option>
+              <option value={2}>PMI</option>
+              <option value={3}>POST-MOTOROLA</option>
+              <option value={4}>DAKI</option>
+              <option value={5}>4L</option>
+              <option value={6}>KPT</option>
+            </TemplateSelect>
             <Label>해시태그</Label>
             <Input onChange={onChange} />
             <HelpText>

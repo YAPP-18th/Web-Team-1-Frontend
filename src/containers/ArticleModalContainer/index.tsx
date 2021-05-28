@@ -15,6 +15,7 @@ const ArticleModalContainer = () => {
   const [data, setData] = useState({
     category: '',
     tag: '',
+    templateIdx: 0,
   });
 
   const [warning, setWarning] = useState(false);
@@ -25,8 +26,9 @@ const ArticleModalContainer = () => {
 
   const onClickWriteBtn = () => {
     // 카테고리 유효성 검사
-    if (data.category === '') {
+    if (data.category === '' || data.templateIdx === 0) {
       setWarning(true);
+      return;
     }
 
     // 해시태그 파싱
@@ -41,6 +43,7 @@ const ArticleModalContainer = () => {
     const reduxData: EditorState = {
       category: data.category,
       tag: tagList,
+      templateIdx: data.templateIdx,
     };
     dispatch(editorActions.setEditorData(reduxData));
 

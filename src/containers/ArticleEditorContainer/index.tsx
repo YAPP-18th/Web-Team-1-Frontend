@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
-import { postArticle, PostArticleData } from 'api/articleEditorApi';
+import { postArticle, PostArticleData } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 
@@ -9,7 +9,7 @@ const ArticleEditorContainer = () => {
   const history = useHistory();
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string | null>('');
-  const { tag, category } = useAppSelector((state) => state.articleEditorReducer);
+  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
 
   const callApi = async (data: PostArticleData) => {
     const index = await postArticle(data);
@@ -30,7 +30,7 @@ const ArticleEditorContainer = () => {
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         image: [],
         tag,
-        templateIdx: 0,
+        templateIdx,
         title: titleRef.current,
       };
       callApi(data);
