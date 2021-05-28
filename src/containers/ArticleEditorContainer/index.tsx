@@ -9,7 +9,7 @@ const ArticleEditorContainer = () => {
   const history = useHistory();
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string | null>('');
-  const { tag, category } = useAppSelector((state) => state.articleEditorReducer);
+  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
 
   const callApi = async (data: PostArticleData) => {
     const index = await postArticle(data);
@@ -30,7 +30,7 @@ const ArticleEditorContainer = () => {
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         image: [],
         tag,
-        templateIdx: 0,
+        templateIdx,
         title: titleRef.current,
       };
       callApi(data);
