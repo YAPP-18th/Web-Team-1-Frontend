@@ -43,18 +43,6 @@ module.exports = () => {
       contentBase: path.resolve(__dirname, 'dist'),
       stats: 'errors-warnings',
       overlay: true,
-      // proxy: {
-      //   '/api/v1': {
-      //     target: 'http://15.165.67.119:9000',
-      //     changeOrigin: true,
-      //     // pathRewrite: { '^/api' : ''}
-      //   },
-      // },
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
-      },
     },
     entry: path.join(__dirname, 'src', 'index'),
     module: {
