@@ -6,11 +6,8 @@ import Views from '#components/ArticleView/ArticleDetail/SubtleInfo/Views';
 
 interface Props {
   view: number;
-  user: {
-    idx: number;
-    nickname: string;
-    picture: string;
-  };
+  nickname: string;
+  profile: string;
   date: string;
 }
 
@@ -20,10 +17,10 @@ const StyledSubtleInfo = styled.div`
   margin-bottom: 56px;
 `;
 
-const SubtleInfo = ({ user, date, view }: Props) => {
+const SubtleInfo = ({ nickname, profile, date, view }: Props) => {
   return (
     <StyledSubtleInfo>
-      <Author imgSrc={user.picture} name={user.nickname} />
+      <Author imgSrc={profile} name={nickname} />
       <CreatedAt date={date} />
       <Views count={view} />
     </StyledSubtleInfo>
