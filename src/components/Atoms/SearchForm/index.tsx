@@ -6,11 +6,12 @@ export default function SearchForm() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState({
     isOpen: false,
+    text: '',
     defaultOption: '제목+내용',
     options: ['제목+내용', '제목', '내용'],
   });
 
-  const { isOpen, defaultOption, options } = state;
+  const { isOpen, text, defaultOption, options } = state;
 
   const toggling = () => {
     setState({
@@ -25,6 +26,11 @@ export default function SearchForm() {
       defaultOption: option,
       isOpen: false,
     });
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setState({ ...state, text: value });
   };
 
   useEffect(() => {
@@ -54,7 +60,12 @@ export default function SearchForm() {
         )}
       </S.Dropdown>
       <S.SearchField>
-        <input type="text" placeholder="어떤 글을 찾으시나요?" />
+        <input
+          type="text"
+          placeholder="어떤 글을 찾으시나요?"
+          onChange={handleChange}
+          value={text}
+        />
         <IconWrapper icon={IconPaths.Search} />
       </S.SearchField>
     </S.SearchBox>
