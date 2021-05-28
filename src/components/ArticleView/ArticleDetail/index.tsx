@@ -7,6 +7,7 @@ import Title from './Title';
 
 import SubtleInfo from '#components/ArticleView/ArticleDetail/SubtleInfo';
 import TagList from './TagList';
+import EditBtnList from './EditBtnList';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'codemirror/lib/codemirror.css';
 // import './Style/style.css';
@@ -22,6 +23,7 @@ const StyleArticleCard = styled.div`
   padding: 56px 200px 64px 100px;
   /* margin: 0 0 50px 104px; */
   width: 1128px;
+  position: relative;
 `;
 
 const StyledViewer = styled.div`
@@ -57,6 +59,7 @@ const ArticleDetailCard = ({ data }: Props) => {
 
   return (
     <StyleArticleCard>
+      <EditBtnList />
       <StyledTag>
         <Category category={category} />
         <TagList tag={tag} />
