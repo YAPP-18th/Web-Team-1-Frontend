@@ -9,7 +9,15 @@ const color: colorTypes = {
   purple: '#8F7CDA',
   yellow: '#F4BB4A',
   gray: '#ACABA5',
+  white: '#ffffff',
+
   backgroundColor: '#F6F5F0',
+  modalOuter: 'rgba(53, 53, 53, 0.76)',
+  modalText: '#666666',
+
+  google: '#D85040',
+  kakao: '#F8D749',
+  kakaoText: '#391B1B',
 };
 
 export default color;

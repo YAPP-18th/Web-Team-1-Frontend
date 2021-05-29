@@ -43,7 +43,8 @@
         "jsx": "never",
         "ts": "never",
         "tsx": "never"
-      }]
+      }],
+    "consistent-return":"off"
   },
   "settings": {
     "import/resolver": {
