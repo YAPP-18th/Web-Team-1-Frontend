@@ -17,6 +17,10 @@ export const CardItem = styled.li`
   box-shadow: 0px 5px 20px 0px #cdccc640;
 `;
 
+export const CardLink = styled.a`
+  text-decoration: none;
+`;
+
 export const Title = styled.h1`
   font-weight: 700;
   font-size: 20px;

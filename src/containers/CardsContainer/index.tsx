@@ -7,7 +7,11 @@ import Cards from '#components/Cards';
 
 import { fetchCards } from '../../slices/cardsSlice';
 
-export default function CardsContainer() {
+interface Props {
+  onClickCard: (postIdx: number) => void;
+}
+
+export default function CardsContainer({ onClickCard }: Props) {
   const dispatch = useAppDispatch();
   const { cards } = useAppSelector((state) => state.cardsReducer);
 
@@ -15,5 +19,5 @@ export default function CardsContainer() {
     dispatch(fetchCards());
   }, []);
 
-  return <Cards cards={cards} />;
+  return <Cards cards={cards} onClickCard={onClickCard} />;
 }

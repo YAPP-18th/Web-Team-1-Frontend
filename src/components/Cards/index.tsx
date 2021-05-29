@@ -18,9 +18,17 @@ interface Card {
 
 interface Props {
   cards: Card[];
+  onClickCard: (postIdx: number) => void;
 }
 
-export default function Cards({ cards }: Props) {
+export default function Cards({ cards, onClickCard }: Props) {
+  const handleClick = (idx: number) => {
+    return (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      onClickCard(idx);
+    };
+  };
+
   return (
     <div className="articles">
       <S.CardList>
@@ -38,29 +46,31 @@ export default function Cards({ cards }: Props) {
             scrapCnt,
           }) => (
             <S.CardItem key={postIdx}>
-              <article>
-                <S.Title>{title}</S.Title>
-                <S.Category category={category}>{category}</S.Category>
-                <S.Content>{contents.replace(/(<([^>]+)>)/gi, '')}</S.Content>
-                <S.CardFooter>
-                  <div className="tag">{tag}</div>
-                  <div className="comment-and-scrap">
-                    <div>
-                      <IconWrapper icon={IconPaths.Commant} />
-                      {commentCnt}
+              <S.CardLink href={`/articleDetail/${postIdx}`} onClick={handleClick(postIdx)}>
+                <article>
+                  <S.Title>{title}</S.Title>
+                  <S.Category category={category}>{category}</S.Category>
+                  <S.Content>{contents.replace(/(<([^>]+)>)/gi, '')}</S.Content>
+                  <S.CardFooter>
+                    <div className="tag">{tag}</div>
+                    <div className="comment-and-scrap">
+                      <div>
+                        <IconWrapper icon={IconPaths.Commant} />
+                        {commentCnt}
+                      </div>
+                      <div>
+                        <IconWrapper icon={IconPaths.Bookmark} />
+                        {scrapCnt}
+                      </div>
                     </div>
-                    <div>
-                      <IconWrapper icon={IconPaths.Bookmark} />
-                      {scrapCnt}
-                    </div>
-                  </div>
-                </S.CardFooter>
-              </article>
-              <S.User>
-                <S.UserPhoto userPhoto={profile} />
-                {nickname}
-                <S.CreatedAt>{created_at}</S.CreatedAt>
-              </S.User>
+                  </S.CardFooter>
+                </article>
+                <S.User>
+                  <S.UserPhoto userPhoto={profile} />
+                  {nickname}
+                  <S.CreatedAt>{created_at}</S.CreatedAt>
+                </S.User>
+              </S.CardLink>
             </S.CardItem>
           ),
         )}
