@@ -49,7 +49,7 @@ const StyledTag = styled.div`
 `;
 
 const ArticleDetailCard = ({ data, id }: Props) => {
-  const { contents, category, title, nickname, profile, view, created_at, tag, writer } = data;
+  const { contents, category, title, nickname, profile, created_at, tag, writer } = data;
   const viewerRef = useRef<Viewer>(null);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const ArticleDetailCard = ({ data, id }: Props) => {
         <TagList tag={tag} />
       </StyledTag>
       <Title text={title} />
-      <SubtleInfo nickname={nickname} profile={profile} view={view} date={created_at} />
+      <SubtleInfo nickname={nickname} profile={profile} date={created_at} />
       <StyledViewer>
         <Viewer ref={viewerRef} />
       </StyledViewer>
