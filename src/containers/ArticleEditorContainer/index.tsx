@@ -1,14 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
-import { getTemplate, postArticle, PostArticleData } from '#apis/articleEditorApi';
+import { getTemplate, postArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
+import ConfirmModalContainer from '#containers/ConfirmModalContainer';
+/* eslint-disable no-console */
 
 const ArticleEditorContainer = () => {
   const history = useHistory();
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string | null>('');
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
   const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
 
   const setTemplate = async (index: number) => {
@@ -18,19 +24,7 @@ const ArticleEditorContainer = () => {
     }
   };
 
-  const callApi = async (data: PostArticleData) => {
-    const index = await postArticle(data);
-    if (index !== -1) {
-      history.push(`/articleDetail/${index}`);
-    }
-  };
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    titleRef.current = e.target.value;
-  };
-
-  const onClick = () => {
-    /* eslint-disable no-console */
+  const callApi = async () => {
     if (editorRef.current !== null) {
       const data = {
         category,
@@ -40,8 +34,15 @@ const ArticleEditorContainer = () => {
         templateIdx,
         title: titleRef.current,
       };
-      callApi(data);
+      const index = await postArticle(data);
+      if (index !== -1) {
+        history.push(`/articleDetail/${index}`);
+      }
     }
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    titleRef.current = e.target.value;
   };
 
   useEffect(() => {
@@ -57,7 +58,8 @@ const ArticleEditorContainer = () => {
 
   return (
     <>
-      <ArticleEditor onChange={onChange} editorRef={editorRef} onClick={onClick} />
+      <ArticleEditor onChange={onChange} editorRef={editorRef} onClick={toggle} />
+      {modal && <ConfirmModalContainer type="write" onClick={callApi} toggle={toggle} />}
     </>
   );
 };

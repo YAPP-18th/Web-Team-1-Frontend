@@ -10,8 +10,8 @@ interface MatchParams {
 const ArticleDetailPage = ({ match }: RouteComponentProps<MatchParams>) => {
   return (
     <>
-      <ProgressBar />
       <ArticleDetailContainer id={match.params.id} />
+      <ProgressBar />
     </>
   );
 };
