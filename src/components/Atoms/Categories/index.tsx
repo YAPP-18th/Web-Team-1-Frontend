@@ -7,7 +7,7 @@ export default function Categories() {
     { text: '전체', value: 'total', icon: IconPaths.Glitter },
     { text: '마케팅', value: 'marketing', icon: IconPaths.Writing },
     { text: '디자인', value: 'design', icon: IconPaths.Palette },
-    { text: '기획', value: 'managing', icon: IconPaths.Bulb },
+    { text: '기획', value: 'plan', icon: IconPaths.Bulb },
     { text: '개발', value: 'develop', icon: IconPaths.Laptop },
   ];
 
@@ -16,7 +16,7 @@ export default function Categories() {
       <Dropdown />
       {categories.map(({ text, value, icon }) => (
         <S.Category key={text}>
-          <S.Input type="checkbox" id={value} name={value} />
+          <S.Input type="radio" id={value} name="category-radio-group" />
           <S.Label htmlFor={value} backgroundColor={S.backgroundColors[text]}>
             {text}
             <IconWrapper icon={icon} />
