@@ -33,8 +33,6 @@ const StyledModal = styled.div`
   transform: translate(-50%, -50%);
   max-width: 100%;
   padding: 50px 60px;
-  width: 416px;
-  height: 620px;
 `;
 
 const CloseBtn = styled.button`
