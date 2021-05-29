@@ -5,14 +5,17 @@ import styled from 'styled-components';
 import color from '#styles/color';
 
 interface Card {
-  id: number;
+  postIdx: number;
   title: string;
   category: string;
-  description: string;
-  tags: string[];
-  user: string;
-  userPhoto: string;
-  createdAt: string;
+  contents: string;
+  nickname: string;
+  profile: string;
+  tag: string;
+  view: number;
+  created_at: string;
+  commentCnt: number;
+  scrapCnt: number;
 }
 interface Props {
   cards: Card[];
@@ -22,23 +25,24 @@ export default function Cards({ cards }: Props) {
   return (
     <div className="articles">
       <CardList>
-        {cards.map(({ id, title, category, description, tags, user, userPhoto, createdAt }) => (
-          <CardItem key={id}>
+        {cards.map(({ postIdx, title, category, contents, nickname, profile, tag, created_at }) => (
+          <CardItem key={postIdx}>
             <article>
               <Title>{title}</Title>
               <Category category={category}>{category}</Category>
-              <Content>{description}</Content>
+              <Content>{contents.replace(/(<([^>]+)>)/gi, '')}</Content>
               <Tags>
-                {tags.map((tag) => (
+                {/* {tags.map((tag) => (
                   <li key={tag}>{tag}</li>
-                ))}
+                ))} */}
+                {tag}
               </Tags>
               {/* TODO: 댓글, 공유 표시 */}
             </article>
             <User>
-              <UserPhoto userPhoto={userPhoto} />
-              {user}
-              <CreatedAt>{createdAt}</CreatedAt>
+              <UserPhoto userPhoto={profile} />
+              {nickname}
+              <CreatedAt>{created_at}</CreatedAt>
             </User>
           </CardItem>
         ))}
@@ -85,10 +89,10 @@ const Category = styled.span<{ category: string }>`
     width: 8px;
     background-color: ${(props) => {
       const categories: { [key: string]: string } = {
-        마케팅: 'red',
-        디자인: 'blue',
-        기획: 'purple',
-        개발: 'yellow',
+        marketing: 'red',
+        design: 'blue',
+        plan: 'purple',
+        develop: 'yellow',
       };
       return color[categories[props.category]];
     }};
@@ -113,8 +117,18 @@ const Content = styled.section`
   font-size: 15px;
   color: #666666;
   line-height: 24px;
-  padding-bottom: 22px;
+  margin-bottom: 22px;
   letter-spacing: -0.04em;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+
+  height: 120px;
+  text-align: left;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 `;
 
 const User = styled.div`
