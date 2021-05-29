@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { alertActions, AlertState } from 'slices/alertSlice';
 import { useHistory } from 'react-router';
 import EditBtnList from '#components/ArticleView/ArticleDetail/EditBtnList';
 import { deleteArticle } from '#apis/articleViewApi';
+import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 
 /* eslint-disable no-console */
 
@@ -14,7 +15,11 @@ interface Props {
 const EditBtnListContainer = ({ id }: Props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const onClickDelete = async () => {
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+  const callApi = async () => {
     const result = await deleteArticle(id);
     if (result) {
       history.push('/');
@@ -32,7 +37,8 @@ const EditBtnListContainer = ({ id }: Props) => {
 
   return (
     <>
-      <EditBtnList onClickDelete={onClickDelete} onClickEdit={onClickEdit} />
+      <EditBtnList onClickDelete={toggle} onClickEdit={onClickEdit} />
+      {modal && <ConfirmModalContainer type="delete" onClick={callApi} toggle={toggle} />}
     </>
   );
 };
