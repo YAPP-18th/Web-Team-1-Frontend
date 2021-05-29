@@ -8,12 +8,14 @@ import { LoginModal } from '#components/Organisms/Modal';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
+import * as S from './style';
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedArticleModal, setIsShowedArticleModal] = useState(false);
+  const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isLogined, setIsLogined] = useState(false);
   const modalToggle = () => setIsShowedArticleModal(!isShowedArticleModal);
 
@@ -30,35 +32,30 @@ export default function Header() {
   };
 
   const onClickWriteBtn = () => {
-    // 카테고리 유효성 검사
-    if (data.category === '' || data.templateIdx === 0) {
-      setWarning(true);
-      return;
-    }
-
-    // 해시태그 파싱
+    if (data.category === '' || data.templateIdx === 0) return setWarning(true);
     const tagList = data.tag
       .split('#')
       .map((tag) => {
         return tag.split(' ')[0];
       })
       .filter((tmp) => tmp !== '');
-
-    // 리덕스에 저장
     const reduxData: EditorState = {
       category: data.category,
       tag: tagList,
       templateIdx: data.templateIdx,
     };
     dispatch(editorActions.setEditorData(reduxData));
-
-    // 페이지 이동
     history.push('/articleEditor');
   };
 
   // 로그인 버튼 클릭
   const handleClickSignInButton = useCallback(() => {
     setIsShowedSignInModal((prev) => !prev);
+  }, []);
+
+  // 햄버거 아이콘 클릭
+  const handleClickHamburger = useCallback(() => {
+    setIsShowedMenu((prev) => !prev);
   }, []);
 
   // access token 유무 체크
@@ -74,10 +71,31 @@ export default function Header() {
       <HeaderWrapper>
         <Logo>돌아보다,</Logo>
         {isLogined ? (
-          <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
-            바로 회고하기
-            <IconWrapper icon={IconPaths.Glitter} />
-          </Button>
+          <S.LoginAfter>
+            <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
+              바로 회고하기
+              <IconWrapper icon={IconPaths.Glitter} />
+            </Button>
+            <IconWrapper icon={IconPaths.Hamburger} onClick={handleClickHamburger} />
+            {isShowedMenu && (
+              <S.MenuWrapper>
+                <div className="profile">
+                  <img
+                    src="https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg"
+                    alt="썸네일"
+                  />
+                  <div className="content">
+                    <p>나같은 견</p>
+                    <span>로그아웃</span>
+                  </div>
+                </div>
+                <Button to="/me">작성한 회고</Button>
+                <span>작성 중인 회고</span>
+                <span>최근 읽은 회고</span>
+                <span>스크랩한 회고</span>
+              </S.MenuWrapper>
+            )}
+          </S.LoginAfter>
         ) : (
           <Button buttonColor={{ background: 'gray' }} onClick={handleClickSignInButton}>
             회원가입 / 로그인
