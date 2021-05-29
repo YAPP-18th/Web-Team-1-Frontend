@@ -17,8 +17,8 @@ export default function CardsContainer({ onClickCard }: Props) {
   const { sortBy } = useAppSelector((state) => state.conditionReducer);
 
   useEffect(() => {
-    dispatch(fetchCards());
-  }, []);
+    dispatch(fetchCards({ sortBy }));
+  }, [sortBy]);
 
   return <Cards cards={cards} onClickCard={onClickCard} />;
 }
