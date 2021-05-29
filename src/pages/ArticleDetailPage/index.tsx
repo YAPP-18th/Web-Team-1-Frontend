@@ -2,7 +2,6 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import ArticleDetailContainer from '#containers/ArticleDetailContainer';
 import { ProgressBar } from '#components/ArticleView';
-// import ConfirmModal from '#components/ConfirmModal';
 
 interface MatchParams {
   id: string;
@@ -11,9 +10,8 @@ interface MatchParams {
 const ArticleDetailPage = ({ match }: RouteComponentProps<MatchParams>) => {
   return (
     <>
-      <ProgressBar />
       <ArticleDetailContainer id={match.params.id} />
-      {/* <ConfirmModal /> */}
+      <ProgressBar />
     </>
   );
 };
