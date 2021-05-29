@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getArticleDetail } from '#apis/articleViewApi';
 import { ArticleDetail } from '#components/ArticleView';
+/* eslint-disable no-console */
 
 interface Props {
   id: string;
@@ -17,6 +18,7 @@ const ArticleDetailContainer = ({ id }: Props) => {
     tag: [],
     title: '',
     view: 0,
+    writer: false,
   });
 
   const getData = async () => {
@@ -38,7 +40,7 @@ const ArticleDetailContainer = ({ id }: Props) => {
 
   return (
     <>
-      <ArticleDetail data={data} />
+      <ArticleDetail data={data} id={id} />
     </>
   );
 };
