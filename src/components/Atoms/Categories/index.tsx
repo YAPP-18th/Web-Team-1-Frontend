@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './style';
-import { IconPaths, IconWrapper } from '#components/Atoms';
+import { Dropdown, IconPaths, IconWrapper } from '#components/Atoms';
 
 export default function Categories() {
   const categories = [
@@ -13,6 +13,7 @@ export default function Categories() {
 
   return (
     <S.Categories>
+      <Dropdown />
       {categories.map(({ text, value, icon }) => (
         <S.Category key={text}>
           <S.Input type="checkbox" id={value} name={value} />

@@ -8,6 +8,7 @@ export const DropdownWrapper = styled.div`
   line-height: 18px;
   letter-spacing: -0.04em;
   color: #666666;
+  position: relative;
 `;
 
 export const DropdownHeader = styled.div`
@@ -31,8 +32,7 @@ export const DropdownHeader = styled.div`
 
 export const DropdownList = styled.ul`
   position: absolute;
-  top: 61px;
-  left: 16px;
+  top: 43px;
   width: 99px;
   height: 78px;
   background: #fefefe;
@@ -50,6 +50,7 @@ export const DropdownItem = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
+  user-select: none;
   &:hover {
     color: #333333;
     background: #f8f8f8;
