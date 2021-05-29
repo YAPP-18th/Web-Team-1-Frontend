@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { IconWrapper, IconPaths } from '#components/Atoms';
 
 export default function Dropdown() {
   const [isOpen, setIsOpen] = useState(true);
@@ -10,7 +11,10 @@ export default function Dropdown() {
 
   return (
     <DropdownWrapper>
-      <DropdownHeader onClick={toggling}>최신순</DropdownHeader>
+      <DropdownHeader onClick={toggling}>
+        최신순
+        <IconWrapper icon={IconPaths.PolygonBottom} />
+      </DropdownHeader>
       {isOpen && (
         <DropdownList>
           <DropdownItem>최신순</DropdownItem>
@@ -34,6 +38,7 @@ const DropdownWrapper = styled.div`
 const DropdownHeader = styled.div`
   width: 98px;
   height: 40px;
+  padding-right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,6 +47,11 @@ const DropdownHeader = styled.div`
   border-radius: 54px;
   cursor: pointer;
   position: relative;
+  & span {
+    position: absolute;
+    right: 0px;
+    top: 8px;
+  }
 `;
 
 const DropdownList = styled.ul`
