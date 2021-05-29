@@ -8,7 +8,7 @@ export const BannerWrapper = styled.div`
   letter-spacing: -0.05em;
   text-align: left;
   color: #cdccc6;
-  padding-bottom: 120px;
+  padding-bottom: 90px;
   & .first-line {
     display: inline;
   }

@@ -9,6 +9,9 @@ import Laptop from './SVG/Laptop.svg';
 import Palette from './SVG/Palette.svg';
 import Search from './SVG/Search.svg';
 import Hamburger from './SVG/Hamburger.svg';
+import Bookmark from './SVG/Bookmark.svg';
+import Commant from './SVG/Commant.svg';
+import PolygonBottom from './SVG/PolygonBottom.svg';
 
 type Icon =
   | 'Exit'
@@ -20,7 +23,10 @@ type Icon =
   | 'Laptop'
   | 'Palette'
   | 'Search'
-  | 'Hamburger';
+  | 'Hamburger'
+  | 'Bookmark'
+  | 'Commant'
+  | 'PolygonBottom';
 
 type IconPathKey = {
   [key in Icon]: FunctionComponent;
@@ -37,6 +43,9 @@ const IconPaths: IconPathKey = {
   Palette,
   Search,
   Hamburger,
+  Bookmark,
+  Commant,
+  PolygonBottom,
 };
 
 export default IconPaths;

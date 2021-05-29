@@ -1,15 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '#components/Atoms';
-import { color } from '#styles/index';
+import { Button } from '#components/Atoms/index';
 
 interface Props {
   tag: Array<string>;
 }
-
-const StyledTagList = styled.div`
-  display: flex;
-`;
 
 const StyledTag = styled.span`
   margin: 0 4px;
@@ -24,15 +19,15 @@ const TagList = ({ tag }: Props) => {
   });
 
   return (
-    <StyledTagList>
+    <>
       {indexedTagList.map((item) => {
         return (
           <StyledTag key={item.id}>
-            <Button buttonColor={{ background: color.gray }}>{item.text}</Button>
+            <Button buttonColor={{ background: 'lightGray' }}>{item.text}</Button>
           </StyledTag>
         );
       })}
-    </StyledTagList>
+    </>
   );
 };
 

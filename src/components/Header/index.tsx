@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { editorActions, EditorState } from 'slices/articleEditorSlice';
 import { color } from '#styles/index';
@@ -71,7 +72,7 @@ export default function Header() {
   return (
     <>
       <HeaderWrapper>
-        <Logo>돌아보다,</Logo>
+        <Logo to="/">돌아보다,</Logo>
         {isLogined ? (
           <S.LoginAfter>
             <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
@@ -125,7 +126,7 @@ const HeaderWrapper = styled.header`
   padding: 60px 0 60px 0;
 `;
 
-const Logo = styled.h1`
+const Logo = styled(Link)`
   font-family: 'RIDIBatang';
   font-size: 32px;
   line-height: 32px;

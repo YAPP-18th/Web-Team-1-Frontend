@@ -5,13 +5,13 @@ export default function Banner() {
   return (
     <S.BannerWrapper>
       <div className="first-line">
-        오늘 하루<span>, </span>
+        개인 작업에서<span>, </span>
       </div>
       <div className="first-line">
-        많은 생각을 했고<span>, </span>
+        많은 것을 느꼈고<span>, </span>
       </div>
       <div>
-        회고가 필요하다면<span>?</span>
+        이를 돌아보고 싶다면<span>?</span>
       </div>
     </S.BannerWrapper>
   );
