@@ -4,27 +4,33 @@ import { IconWrapper, IconPaths } from '#components/Atoms';
 
 export default function Dropdown() {
   const [isOpen, setIsOpen] = useState(true);
-  const [option, setOption] = useState('최신순');
+  const [defaultOption, setDefaultOption] = useState('최신순');
+  const [options, setOptions] = useState(['최신순', '조회순']);
 
   const toggling = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickOption = (it) => {
-    setOption(it);
+  const handleClickOption = (it: string) => {
+    setDefaultOption(it);
     setIsOpen(false);
   };
 
   return (
     <DropdownWrapper>
       <DropdownHeader onClick={toggling}>
-        {option}
+        {defaultOption}
         <IconWrapper icon={IconPaths.PolygonBottom} />
       </DropdownHeader>
       {isOpen && (
         <DropdownList>
-          <DropdownItem onClick={() => handleClickOption('최신순')}>최신순</DropdownItem>
-          <DropdownItem onClick={() => handleClickOption('조회순')}>조회순</DropdownItem>
+          {options.map((option) => (
+            <DropdownItem key={option} onClick={() => handleClickOption(option)}>
+              {option}
+            </DropdownItem>
+          ))}
+          {/* <DropdownItem onClick={() => handleClickOption('최신순')}>최신순</DropdownItem>
+          <DropdownItem onClick={() => handleClickOption('조회순')}>조회순</DropdownItem> */}
         </DropdownList>
       )}
     </DropdownWrapper>
