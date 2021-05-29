@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Categories, SearchForm, Banner } from '#components/Atoms';
 
 import CardsContainer from '#containers/CardsContainer';
+import ConditionContainer from '#containers/ConditionContainer';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 
 export default function HomePage() {
@@ -19,10 +20,7 @@ export default function HomePage() {
     <>
       <main>
         <Banner />
-        <SearchAndCategoriesContainer>
-          <Categories />
-          <SearchForm />
-        </SearchAndCategoriesContainer>
+        <ConditionContainer />
         <CardsContainer onClickCard={handleClickCard} />
 
         {/* 헤더의 바로 작성하기 버튼 대신 임시로 쓰이는 버튼입니다. */}
@@ -31,10 +29,3 @@ export default function HomePage() {
     </>
   );
 }
-
-const SearchAndCategoriesContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-`;
