@@ -46,6 +46,8 @@ export default function Header() {
     };
     dispatch(editorActions.setEditorData(reduxData));
     history.push('/articleEditor');
+
+    modalToggle();
   };
 
   // 로그인 버튼 클릭
