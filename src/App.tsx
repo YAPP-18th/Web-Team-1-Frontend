@@ -10,6 +10,7 @@ import EditorPage from '#pages/EditorPage';
 import ViewPage from '#pages/ViewPage';
 import ArticleDetailPage from '#pages/ArticleDetailPage';
 import ArticleEditorPage from '#pages/ArticleEditorPage';
+import ArticleUpdatePage from '#pages/ArticleUpdatePage';
 import Alert from '#components/Alert';
 import instance from '#apis/common';
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route exact path="/view" component={ViewPage} />
         <Route exact path="/articleDetail/:id" component={ArticleDetailPage} />
         <Route exact path="/articleEditor" component={ArticleEditorPage} />
+        <Route exact path="/articleUpdate" component={ArticleUpdatePage} />
 
         <Route component={NotFound} />
       </Switch>

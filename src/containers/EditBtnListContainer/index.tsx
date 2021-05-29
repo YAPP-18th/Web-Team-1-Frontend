@@ -32,7 +32,9 @@ const EditBtnListContainer = ({ id }: Props) => {
   };
 
   const onClickEdit = () => {
-    console.log('edit');
+    // 여기서 말고 edit 페이지에서 확인하기, 값 없으면 정상적이지 않은 접근
+    // const { category, title, contents, index } = useAppSelector((state) => state.articleViewReducer);
+    history.push('/articleUpdate');
   };
 
   return (

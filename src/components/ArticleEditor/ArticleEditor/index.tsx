@@ -9,6 +9,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   editorRef: React.MutableRefObject<Editor | null>;
   onClick: () => void;
+  initialValue: string;
 }
 
 const StyledArticleCard = styled.div`
@@ -44,10 +45,10 @@ const StyledViewer = styled.div`
   }
 `;
 
-const ArticleEditor = ({ onChange, editorRef, onClick }: Props) => {
+const ArticleEditor = ({ onChange, editorRef, onClick, initialValue }: Props) => {
   return (
     <StyledArticleCard>
-      <TitleInput onChange={onChange} />
+      <TitleInput onChange={onChange} initialValue={initialValue} />
       <StyledViewer>
         <Editor
           previewStyle="vertical"

@@ -44,6 +44,7 @@ const ArticleModalContainer = () => {
       category: data.category,
       tag: tagList,
       templateIdx: data.templateIdx,
+      isUpdate: false,
     };
     dispatch(editorActions.setEditorData(reduxData));
 

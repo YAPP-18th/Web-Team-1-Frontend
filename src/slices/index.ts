@@ -4,12 +4,14 @@ import { ThunkAction } from 'redux-thunk';
 import cardsReducer from './cardsSlice';
 import alertReducer from './alertSlice';
 import articleEditorReducer from './articleEditorSlice';
+import articleViewReducer from './articleViewSlice';
 
 export const store = configureStore({
   reducer: {
     cardsReducer,
     articleEditorReducer,
     alertReducer,
+    articleViewReducer,
   },
 });
 

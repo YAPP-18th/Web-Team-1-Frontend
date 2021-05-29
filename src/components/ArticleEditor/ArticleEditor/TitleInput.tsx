@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  initialValue: string;
 }
 const StyledTitleInput = styled.div`
   & .title-input {
@@ -26,10 +27,15 @@ const StyledTitleInput = styled.div`
   }
 `;
 
-const TitleInput = ({ onChange }: Props) => {
+const TitleInput = ({ onChange, initialValue }: Props) => {
   return (
     <StyledTitleInput>
-      <input className="title-input" placeholder="제목을 입력하세요" onChange={onChange} />
+      <input
+        className="title-input"
+        placeholder="제목을 입력하세요"
+        onChange={onChange}
+        value={initialValue}
+      />
     </StyledTitleInput>
   );
 };
