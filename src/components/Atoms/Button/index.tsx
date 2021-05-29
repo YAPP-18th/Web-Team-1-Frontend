@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classnames from 'classnames';
 import { ButtonColor } from '#types/Styles';
 import * as S from './style';
@@ -78,4 +78,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default memo(Button);

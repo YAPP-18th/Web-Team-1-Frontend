@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { GlobalStyle } from '#styles/index';
 
@@ -11,8 +11,17 @@ import ViewPage from '#pages/ViewPage';
 import ArticleDetailPage from '#pages/ArticleDetailPage';
 import ArticleEditorPage from '#pages/ArticleEditorPage';
 import Alert from '#components/Alert';
+import instance from '#apis/common';
 
 const App = () => {
+  // 로컬 스토리지에 있는 access token을 axios에다가 적용
+  useLayoutEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      instance.defaults.headers.Authorization = `Bearer ${accessToken}`;
+    }
+  }, []);
+
   return (
     <>
       <GlobalStyle />
