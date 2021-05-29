@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
-import { postArticle, PostArticleData } from '#apis/articleEditorApi';
+import { getTemplate, postArticle, PostArticleData } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 
@@ -10,6 +10,13 @@ const ArticleEditorContainer = () => {
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string | null>('');
   const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
+
+  const setTemplate = async (index: number) => {
+    const data = await getTemplate(index);
+    if (data && editorRef.current) {
+      editorRef.current.getInstance().setHtml(data);
+    }
+  };
 
   const callApi = async (data: PostArticleData) => {
     const index = await postArticle(data);
@@ -38,6 +45,7 @@ const ArticleEditorContainer = () => {
   };
 
   useEffect(() => {
+    setTemplate(templateIdx);
     if (editorRef.current !== null) {
       editorRef.current
         .getInstance()

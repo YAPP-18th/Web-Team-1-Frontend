@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import Delete from './svg/Delete';
 import Edit from './svg/Edit';
 
+interface Props {
+  onClickDelete: () => void;
+  onClickEdit: () => void;
+}
+
 const StyledEditBtnList = styled.div`
   position: absolute;
   right: 50px;
@@ -14,13 +19,13 @@ const StyledEditBtn = styled.div`
   cursor: pointer;
 `;
 
-const EditBtnList = () => {
+const EditBtnList = ({ onClickDelete, onClickEdit }: Props) => {
   return (
     <StyledEditBtnList>
-      <StyledEditBtn>
+      <StyledEditBtn onClick={onClickEdit}>
         <Edit />
       </StyledEditBtn>
-      <StyledEditBtn>
+      <StyledEditBtn onClick={onClickDelete}>
         <Delete />
       </StyledEditBtn>
     </StyledEditBtnList>

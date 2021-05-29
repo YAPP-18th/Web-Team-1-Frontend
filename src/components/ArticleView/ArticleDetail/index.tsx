@@ -7,13 +7,14 @@ import Title from './Title';
 
 import SubtleInfo from '#components/ArticleView/ArticleDetail/SubtleInfo';
 import TagList from './TagList';
-import EditBtnList from './EditBtnList';
+import EditBtnListContainer from '#containers/EditBtnListContainer';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'codemirror/lib/codemirror.css';
 // import './Style/style.css';
 
 interface Props {
   data: ArticleDetailData;
+  id: string;
 }
 
 const StyleArticleCard = styled.div`
@@ -47,8 +48,8 @@ const StyledTag = styled.div`
   display: flex;
 `;
 
-const ArticleDetailCard = ({ data }: Props) => {
-  const { contents, category, title, nickname, profile, view, created_at, tag } = data;
+const ArticleDetailCard = ({ data, id }: Props) => {
+  const { contents, category, title, nickname, profile, view, created_at, tag, writer } = data;
   const viewerRef = useRef<Viewer>(null);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const ArticleDetailCard = ({ data }: Props) => {
 
   return (
     <StyleArticleCard>
-      <EditBtnList />
+      {writer && <EditBtnListContainer id={id} />}
       <StyledTag>
         <Category category={category} />
         <TagList tag={tag} />
