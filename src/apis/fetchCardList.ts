@@ -19,7 +19,7 @@ export const fetchCardList = async (): Promise<Card[]> => {
 
   try {
     const { data } = await instance.get(url);
-    return data;
+    return data.data.result;
   } catch (error) {
     throw new Error(error);
   }
