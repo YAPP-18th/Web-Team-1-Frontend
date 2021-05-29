@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ConfirmModal from '#components/ConfirmModal';
 
 interface Props {
   type: string;
   onClick: () => void;
+  toggle: () => void;
 }
 
 interface MsgSet {
@@ -25,21 +26,16 @@ const Msg: { [key: string]: MsgSet } = {
   },
 };
 
-const ConfirmModalContainer = ({ type, onClick }: Props) => {
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
-
+const ConfirmModalContainer = ({ type, onClick, toggle }: Props) => {
   return (
     <>
-      {modal && (
-        <ConfirmModal
-          toggle={toggle}
-          header={Msg[type].header}
-          body={Msg[type].body}
-          btnMsg={Msg[type].btnMsg}
-          onClick={onClick}
-        />
-      )}
+      <ConfirmModal
+        toggle={toggle}
+        header={Msg[type].header}
+        body={Msg[type].body}
+        btnMsg={Msg[type].btnMsg}
+        onClick={onClick}
+      />
     </>
   );
 };
