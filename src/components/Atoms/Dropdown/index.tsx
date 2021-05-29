@@ -59,7 +59,7 @@ const DropdownList = styled.ul`
   top: 61px;
   left: 16px;
   width: 99px;
-  height: 74px;
+  height: 78px;
   background: #fefefe;
   border: 1px solid #eeeeee;
   box-sizing: border-box;
@@ -69,13 +69,15 @@ const DropdownList = styled.ul`
 `;
 
 const DropdownItem = styled.li`
-  width: 99px;
+  width: 97px;
   height: 38px;
   padding-left: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   &:hover {
-    background: yellow;
+    color: #333333;
+    background: #f8f8f8;
+    border-radius: 8px;
   }
 `;
