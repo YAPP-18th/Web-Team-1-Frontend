@@ -10,6 +10,7 @@ import Palette from './SVG/Palette.svg';
 import Search from './SVG/Search.svg';
 import Bookmark from './SVG/Bookmark.svg';
 import Commant from './SVG/Commant.svg';
+import PolygonBottom from './SVG/PolygonBottom.svg';
 
 type Icon =
   | 'Exit'
@@ -22,7 +23,8 @@ type Icon =
   | 'Palette'
   | 'Search'
   | 'Bookmark'
-  | 'Commant';
+  | 'Commant'
+  | 'PolygonBottom';
 
 type IconPathKey = {
   [key in Icon]: FunctionComponent;
@@ -40,6 +42,7 @@ const IconPaths: IconPathKey = {
   Search,
   Bookmark,
   Commant,
+  PolygonBottom,
 };
 
 export default IconPaths;
