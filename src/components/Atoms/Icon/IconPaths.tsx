@@ -8,6 +8,8 @@ import Bulb from './SVG/Bulb.svg';
 import Laptop from './SVG/Laptop.svg';
 import Palette from './SVG/Palette.svg';
 import Search from './SVG/Search.svg';
+import Bookmark from './SVG/Bookmark.svg';
+import Commant from './SVG/Commant.svg';
 
 type Icon =
   | 'Exit'
@@ -18,7 +20,9 @@ type Icon =
   | 'Bulb'
   | 'Laptop'
   | 'Palette'
-  | 'Search';
+  | 'Search'
+  | 'Bookmark'
+  | 'Commant';
 
 type IconPathKey = {
   [key in Icon]: FunctionComponent;
@@ -34,6 +38,8 @@ const IconPaths: IconPathKey = {
   Laptop,
   Palette,
   Search,
+  Bookmark,
+  Commant,
 };
 
 export default IconPaths;
