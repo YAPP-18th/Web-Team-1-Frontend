@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { color } from '#styles/index';
 import { ColorType, ButtonColor } from '#types/Styles';
 
 export interface Props {
@@ -20,14 +21,14 @@ const defaultStyle = (
   border-radius: 60px;
   border: none;
   cursor: pointer;
-  background: ${backgroundColor || 'none'};
-  color: ${textColor || 'white'};
+  background: ${backgroundColor && color[backgroundColor]};
+  color: ${(textColor && color[textColor]) || 'white'};
   &:disabled {
     cursor: default;
-    background: ${disabledColor || backgroundColor || 'none'} !important;
+    background: ${disabledColor && color[disabledColor]} !important;
   }
   &:hover {
-    background: ${hoverColor || backgroundColor || 'none'};
+    background: ${hoverColor && color[hoverColor]};
   }
 `;
 
