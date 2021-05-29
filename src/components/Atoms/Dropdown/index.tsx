@@ -3,18 +3,25 @@ import styled from 'styled-components';
 import { IconWrapper, IconPaths } from '#components/Atoms';
 
 export default function Dropdown() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [defaultOption, setDefaultOption] = useState('최신순');
-  const [options, setOptions] = useState(['최신순', '조회순']);
+  const [state, setState] = useState({
+    isOpen: false,
+    defaultOption: '최신순',
+    options: ['최신순', '조회순'],
+  });
 
   const toggling = () => {
-    setIsOpen(!isOpen);
+    setState({ ...state, isOpen: !state.isOpen });
   };
 
   const handleClickOption = (it: string) => {
-    setDefaultOption(it);
-    setIsOpen(false);
+    setState({
+      ...state,
+      defaultOption: it,
+      isOpen: false,
+    });
   };
+
+  const { isOpen, defaultOption, options } = state;
 
   return (
     <DropdownWrapper>
@@ -29,8 +36,6 @@ export default function Dropdown() {
               {option}
             </DropdownItem>
           ))}
-          {/* <DropdownItem onClick={() => handleClickOption('최신순')}>최신순</DropdownItem>
-          <DropdownItem onClick={() => handleClickOption('조회순')}>조회순</DropdownItem> */}
         </DropdownList>
       )}
     </DropdownWrapper>
