@@ -10,6 +10,7 @@ const color: colorTypes = {
   yellow: '#F4BB4A',
   gray: '#ACABA5',
   white: '#ffffff',
+  lightGray: '#CDCCC6',
 
   backgroundColor: '#F6F5F0',
   modalOuter: 'rgba(53, 53, 53, 0.76)',
