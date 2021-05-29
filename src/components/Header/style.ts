@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import zIndex from '#styles/zIndex';
 
 export const LoginAfter = styled.div`
   position: relative;
@@ -20,6 +21,7 @@ export const MenuWrapper = styled.div`
   background-color: white;
   border-radius: 16px;
   box-shadow: 0px 5px 20px 0px #cdccc640;
+  z-index: ${zIndex.menu};
   .profile {
     display: flex;
     align-items: center;

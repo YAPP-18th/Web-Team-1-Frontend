@@ -1,15 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+import thumbnail from 'assets/images/thumbnail.png';
 import CardsContainer from '#containers/CardsContainer';
 import * as S from './style';
 
 const MyPage = () => {
+  const history = useHistory();
+
+  const handleClickCard = (postIdx: number) => {
+    const url = `/articleDetail/${postIdx}`;
+    history.push(url);
+  };
+
   return (
     <div>
       <S.ProfileWrapper>
-        <img
-          src="https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg"
-          alt="썸네일"
-        />
+        <img src={thumbnail} alt="썸네일" />
         <div className="content">
           <h1>나같은 견</h1>
           <h2>디자인</h2>
@@ -26,7 +32,7 @@ const MyPage = () => {
         <span>최근 읽은 회고 0</span>
         <span>스크랩한 회고 0</span>
       </S.Tabs>
-      <CardsContainer />
+      <CardsContainer onClickCard={handleClickCard} />
     </div>
   );
 };

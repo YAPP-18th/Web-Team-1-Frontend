@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { editorActions, EditorState } from 'slices/articleEditorSlice';
+import thumbnail from 'assets/images/thumbnail.png';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
 import { LoginModal } from '#components/Organisms/Modal';
@@ -83,10 +84,7 @@ export default function Header() {
             {isShowedMenu && (
               <S.MenuWrapper>
                 <div className="profile">
-                  <img
-                    src="https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg"
-                    alt="썸네일"
-                  />
+                  <img src={thumbnail} alt="썸네일" />
                   <div className="content">
                     <p>나같은 견</p>
                     <span>로그아웃</span>
