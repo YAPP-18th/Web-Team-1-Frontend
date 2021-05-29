@@ -54,6 +54,8 @@ export default function Header() {
 
     // 페이지 이동
     history.push('/articleEditor');
+
+    modalToggle();
   };
 
   // 로그인 버튼 클릭
