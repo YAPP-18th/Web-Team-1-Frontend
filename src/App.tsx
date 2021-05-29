@@ -10,12 +10,14 @@ import EditorPage from '#pages/EditorPage';
 import ViewPage from '#pages/ViewPage';
 import ArticleDetailPage from '#pages/ArticleDetailPage';
 import ArticleEditorPage from '#pages/ArticleEditorPage';
+import Alert from '#components/Alert';
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
       <Header />
+      <Alert />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
