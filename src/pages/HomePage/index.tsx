@@ -1,8 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-
-import { Categories, SearchForm, Banner } from '#components/Atoms';
+import { Banner } from '#components/Atoms';
 
 import CardsContainer from '#containers/CardsContainer';
 import ConditionContainer from '#containers/ConditionContainer';

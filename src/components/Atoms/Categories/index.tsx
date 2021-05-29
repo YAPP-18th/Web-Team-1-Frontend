@@ -2,7 +2,11 @@ import React from 'react';
 import * as S from './style';
 import { Dropdown, IconPaths, IconWrapper } from '#components/Atoms';
 
-export default function Categories() {
+export interface Props {
+  onClickDropdownItem: (sortBy: string) => void;
+}
+
+export default function Categories({ onClickDropdownItem }: Props) {
   const categories = [
     { text: '전체', value: 'total', icon: IconPaths.Glitter },
     { text: '마케팅', value: 'marketing', icon: IconPaths.Writing },
@@ -13,7 +17,7 @@ export default function Categories() {
 
   return (
     <S.Categories>
-      <Dropdown />
+      <Dropdown onClickDropdownItem={onClickDropdownItem} />
       {categories.map(({ text, value, icon }) => (
         <S.Category key={text}>
           <S.Input type="radio" id={value} name="category-radio-group" />

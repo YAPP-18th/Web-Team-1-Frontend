@@ -6,7 +6,7 @@ const { actions, reducer: conditionReducer } = createSlice({
     sortBy: '최신순',
   },
   reducers: {
-    setSort(state, { payload: sortBy }) {
+    setSortBy(state, { payload: sortBy }) {
       return {
         ...state,
         sortBy,
@@ -15,5 +15,5 @@ const { actions, reducer: conditionReducer } = createSlice({
   },
 });
 
-export const { setSort } = actions;
+export const { setSortBy } = actions;
 export default conditionReducer;
