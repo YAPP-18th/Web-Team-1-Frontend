@@ -14,8 +14,8 @@ interface Props {
 const EditBtnListContainer = ({ id }: Props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const onClickDelete = () => {
-    const result = deleteArticle(id);
+  const onClickDelete = async () => {
+    const result = await deleteArticle(id);
     if (result) {
       history.push('/');
       const reduxData: AlertState = {
