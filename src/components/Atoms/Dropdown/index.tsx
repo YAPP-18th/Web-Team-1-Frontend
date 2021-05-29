@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import * as S from './style';
 import { IconWrapper, IconPaths } from '#components/Atoms';
 
-export default function Dropdown() {
+export interface Props {
+  onClickDropdownItem: (sortBy: string) => void;
+}
+
+export default function Dropdown({ onClickDropdownItem }: Props) {
   const [state, setState] = useState({
     isOpen: false,
     defaultOption: '최신순',
@@ -19,6 +23,7 @@ export default function Dropdown() {
       defaultOption: it,
       isOpen: false,
     });
+    onClickDropdownItem(it);
   };
 
   const { isOpen, defaultOption, options } = state;

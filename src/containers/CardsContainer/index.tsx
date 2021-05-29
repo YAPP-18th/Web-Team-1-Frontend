@@ -14,10 +14,11 @@ interface Props {
 export default function CardsContainer({ onClickCard }: Props) {
   const dispatch = useAppDispatch();
   const { cards } = useAppSelector((state) => state.cardsReducer);
+  const { sortBy } = useAppSelector((state) => state.conditionReducer);
 
   useEffect(() => {
-    dispatch(fetchCards());
-  }, []);
+    dispatch(fetchCards({ sortBy }));
+  }, [sortBy]);
 
   return <Cards cards={cards} onClickCard={onClickCard} />;
 }

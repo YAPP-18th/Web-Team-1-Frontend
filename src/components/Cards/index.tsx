@@ -29,6 +29,10 @@ export default function Cards({ cards, onClickCard }: Props) {
     };
   };
 
+  if (cards.length === 0) {
+    return <div>작성된 글이 없어요!</div>;
+  }
+
   return (
     <div className="articles">
       <S.CardList>
