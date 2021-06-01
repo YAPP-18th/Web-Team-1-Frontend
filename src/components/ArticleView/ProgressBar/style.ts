@@ -18,5 +18,5 @@ export const ProgressBarContent = styled(ProgressBarBackground).attrs<Props>(({ 
     width: `${percent}%`,
   },
 }))<Props>`
-  background-color: #8f7cda;
+  background-color: #6a84e1;
 `;

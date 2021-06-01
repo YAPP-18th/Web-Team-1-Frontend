@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -28,13 +28,17 @@ const StyledTitleInput = styled.div`
 `;
 
 const TitleInput = ({ onChange, initialValue }: Props) => {
+  const [title, setTitle] = useState(initialValue);
   return (
     <StyledTitleInput>
       <input
         className="title-input"
         placeholder="제목을 입력하세요"
-        onChange={onChange}
-        value={initialValue}
+        onChange={(e) => {
+          onChange(e);
+          setTitle(e.target.value);
+        }}
+        value={title}
       />
     </StyledTitleInput>
   );

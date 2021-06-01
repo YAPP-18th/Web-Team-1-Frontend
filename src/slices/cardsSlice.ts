@@ -22,9 +22,9 @@ export const { setCards } = actions;
 
 export default cardsReducer;
 
-export function fetchCards(): AppThunk {
+export function fetchCards({ sortBy }: { sortBy: string }): AppThunk {
   return async (dispatch) => {
-    const cards = await fetchCardList();
+    const cards = await fetchCardList({ sortBy });
     dispatch(setCards(cards));
   };
 }

@@ -20,6 +20,7 @@ const StyledArticleCard = styled.div`
   margin: 0 0 100px 0;
   height: auto;
   width: 1128px;
+  position: relative;
 `;
 
 const StyledViewer = styled.div`
