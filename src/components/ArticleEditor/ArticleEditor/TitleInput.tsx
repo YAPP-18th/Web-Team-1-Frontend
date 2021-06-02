@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeTitle: (title: string) => void;
+  initialValue: string;
 }
+
+// export interface WarningProps {
+//   visible: boolean;
+// }
 const StyledTitleInput = styled.div`
   & .title-input {
     border: none;
@@ -26,10 +31,27 @@ const StyledTitleInput = styled.div`
   }
 `;
 
-const TitleInput = ({ onChange }: Props) => {
+// const Warning = styled.small<WarningProps>`
+//   display: block;
+//   margin: 0 0 50px 30px;
+//   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+//   color: red;
+// `;
+
+const TitleInput = ({ onChangeTitle, initialValue }: Props) => {
+  const [title, setTitle] = useState(initialValue);
   return (
     <StyledTitleInput>
-      <input className="title-input" placeholder="제목을 입력하세요" onChange={onChange} />
+      <input
+        className="title-input"
+        placeholder="제목을 입력하세요"
+        onChange={(e) => {
+          onChangeTitle(e.target.value);
+          setTitle(e.target.value);
+        }}
+        value={title}
+      />
+      {/* <Warning visible={title === ''}>제목을 입력해야 작성완료 할 수 있습니다</Warning> */}
     </StyledTitleInput>
   );
 };

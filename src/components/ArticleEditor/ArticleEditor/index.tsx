@@ -6,9 +6,10 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import TempSaveBtn from './TempSaveBtn';
 
 interface Props {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeTitle: (title: string) => void;
   editorRef: React.MutableRefObject<Editor | null>;
-  onClick: () => void;
+  modalToggle: () => void;
+  initialValue: string;
 }
 
 const StyledArticleCard = styled.div`
@@ -45,21 +46,21 @@ const StyledViewer = styled.div`
   }
 `;
 
-const ArticleEditor = ({ onChange, editorRef, onClick }: Props) => {
+const ArticleEditor = ({ onChangeTitle, editorRef, modalToggle, initialValue }: Props) => {
   return (
     <StyledArticleCard>
-      <TitleInput onChange={onChange} />
+      <TitleInput onChangeTitle={onChangeTitle} initialValue={initialValue} />
       <StyledViewer>
         <Editor
           previewStyle="vertical"
-          height="auto"
           initialEditType="wysiwyg"
+          height="auto"
           useCommandShortcut
-          ref={editorRef}
           hideModeSwitch
+          ref={editorRef}
         />
       </StyledViewer>
-      <TempSaveBtn onClick={onClick} />
+      <TempSaveBtn onClick={modalToggle} />
     </StyledArticleCard>
   );
 };

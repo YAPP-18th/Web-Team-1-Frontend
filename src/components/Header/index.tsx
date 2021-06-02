@@ -47,7 +47,7 @@ export default function Header() {
       templateIdx: data.templateIdx,
     };
     dispatch(editorActions.setEditorData(reduxData));
-    history.push('/articleEditor');
+    history.push('/articleCreate');
 
     modalToggle();
   };
@@ -86,11 +86,11 @@ export default function Header() {
                 <div className="profile">
                   <img src={thumbnail} alt="썸네일" />
                   <div className="content">
-                    <p>나같은 견</p>
+                    <p>이름</p>
                     <span>로그아웃</span>
                   </div>
                 </div>
-                <Button to="/me">작성한 회고</Button>
+                <span>작성한 회고</span>
                 <span>작성 중인 회고</span>
                 <span>최근 읽은 회고</span>
                 <span>스크랩한 회고</span>

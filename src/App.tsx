@@ -9,8 +9,9 @@ import NotFound from './pages/NotFound';
 import EditorPage from '#pages/EditorPage';
 import ViewPage from '#pages/ViewPage';
 import ArticleDetailPage from '#pages/ArticleDetailPage';
-import ArticleEditorPage from '#pages/ArticleEditorPage';
-import MyPage from '#pages/MyPage';
+import ArticleCreatePage from '#pages/ArticleCreatePage';
+import ArticleUpdatePage from '#pages/ArticleUpdatePage';
+
 import Alert from '#components/Alert';
 import instance from '#apis/common';
 
@@ -34,8 +35,9 @@ const App = () => {
         <Route exact path="/editor" component={EditorPage} />
         <Route exact path="/view" component={ViewPage} />
         <Route exact path="/articleDetail/:id" component={ArticleDetailPage} />
-        <Route exact path="/articleEditor" component={ArticleEditorPage} />
-        <Route exact path="/me" component={MyPage} />
+        <Route exact path="/articleCreate" component={ArticleCreatePage} />
+        <Route exact path="/articleUpdate" component={ArticleUpdatePage} />
+        {/* <Route exact path="/me" component={MyPage} /> */}
         <Route component={NotFound} />
       </Switch>
     </>
