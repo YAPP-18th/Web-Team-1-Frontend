@@ -7,9 +7,8 @@ import { getTemplate, postArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 import ConfirmModalContainer from '#containers/ConfirmModalContainer';
-/* eslint-disable no-console */
 
-const ArticleEditorContainer = () => {
+const ArticleCreateContainer = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const editorRef = useRef<Editor | null>(null);
@@ -57,13 +56,6 @@ const ArticleEditorContainer = () => {
 
   useEffect(() => {
     setTemplate(templateIdx);
-    if (editorRef.current !== null) {
-      editorRef.current
-        .getInstance()
-        .setHtml(
-          `<table class="custom"><thead><tr><th><br></th><th><br></th></tr></thead><tbody><tr><td><br><br><br><br><br><br><br></td><td><br><br><br><br><br><br><br></td></tr><tr><td><br><br><br><br><br><br><br></td><td><br><br><br><br><br><br><br></td></tr></tbody></table>`,
-        );
-    }
   }, []);
 
   return (
@@ -74,4 +66,4 @@ const ArticleEditorContainer = () => {
   );
 };
 
-export default ArticleEditorContainer;
+export default ArticleCreateContainer;

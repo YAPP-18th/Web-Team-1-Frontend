@@ -48,7 +48,7 @@ const ArticleModalContainer = () => {
     dispatch(editorActions.setEditorData(reduxData));
 
     // 페이지 이동
-    history.push('/articleEditor');
+    history.push('/articleCreate');
   };
 
   return (

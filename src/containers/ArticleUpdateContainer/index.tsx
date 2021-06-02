@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
+import { useDispatch } from 'react-redux';
+import { editorActions, EditorState } from 'slices/articleEditorSlice';
 import { updateArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 import ConfirmModalContainer from '#containers/ConfirmModalContainer';
-/* eslint-disable no-console */
 
 const ArticleUpdateContainer = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string>('');
 
@@ -28,6 +30,13 @@ const ArticleUpdateContainer = () => {
       const result = await updateArticle(index, data);
 
       if (result) {
+        const reduxData: EditorState = {
+          category: '',
+          tag: [],
+          templateIdx: 0,
+        };
+        dispatch(editorActions.setEditorData(reduxData));
+
         history.push(`/articleDetail/${index}`);
       }
     }
