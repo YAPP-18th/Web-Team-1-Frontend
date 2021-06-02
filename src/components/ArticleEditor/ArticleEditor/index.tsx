@@ -53,11 +53,11 @@ const ArticleEditor = ({ onChange, editorRef, onClick, initialValue }: Props) =>
       <StyledViewer>
         <Editor
           previewStyle="vertical"
-          height="auto"
           initialEditType="wysiwyg"
+          height="auto"
           useCommandShortcut
-          ref={editorRef}
           hideModeSwitch
+          ref={editorRef}
         />
       </StyledViewer>
       <TempSaveBtn onClick={onClick} />

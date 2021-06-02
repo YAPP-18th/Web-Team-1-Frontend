@@ -11,13 +11,14 @@ import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 const ArticleCreateContainer = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string | null>('');
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
+  const articleEditorSliceData = useAppSelector((state) => state.articleEditorReducer);
 
   const setTemplate = async (index: number) => {
     const data = await getTemplate(index);
@@ -29,14 +30,13 @@ const ArticleCreateContainer = () => {
   const callPostApi = async () => {
     if (editorRef.current !== null) {
       const data = {
-        category,
+        ...articleEditorSliceData,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
-        image: [],
-        tag,
-        templateIdx,
         title: titleRef.current,
+        image: [],
       };
       const index = await postArticle(data);
+
       if (index) {
         const reduxData: EditorState = {
           category: '',
@@ -55,13 +55,13 @@ const ArticleCreateContainer = () => {
   };
 
   useEffect(() => {
-    setTemplate(templateIdx);
+    setTemplate(articleEditorSliceData.templateIdx);
   }, []);
 
   return (
     <>
       <ArticleEditor onChange={onChange} editorRef={editorRef} onClick={toggle} initialValue="" />
-      {modal && <ConfirmModalContainer type="write" onClick={callPostApi} toggle={toggle} />}
+      {modal && <ConfirmModalContainer type="write" callApi={callPostApi} toggle={toggle} />}
     </>
   );
 };

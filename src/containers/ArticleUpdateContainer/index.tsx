@@ -62,7 +62,7 @@ const ArticleUpdateContainer = () => {
         onClick={toggle}
         initialValue={title}
       />
-      {modal && <ConfirmModalContainer type="write" onClick={callUpdateApi} toggle={toggle} />}
+      {modal && <ConfirmModalContainer type="write" callApi={callUpdateApi} toggle={toggle} />}
     </>
   );
 };

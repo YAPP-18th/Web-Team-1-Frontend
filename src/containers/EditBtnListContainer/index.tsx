@@ -40,7 +40,7 @@ const EditBtnListContainer = ({ id }: Props) => {
   return (
     <>
       <EditBtnList onClickDelete={toggle} onClickEdit={onClickEdit} />
-      {modal && <ConfirmModalContainer type="delete" onClick={callApi} toggle={toggle} />}
+      {modal && <ConfirmModalContainer type="delete" callApi={callApi} toggle={toggle} />}
     </>
   );
 };

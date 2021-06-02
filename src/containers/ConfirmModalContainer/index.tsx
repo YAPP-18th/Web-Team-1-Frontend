@@ -3,7 +3,7 @@ import ConfirmModal from '#components/ConfirmModal';
 
 interface Props {
   type: string;
-  onClick: () => void;
+  callApi: () => void;
   toggle: () => void;
 }
 
@@ -26,7 +26,7 @@ const Msg: { [key: string]: MsgSet } = {
   },
 };
 
-const ConfirmModalContainer = ({ type, onClick, toggle }: Props) => {
+const ConfirmModalContainer = ({ type, callApi, toggle }: Props) => {
   return (
     <>
       <ConfirmModal
@@ -34,7 +34,7 @@ const ConfirmModalContainer = ({ type, onClick, toggle }: Props) => {
         header={Msg[type].header}
         body={Msg[type].body}
         btnMsg={Msg[type].btnMsg}
-        onClick={onClick}
+        callApi={callApi}
       />
     </>
   );
