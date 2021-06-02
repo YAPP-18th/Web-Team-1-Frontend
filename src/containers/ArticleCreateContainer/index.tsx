@@ -54,6 +54,12 @@ const ArticleCreateContainer = () => {
     titleRef.current = title;
   };
 
+  const onClickSaveBtn = () => {
+    if (!(titleRef.current === '')) {
+      toggle();
+    }
+  };
+
   useEffect(() => {
     setTemplate(articleEditorSliceData.templateIdx);
   }, []);
@@ -63,7 +69,7 @@ const ArticleCreateContainer = () => {
       <ArticleEditor
         onChangeTitle={onChangeTitle}
         editorRef={editorRef}
-        modalToggle={toggle}
+        modalToggle={onClickSaveBtn}
         initialValue=""
       />
       {modal && <ConfirmModalContainer type="write" callApi={callPostApi} toggle={toggle} />}
