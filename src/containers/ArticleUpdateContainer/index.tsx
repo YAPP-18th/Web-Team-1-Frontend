@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
-// import { useDispatch } from 'react-redux';
 import { updateArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
@@ -10,7 +9,6 @@ import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 
 const ArticleUpdateContainer = () => {
   const history = useHistory();
-  // const dispatch = useDispatch();
   const editorRef = useRef<Editor | null>(null);
   const titleRef = useRef<string>('');
 
@@ -30,16 +28,6 @@ const ArticleUpdateContainer = () => {
       const result = await updateArticle(index, data);
 
       if (result) {
-        // 어차피 detail 페이지로 이동하면, 최신 데이터로 redux 갱신
-        // const reduxData: ViewState = {
-        //   category: '',
-        //   contents: '',
-        //   tag: [],
-        //   title: '',
-        //   index: -1,
-        // };
-        // dispatch(viewActions.setViewData(reduxData));
-
         history.push(`/articleDetail/${index}`);
       }
     }

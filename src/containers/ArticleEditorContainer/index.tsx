@@ -43,7 +43,6 @@ const ArticleEditorContainer = () => {
           category: '',
           tag: [],
           templateIdx: 0,
-          isUpdate: false,
         };
         dispatch(editorActions.setEditorData(reduxData));
 
