@@ -13,9 +13,6 @@ const GlobalStyle = createGlobalStyle`
     color: black;
   }
 
-  body{
-    position: relative;
-  }
 `;
 
 export default GlobalStyle;
