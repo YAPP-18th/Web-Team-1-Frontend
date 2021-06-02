@@ -1,21 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
+import { useDispatch } from 'react-redux';
+import { editorActions, EditorState } from 'slices/articleEditorSlice';
 import { getTemplate, postArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 import ConfirmModalContainer from '#containers/ConfirmModalContainer';
-/* eslint-disable no-console */
 
-const ArticleEditorContainer = () => {
+const ArticleCreateContainer = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const editorRef = useRef<Editor | null>(null);
-  const titleRef = useRef<string | null>('');
+  const titleRef = useRef<string>('');
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
+  const articleEditorSliceData = useAppSelector((state) => state.articleEditorReducer);
 
   const setTemplate = async (index: number) => {
     const data = await getTemplate(index);
@@ -24,44 +27,54 @@ const ArticleEditorContainer = () => {
     }
   };
 
-  const callApi = async () => {
+  const callPostApi = async () => {
     if (editorRef.current !== null) {
       const data = {
-        category,
+        ...articleEditorSliceData,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
-        image: [],
-        tag,
-        templateIdx,
         title: titleRef.current,
+        image: [],
       };
       const index = await postArticle(data);
-      if (index !== -1) {
+
+      if (index) {
+        const reduxData: EditorState = {
+          category: '',
+          tag: [],
+          templateIdx: 0,
+        };
+        dispatch(editorActions.setEditorData(reduxData));
+
         history.push(`/articleDetail/${index}`);
       }
     }
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    titleRef.current = e.target.value;
+  const onChangeTitle = (title: string) => {
+    titleRef.current = title;
+  };
+
+  const onClickSaveBtn = () => {
+    if (!(titleRef.current === '')) {
+      toggle();
+    }
   };
 
   useEffect(() => {
-    setTemplate(templateIdx);
-    if (editorRef.current !== null) {
-      editorRef.current
-        .getInstance()
-        .setHtml(
-          `<table class="custom"><thead><tr><th><br></th><th><br></th></tr></thead><tbody><tr><td><br><br><br><br><br><br><br></td><td><br><br><br><br><br><br><br></td></tr><tr><td><br><br><br><br><br><br><br></td><td><br><br><br><br><br><br><br></td></tr></tbody></table>`,
-        );
-    }
+    setTemplate(articleEditorSliceData.templateIdx);
   }, []);
 
   return (
     <>
-      <ArticleEditor onChange={onChange} editorRef={editorRef} onClick={toggle} />
-      {modal && <ConfirmModalContainer type="write" onClick={callApi} toggle={toggle} />}
+      <ArticleEditor
+        onChangeTitle={onChangeTitle}
+        editorRef={editorRef}
+        modalToggle={onClickSaveBtn}
+        initialValue=""
+      />
+      {modal && <ConfirmModalContainer type="write" callApi={callPostApi} toggle={toggle} />}
     </>
   );
 };
 
-export default ArticleEditorContainer;
+export default ArticleCreateContainer;

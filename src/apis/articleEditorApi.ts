@@ -10,13 +10,32 @@ export interface PostArticleData {
   title: string | null;
 }
 
-export const postArticle = async (data: PostArticleData): Promise<number> => {
+export interface UpdateArticleData {
+  category: string;
+  contents: string;
+  title: string | null;
+}
+
+export const postArticle = async (data: PostArticleData): Promise<number | null> => {
   try {
     const res = await instance.post('/posts', data);
     return res.data.data;
   } catch (error) {
     console.log(error);
-    return -1;
+    return null;
+  }
+};
+
+export const updateArticle = async (
+  index: number,
+  data: UpdateArticleData,
+): Promise<number | null> => {
+  try {
+    const res = await instance.put(`/posts/${index}`, data);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };
 

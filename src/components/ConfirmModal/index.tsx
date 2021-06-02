@@ -6,7 +6,7 @@ interface Props {
   body: string;
   btnMsg: string;
   toggle: () => void;
-  onClick: () => void;
+  callApi: () => void;
 }
 
 const StyledModalContainer = styled.div`
@@ -77,7 +77,7 @@ const ColorBtn = styled(FooterBtn)`
   color: #6a84e1;
 `;
 
-const ConfirmModal = ({ header, body, btnMsg, toggle, onClick }: Props) => {
+const ConfirmModal = ({ header, body, btnMsg, toggle, callApi }: Props) => {
   return (
     <StyledModalContainer>
       <StyledModal>
@@ -85,7 +85,7 @@ const ConfirmModal = ({ header, body, btnMsg, toggle, onClick }: Props) => {
         <ModalBody>{body}</ModalBody>
         <ModalFooter>
           <FooterBtn onClick={toggle}>취소</FooterBtn>
-          <ColorBtn onClick={onClick}>{btnMsg}</ColorBtn>
+          <ColorBtn onClick={callApi}>{btnMsg}</ColorBtn>
         </ModalFooter>
       </StyledModal>
     </StyledModalContainer>

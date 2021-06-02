@@ -5,6 +5,7 @@ import cardsReducer from './cardsSlice';
 import conditionReducer from './conditionSlice';
 import alertReducer from './alertSlice';
 import articleEditorReducer from './articleEditorSlice';
+import articleViewReducer from './articleViewSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     conditionReducer,
     articleEditorReducer,
     alertReducer,
+    articleViewReducer,
   },
 });
 

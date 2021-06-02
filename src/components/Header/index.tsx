@@ -47,7 +47,7 @@ export default function Header() {
       templateIdx: data.templateIdx,
     };
     dispatch(editorActions.setEditorData(reduxData));
-    history.push('/articleEditor');
+    history.push('/articleCreate');
 
     modalToggle();
   };
