@@ -13,7 +13,7 @@ const ArticleCreateContainer = () => {
   const dispatch = useDispatch();
 
   const editorRef = useRef<Editor | null>(null);
-  const titleRef = useRef<string | null>('');
+  const titleRef = useRef<string>('');
 
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -50,8 +50,8 @@ const ArticleCreateContainer = () => {
     }
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    titleRef.current = e.target.value;
+  const onChangeTitle = (title: string) => {
+    titleRef.current = title;
   };
 
   useEffect(() => {
@@ -60,7 +60,12 @@ const ArticleCreateContainer = () => {
 
   return (
     <>
-      <ArticleEditor onChange={onChange} editorRef={editorRef} onClick={toggle} initialValue="" />
+      <ArticleEditor
+        onChangeTitle={onChangeTitle}
+        editorRef={editorRef}
+        modalToggle={toggle}
+        initialValue=""
+      />
       {modal && <ConfirmModalContainer type="write" callApi={callPostApi} toggle={toggle} />}
     </>
   );

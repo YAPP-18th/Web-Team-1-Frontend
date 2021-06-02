@@ -17,7 +17,9 @@ const ArticleUpdateContainer = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { category, contents, title, index } = useAppSelector((state) => state.articleViewReducer);
+  const { category, contents: beforeContents, title: beforeTitle, index } = useAppSelector(
+    (state) => state.articleViewReducer,
+  );
 
   const callUpdateApi = async () => {
     if (editorRef.current !== null) {
@@ -42,25 +44,24 @@ const ArticleUpdateContainer = () => {
     }
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    titleRef.current = e.target.value;
+  const onChangeTitle = (title: string) => {
+    titleRef.current = title;
   };
 
   useEffect(() => {
     if (editorRef.current !== null) {
-      editorRef.current.getInstance().setHtml(contents);
+      editorRef.current.getInstance().setHtml(beforeContents);
     }
-
-    titleRef.current = title;
+    titleRef.current = beforeTitle;
   }, []);
 
   return (
     <>
       <ArticleEditor
-        onChange={onChange}
+        onChangeTitle={onChangeTitle}
         editorRef={editorRef}
-        onClick={toggle}
-        initialValue={title}
+        modalToggle={toggle}
+        initialValue={beforeTitle}
       />
       {modal && <ConfirmModalContainer type="write" callApi={callUpdateApi} toggle={toggle} />}
     </>
