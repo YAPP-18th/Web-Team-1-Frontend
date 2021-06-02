@@ -19,7 +19,7 @@ const StyledAlert = styled.div<Props>`
   margin: auto;
   text-align: center;
   position: absolute;
-  top: 20%;
+  top: 5%;
   left: 50%;
   z-index: 1000;
   animation: ${(props) => (props.fadeIn ? 'fadein 2s' : 'fadeout 2s')};
