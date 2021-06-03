@@ -21,9 +21,9 @@ export default function Header() {
   const [isLogined, setIsLogined] = useState(false);
   const modalToggle = () => setIsShowedArticleModal(!isShowedArticleModal);
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<InnerArticleState>({
     category: '',
-    tag: [''],
+    tag: [],
     templateIdx: 0,
   });
 

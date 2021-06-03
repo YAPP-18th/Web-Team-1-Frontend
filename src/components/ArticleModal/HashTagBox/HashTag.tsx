@@ -11,7 +11,7 @@ const StyledHashTag = styled.div`
   height: 24px;
   display: inline-block;
   padding: 5px;
-  margin-right: 4px;
+  margin: 0 4px 4px 0;
   border-radius: 4px;
 `;
 

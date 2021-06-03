@@ -153,6 +153,7 @@ const ArticleModal = ({ onChange, onClick, isWarning, toggle, addTag, tagList }:
               <option value={6}>KPT</option>
             </TemplateSelect>
             <Label>해시태그</Label>
+            <HashTagBox addTag={addTag} tagList={tagList} />
             <HelpText>
               회고 양식 해시태그는 자동으로 맨 앞에 위치합니다.
               <br />
@@ -161,7 +162,6 @@ const ArticleModal = ({ onChange, onClick, isWarning, toggle, addTag, tagList }:
             <Warning visible={isWarning}>
               카테고리를 선택했는지, 해시태그에 이상이 없는지 확인하세요.
             </Warning>
-            <HashTagBox addTag={addTag} tagList={tagList} />
             <Button onClick={onClick}>글 작성하기</Button>
           </ModalBody>
         </StyledModal>

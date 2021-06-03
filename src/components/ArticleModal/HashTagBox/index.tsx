@@ -12,6 +12,7 @@ const StyledHashTagBox = styled.div`
   border: 1px solid #6a84e1;
   border-radius: 8px;
   padding: 12px;
+  width: 296px;
 `;
 
 const Input = styled.input`
@@ -21,6 +22,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+  max-width: fit-content;
 `;
 
 const HashTagBox = ({ addTag, tagList }: Props) => {
