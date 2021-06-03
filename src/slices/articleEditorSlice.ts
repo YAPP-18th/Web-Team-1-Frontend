@@ -1,28 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface EditorState {
+interface InnerArticleState {
   category: string;
   tag: Array<string>;
   templateIdx: number;
 }
 
-const initialState: EditorState = {
-  category: '',
-  tag: [],
-  templateIdx: 0,
-};
+interface EditorMetaState {
+  titleWarning: boolean;
+}
+
 /* eslint-disable no-param-reassign */
 const { actions: editorActions, reducer: articleEditorReducer } = createSlice({
   name: 'articleEditor',
-  initialState,
+  initialState: {
+    category: '',
+    tag: [''],
+    templateIdx: 0,
+    titleWarning: false,
+  },
+
   reducers: {
-    setEditorData: (state, action: PayloadAction<EditorState>) => {
+    setEditorData: (state, action: PayloadAction<InnerArticleState>) => {
       state.category = action.payload.category;
       state.tag = action.payload.tag;
       state.templateIdx = action.payload.templateIdx;
     },
+
+    setTitleWarning: (state, action: PayloadAction<EditorMetaState>) => {
+      state.titleWarning = action.payload.titleWarning;
+    },
+
+    clearEditorSlice: (state) => {
+      state.category = '';
+      state.tag = [''];
+      state.templateIdx = 0;
+      state.titleWarning = false;
+    },
   },
 });
 
-export { editorActions, EditorState };
+export { editorActions, InnerArticleState, EditorMetaState };
 export default articleEditorReducer;
