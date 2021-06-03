@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { zIndex } from '#styles/index';
+import HashTagBox from './HashTagBox';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
@@ -172,6 +173,7 @@ const ArticleModal = ({ onChange, onClick, isWarning, toggle }: Props) => {
             <Warning visible={isWarning}>
               카테고리를 선택했는지, 해시태그에 이상이 없는지 확인하세요.
             </Warning>
+            <HashTagBox />
             <Button onClick={onClick}>글 작성하기</Button>
           </ModalBody>
         </StyledModal>
