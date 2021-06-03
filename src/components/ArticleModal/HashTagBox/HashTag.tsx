@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TagItem } from '#components/Header';
 
 interface Props {
-  text: string;
+  tag: TagItem;
+  deleteTag: (tagId: number) => void;
 }
 
 const StyledHashTag = styled.div`
@@ -23,10 +25,17 @@ const CloseBtn = styled.button`
   cursor: pointer;
 `;
 
-const HashTag = ({ text }: Props) => {
+const HashTag = ({ tag, deleteTag }: Props) => {
   return (
     <StyledHashTag>
-      #{text} <CloseBtn>x</CloseBtn>
+      #{tag.text}
+      <CloseBtn
+        onClick={() => {
+          deleteTag(tag.id);
+        }}
+      >
+        x
+      </CloseBtn>
     </StyledHashTag>
   );
 };

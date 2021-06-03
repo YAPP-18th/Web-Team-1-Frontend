@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { TagItem } from '#components/Header';
 import HashTag from './HashTag';
 
 interface Props {
   addTag: (tagText: string) => void;
-  tagList: Array<string>;
+  tagList: Array<TagItem>;
+  deleteTag: (tagId: number) => void;
 }
 
 const StyledHashTagBox = styled.div`
@@ -25,7 +27,7 @@ const Input = styled.input`
   max-width: fit-content;
 `;
 
-const HashTagBox = ({ addTag, tagList }: Props) => {
+const HashTagBox = ({ addTag, tagList, deleteTag }: Props) => {
   const [tagText, setTagText] = useState('');
 
   const onSubmitHashTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -39,17 +41,10 @@ const HashTagBox = ({ addTag, tagList }: Props) => {
     setTagText(e.target.value);
   };
 
-  let count = 0;
-
-  const indexedTagList = tagList.map((item) => {
-    count += 1;
-    return { id: count, text: item };
-  });
-
   return (
     <StyledHashTagBox>
-      {indexedTagList.map((item) => {
-        return <HashTag text={item.text} key={item.id} />;
+      {tagList.map((item) => {
+        return <HashTag tag={item} key={item.id} deleteTag={deleteTag} />;
       })}
       <Input value={tagText} onChange={onChange} onKeyPress={onSubmitHashTag} />
     </StyledHashTagBox>

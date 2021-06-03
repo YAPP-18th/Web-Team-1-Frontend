@@ -12,6 +12,13 @@ import { IconPaths, IconWrapper } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 import * as S from './style';
 
+export interface TagItem {
+  id: number;
+  text: string;
+}
+
+let tagCount = 0;
+
 export default function Header() {
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -21,12 +28,12 @@ export default function Header() {
   const [isLogined, setIsLogined] = useState(false);
   const modalToggle = () => setIsShowedArticleModal(!isShowedArticleModal);
 
-  const [data, setData] = useState<InnerArticleState>({
+  const [data, setData] = useState({
     category: '',
-    tag: [],
     templateIdx: 0,
   });
 
+  const [tagList, setTagList] = useState<Array<TagItem>>([]);
   const [warning, setWarning] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -36,16 +43,11 @@ export default function Header() {
   const onClickWriteBtn = () => {
     if (data.category === '' || data.templateIdx === 0) return setWarning(true);
 
-    // const tagList = data.tag
-    //   .split('#')
-    //   .map((tag) => {
-    //     return tag.split(' ')[0];
-    //   })
-    //   .filter((tmp) => tmp !== '');
+    const newTagList = tagList.map((item) => item.text);
 
     const reduxData: InnerArticleState = {
       category: data.category,
-      tag: data.tag,
+      tag: newTagList,
       templateIdx: data.templateIdx,
     };
 
@@ -56,10 +58,19 @@ export default function Header() {
   };
 
   const addTag = (tagText: string) => {
-    setData({
-      ...data,
-      tag: [...data.tag, tagText],
-    });
+    setTagList([
+      ...tagList,
+      {
+        id: tagCount,
+        text: tagText,
+      },
+    ]);
+    tagCount += 1;
+  };
+
+  const deleteTag = (tagId: number) => {
+    const newTagList = tagList.filter((item) => item.id !== tagId);
+    setTagList(newTagList);
   };
 
   // 로그인 버튼 클릭
@@ -122,7 +133,8 @@ export default function Header() {
           isWarning={warning}
           toggle={modalToggle}
           addTag={addTag}
-          tagList={data.tag}
+          tagList={tagList}
+          deleteTag={deleteTag}
         />
       )}
     </>

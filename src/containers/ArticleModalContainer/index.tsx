@@ -5,6 +5,9 @@ import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
 import { color } from '#styles/index';
 import { useAppDispatch } from '#hooks/useAppDispatch';
+import { TagItem } from '#components/Header';
+
+let tagCount = 0;
 
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
@@ -14,10 +17,10 @@ const ArticleModalContainer = () => {
 
   const [data, setData] = useState({
     category: '',
-    tag: [''],
     templateIdx: 0,
   });
 
+  const [tagList, setTagList] = useState<Array<TagItem>>([]);
   const [warning, setWarning] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -30,19 +33,12 @@ const ArticleModalContainer = () => {
       setWarning(true);
       return;
     }
-
-    // // 해시태그 파싱
-    // const tagList = data.tag
-    //   .split('#')
-    //   .map((tag) => {
-    //     return tag.split(' ')[0];
-    //   })
-    //   .filter((tmp) => tmp !== '');
+    const newTagList = tagList.map((item) => item.text);
 
     // 리덕스에 저장
     const reduxData: InnerArticleState = {
       category: data.category,
-      tag: data.tag,
+      tag: newTagList,
       templateIdx: data.templateIdx,
     };
     dispatch(editorActions.setEditorData(reduxData));
@@ -51,11 +47,20 @@ const ArticleModalContainer = () => {
     history.push('/articleCreate');
   };
 
+  const deleteTag = (tagId: number) => {
+    const newTagList = tagList.filter((item) => item.id !== tagId);
+    setTagList(newTagList);
+  };
+
   const addTag = (tagText: string) => {
-    setData({
-      ...data,
-      tag: [...data.tag, tagText],
-    });
+    setTagList([
+      ...tagList,
+      {
+        id: tagCount,
+        text: tagText,
+      },
+    ]);
+    tagCount += 1;
   };
 
   return (
@@ -71,7 +76,8 @@ const ArticleModalContainer = () => {
           isWarning={warning}
           toggle={modalToggle}
           addTag={addTag}
-          tagList={data.tag}
+          tagList={tagList}
+          deleteTag={deleteTag}
         />
       )}
     </>

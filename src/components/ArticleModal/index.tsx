@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { zIndex } from '#styles/index';
 import HashTagBox from './HashTagBox';
+import { TagItem } from '#components/Header';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
@@ -9,7 +10,8 @@ interface Props {
   isWarning: boolean;
   toggle: () => void;
   addTag: (tagText: string) => void;
-  tagList: Array<string>;
+  tagList: Array<TagItem>;
+  deleteTag: (tagId: number) => void;
 }
 
 export interface WarningProps {
@@ -126,7 +128,15 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ArticleModal = ({ onChange, onClick, isWarning, toggle, addTag, tagList }: Props) => {
+const ArticleModal = ({
+  onChange,
+  onClick,
+  isWarning,
+  toggle,
+  addTag,
+  tagList,
+  deleteTag,
+}: Props) => {
   return (
     <>
       <StyledModalContainer>
@@ -153,7 +163,7 @@ const ArticleModal = ({ onChange, onClick, isWarning, toggle, addTag, tagList }:
               <option value={6}>KPT</option>
             </TemplateSelect>
             <Label>해시태그</Label>
-            <HashTagBox addTag={addTag} tagList={tagList} />
+            <HashTagBox addTag={addTag} tagList={tagList} deleteTag={deleteTag} />
             <HelpText>
               회고 양식 해시태그는 자동으로 맨 앞에 위치합니다.
               <br />
