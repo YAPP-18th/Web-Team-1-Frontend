@@ -38,6 +38,7 @@ const Warning = styled.small<WarningProps>`
   margin: 0 0 50px 30px;
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   color: red;
+  font-size: 18px;
 `;
 
 const TitleInput = ({ onChangeTitle, initialValue }: Props) => {
