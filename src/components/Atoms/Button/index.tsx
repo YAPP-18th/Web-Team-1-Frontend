@@ -9,6 +9,7 @@ export interface Props {
   className?: string[];
   disabled?: boolean;
   href?: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   onClick?: (e?: any) => void;
   to?: string;
   type?: 'button' | 'reset' | 'submit';
