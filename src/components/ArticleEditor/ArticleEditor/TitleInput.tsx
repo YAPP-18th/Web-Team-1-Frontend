@@ -56,7 +56,9 @@ const TitleInput = ({ onChangeTitle, initialValue }: Props) => {
         }}
         value={title}
       />
-      <Warning visible={titleWarning}>제목을 입력해야 작성완료 할 수 있습니다</Warning>
+      <Warning visible={titleWarning && title === ''}>
+        제목을 입력해야 작성완료 할 수 있습니다
+      </Warning>
     </StyledTitleInput>
   );
 };
