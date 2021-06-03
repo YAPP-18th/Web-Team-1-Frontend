@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { viewActions } from 'slices/articleViewSlice';
-import { getArticleDetail } from '#apis/articleViewApi';
+import { ArticleDetailData, getArticleDetail } from '#apis/articleViewApi';
 import { ArticleDetail } from '#components/ArticleView';
 /* eslint-disable no-console */
 
@@ -11,16 +11,20 @@ interface Props {
 
 const ArticleDetailContainer = ({ id }: Props) => {
   const dispatch = useDispatch();
-  const [data, setData] = useState({
-    category: '',
-    contents: '',
-    created_at: '',
-    nickname: '',
-    postIdx: 0,
-    profile: '',
-    tag: [],
-    title: '',
-    view: 0,
+  const [data, setData] = useState<ArticleDetailData>({
+    result: {
+      category: '',
+      commentCnt: 0,
+      contents: '',
+      createdAt: '',
+      nickname: '',
+      postIdx: 0,
+      profile: '',
+      tagList: [],
+      title: '',
+      view: 0,
+    },
+    scrap: false,
     writer: false,
   });
 
@@ -35,11 +39,11 @@ const ArticleDetailContainer = ({ id }: Props) => {
       // 리덕스로 값 넣기
       // 추후 위의 useState가 필요없을 수 있음.
       const reduxData = {
-        category: innerData.category,
-        contents: innerData.contents,
-        tag: innerData.tag,
-        title: innerData.title,
-        index: innerData.postIdx,
+        category: innerData.result.category,
+        contents: innerData.result.contents,
+        tag: innerData.result.tagList,
+        title: innerData.result.title,
+        index: innerData.result.postIdx,
       };
 
       dispatch(viewActions.setViewData(reduxData));
