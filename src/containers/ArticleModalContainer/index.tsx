@@ -14,7 +14,7 @@ const ArticleModalContainer = () => {
 
   const [data, setData] = useState({
     category: '',
-    tag: '',
+    tag: [''],
     templateIdx: 0,
   });
 
@@ -31,24 +31,31 @@ const ArticleModalContainer = () => {
       return;
     }
 
-    // 해시태그 파싱
-    const tagList = data.tag
-      .split('#')
-      .map((tag) => {
-        return tag.split(' ')[0];
-      })
-      .filter((tmp) => tmp !== '');
+    // // 해시태그 파싱
+    // const tagList = data.tag
+    //   .split('#')
+    //   .map((tag) => {
+    //     return tag.split(' ')[0];
+    //   })
+    //   .filter((tmp) => tmp !== '');
 
     // 리덕스에 저장
     const reduxData: InnerArticleState = {
       category: data.category,
-      tag: tagList,
+      tag: data.tag,
       templateIdx: data.templateIdx,
     };
     dispatch(editorActions.setEditorData(reduxData));
 
     // 페이지 이동
     history.push('/articleCreate');
+  };
+
+  const addTag = (tagText: string) => {
+    setData({
+      ...data,
+      tag: [...data.tag, tagText],
+    });
   };
 
   return (
@@ -63,6 +70,8 @@ const ArticleModalContainer = () => {
           onClick={onClickWriteBtn}
           isWarning={warning}
           toggle={modalToggle}
+          addTag={addTag}
+          tagList={data.tag}
         />
       )}
     </>

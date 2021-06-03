@@ -23,7 +23,7 @@ export default function Header() {
 
   const [data, setData] = useState({
     category: '',
-    tag: '',
+    tag: [''],
     templateIdx: 0,
   });
 
@@ -35,22 +35,31 @@ export default function Header() {
 
   const onClickWriteBtn = () => {
     if (data.category === '' || data.templateIdx === 0) return setWarning(true);
-    const tagList = data.tag
-      .split('#')
-      .map((tag) => {
-        return tag.split(' ')[0];
-      })
-      .filter((tmp) => tmp !== '');
+
+    // const tagList = data.tag
+    //   .split('#')
+    //   .map((tag) => {
+    //     return tag.split(' ')[0];
+    //   })
+    //   .filter((tmp) => tmp !== '');
 
     const reduxData: InnerArticleState = {
       category: data.category,
-      tag: tagList,
+      tag: data.tag,
       templateIdx: data.templateIdx,
     };
+
     dispatch(editorActions.setEditorData(reduxData));
     history.push('/articleCreate');
 
     modalToggle();
+  };
+
+  const addTag = (tagText: string) => {
+    setData({
+      ...data,
+      tag: [...data.tag, tagText],
+    });
   };
 
   // 로그인 버튼 클릭
@@ -112,6 +121,8 @@ export default function Header() {
           onClick={onClickWriteBtn}
           isWarning={warning}
           toggle={modalToggle}
+          addTag={addTag}
+          tagList={data.tag}
         />
       )}
     </>
