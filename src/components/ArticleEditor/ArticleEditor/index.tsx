@@ -8,7 +8,7 @@ import TempSaveBtn from './TempSaveBtn';
 interface Props {
   onChangeTitle: (title: string) => void;
   editorRef: React.MutableRefObject<Editor | null>;
-  modalToggle: () => void;
+  onClickSaveBtn: () => void;
   initialValue: string;
 }
 
@@ -46,7 +46,7 @@ const StyledViewer = styled.div`
   }
 `;
 
-const ArticleEditor = ({ onChangeTitle, editorRef, modalToggle, initialValue }: Props) => {
+const ArticleEditor = ({ onChangeTitle, editorRef, onClickSaveBtn, initialValue }: Props) => {
   return (
     <StyledArticleCard>
       <TitleInput onChangeTitle={onChangeTitle} initialValue={initialValue} />
@@ -60,7 +60,7 @@ const ArticleEditor = ({ onChangeTitle, editorRef, modalToggle, initialValue }: 
           ref={editorRef}
         />
       </StyledViewer>
-      <TempSaveBtn onClick={modalToggle} />
+      <TempSaveBtn onClick={onClickSaveBtn} />
     </StyledArticleCard>
   );
 };

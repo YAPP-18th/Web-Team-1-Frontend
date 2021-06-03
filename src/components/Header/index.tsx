@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { editorActions, EditorState } from 'slices/articleEditorSlice';
+import { editorActions, InnerArticleState } from 'slices/articleEditorSlice';
 import thumbnail from 'assets/images/thumbnail.png';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
@@ -41,7 +41,8 @@ export default function Header() {
         return tag.split(' ')[0];
       })
       .filter((tmp) => tmp !== '');
-    const reduxData: EditorState = {
+
+    const reduxData: InnerArticleState = {
       category: data.category,
       tag: tagList,
       templateIdx: data.templateIdx,

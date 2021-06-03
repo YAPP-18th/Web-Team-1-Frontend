@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 import { useDispatch } from 'react-redux';
-import { editorActions, EditorState } from 'slices/articleEditorSlice';
+import { editorActions, InnerArticleState } from 'slices/articleEditorSlice';
 import { updateArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
@@ -32,7 +32,7 @@ const ArticleUpdateContainer = () => {
       const result = await updateArticle(index, data);
 
       if (result) {
-        const reduxData: EditorState = {
+        const reduxData: InnerArticleState = {
           category: '',
           tag: [],
           templateIdx: 0,
@@ -48,11 +48,24 @@ const ArticleUpdateContainer = () => {
     titleRef.current = title;
   };
 
+  const onClickSaveBtn = () => {
+    if (!(titleRef.current === '')) {
+      dispatch(editorActions.setTitleWarning({ titleWarning: false }));
+      toggle();
+    } else {
+      dispatch(editorActions.setTitleWarning({ titleWarning: true }));
+    }
+  };
+
   useEffect(() => {
     if (editorRef.current !== null) {
       editorRef.current.getInstance().setHtml(beforeContents);
     }
     titleRef.current = beforeTitle;
+
+    return () => {
+      dispatch(editorActions.clearEditorSlice());
+    };
   }, []);
 
   return (
@@ -60,7 +73,7 @@ const ArticleUpdateContainer = () => {
       <ArticleEditor
         onChangeTitle={onChangeTitle}
         editorRef={editorRef}
-        modalToggle={toggle}
+        onClickSaveBtn={onClickSaveBtn}
         initialValue={beforeTitle}
       />
       {modal && <ConfirmModalContainer type="write" callApi={callUpdateApi} toggle={toggle} />}

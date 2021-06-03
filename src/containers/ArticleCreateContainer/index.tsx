@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 import { useDispatch } from 'react-redux';
-import { editorActions, EditorState } from 'slices/articleEditorSlice';
+import { editorActions, InnerArticleState } from 'slices/articleEditorSlice';
 import { getTemplate, postArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
@@ -18,7 +18,7 @@ const ArticleCreateContainer = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const articleEditorSliceData = useAppSelector((state) => state.articleEditorReducer);
+  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
 
   const setTemplate = async (index: number) => {
     const data = await getTemplate(index);
@@ -30,7 +30,9 @@ const ArticleCreateContainer = () => {
   const callPostApi = async () => {
     if (editorRef.current !== null) {
       const data = {
-        ...articleEditorSliceData,
+        tag,
+        category,
+        templateIdx,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         title: titleRef.current,
         image: [],
@@ -38,7 +40,7 @@ const ArticleCreateContainer = () => {
       const index = await postArticle(data);
 
       if (index) {
-        const reduxData: EditorState = {
+        const reduxData: InnerArticleState = {
           category: '',
           tag: [],
           templateIdx: 0,
@@ -56,12 +58,18 @@ const ArticleCreateContainer = () => {
 
   const onClickSaveBtn = () => {
     if (!(titleRef.current === '')) {
+      dispatch(editorActions.setTitleWarning({ titleWarning: false }));
       toggle();
+    } else {
+      dispatch(editorActions.setTitleWarning({ titleWarning: true }));
     }
   };
 
   useEffect(() => {
-    setTemplate(articleEditorSliceData.templateIdx);
+    setTemplate(templateIdx);
+    return () => {
+      dispatch(editorActions.clearEditorSlice());
+    };
   }, []);
 
   return (
@@ -69,7 +77,7 @@ const ArticleCreateContainer = () => {
       <ArticleEditor
         onChangeTitle={onChangeTitle}
         editorRef={editorRef}
-        modalToggle={onClickSaveBtn}
+        onClickSaveBtn={onClickSaveBtn}
         initialValue=""
       />
       {modal && <ConfirmModalContainer type="write" callApi={callPostApi} toggle={toggle} />}

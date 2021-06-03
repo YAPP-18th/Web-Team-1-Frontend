@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EditorState, editorActions } from 'slices/articleEditorSlice';
+import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
 import { useHistory } from 'react-router-dom';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
@@ -40,7 +40,7 @@ const ArticleModalContainer = () => {
       .filter((tmp) => tmp !== '');
 
     // 리덕스에 저장
-    const reduxData: EditorState = {
+    const reduxData: InnerArticleState = {
       category: data.category,
       tag: tagList,
       templateIdx: data.templateIdx,

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 interface Props {
   onChangeTitle: (title: string) => void;
   initialValue: string;
 }
 
-// export interface WarningProps {
-//   visible: boolean;
-// }
+export interface WarningProps {
+  visible: boolean;
+}
+
 const StyledTitleInput = styled.div`
   & .title-input {
     border: none;
@@ -18,7 +20,7 @@ const StyledTitleInput = styled.div`
     font-size: 56px;
     line-height: 56px;
     letter-spacing: -0.04em;
-    margin-bottom: 64px;
+    /* margin-bottom: 64px; */
     padding-left: 30px;
     padding-top: 30px;
   }
@@ -31,15 +33,18 @@ const StyledTitleInput = styled.div`
   }
 `;
 
-// const Warning = styled.small<WarningProps>`
-//   display: block;
-//   margin: 0 0 50px 30px;
-//   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
-//   color: red;
-// `;
+const Warning = styled.small<WarningProps>`
+  display: block;
+  margin: 0 0 50px 30px;
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  color: red;
+  font-size: 18px;
+`;
 
 const TitleInput = ({ onChangeTitle, initialValue }: Props) => {
   const [title, setTitle] = useState(initialValue);
+  const { titleWarning } = useAppSelector((state) => state.articleEditorReducer);
+
   return (
     <StyledTitleInput>
       <input
@@ -51,7 +56,7 @@ const TitleInput = ({ onChangeTitle, initialValue }: Props) => {
         }}
         value={title}
       />
-      {/* <Warning visible={title === ''}>제목을 입력해야 작성완료 할 수 있습니다</Warning> */}
+      <Warning visible={titleWarning}>제목을 입력해야 작성완료 할 수 있습니다</Warning>
     </StyledTitleInput>
   );
 };
