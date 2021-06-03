@@ -9,6 +9,7 @@ export interface Props {
   icon: FunctionComponent;
   innerRef?: RefObject<HTMLSpanElement>;
   isCircled?: boolean;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   onClick?: (e?: any) => void;
 }
 
