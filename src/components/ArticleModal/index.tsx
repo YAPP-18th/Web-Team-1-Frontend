@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { zIndex } from '#styles/index';
+import HashTagBox from './HashTagBox';
+import { TagItem } from '#components/Header';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
   onClick: () => void;
   isWarning: boolean;
   toggle: () => void;
+  addTag: (tagText: string) => void;
+  tagList: Array<TagItem>;
+  deleteTag: (tagId: number) => void;
 }
 
 export interface WarningProps {
@@ -93,19 +98,6 @@ const TemplateSelect = styled(Select).attrs(() => ({
   name: 'templateIdx',
 }))``;
 
-const Input = styled.input.attrs(() => ({
-  type: 'text',
-  name: 'tag',
-}))`
-  width: 296px;
-  height: 48px;
-  background: #f8f8f8;
-  padding: 12px 16px;
-
-  border-radius: 8px;
-  border: none;
-`;
-
 const HelpText = styled.small`
   font-family: Apple SD Gothic Neo;
   font-size: 12px;
@@ -136,7 +128,15 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ArticleModal = ({ onChange, onClick, isWarning, toggle }: Props) => {
+const ArticleModal = ({
+  onChange,
+  onClick,
+  isWarning,
+  toggle,
+  addTag,
+  tagList,
+  deleteTag,
+}: Props) => {
   return (
     <>
       <StyledModalContainer>
@@ -163,7 +163,7 @@ const ArticleModal = ({ onChange, onClick, isWarning, toggle }: Props) => {
               <option value={6}>KPT</option>
             </TemplateSelect>
             <Label>해시태그</Label>
-            <Input onChange={onChange} />
+            <HashTagBox addTag={addTag} tagList={tagList} deleteTag={deleteTag} />
             <HelpText>
               회고 양식 해시태그는 자동으로 맨 앞에 위치합니다.
               <br />
