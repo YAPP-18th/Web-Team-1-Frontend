@@ -30,7 +30,9 @@ const ArticleDetailContainer = ({ id }: Props) => {
 
   const getData = async () => {
     const apiData = await getArticleDetail(id);
+    /* eslint-disable no-console */
     if (apiData) {
+      // console.log(apiData.data);
       const innerData = apiData.data;
       setData({
         ...innerData,

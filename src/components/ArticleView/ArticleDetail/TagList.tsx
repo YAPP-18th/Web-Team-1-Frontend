@@ -12,19 +12,12 @@ const StyledTag = styled.span`
 `;
 
 const TagList = ({ tag }: Props) => {
-  let count = 0;
-
-  const indexedTagList = tag.map((item) => {
-    count += 1;
-    return { id: count, text: item.tag };
-  });
-
   return (
     <>
-      {indexedTagList.map((item) => {
+      {tag.map((item) => {
         return (
-          <StyledTag key={item.id}>
-            <Button buttonColor={{ background: 'lightGray' }}>{item.text}</Button>
+          <StyledTag key={item.tagIdx}>
+            <Button buttonColor={{ background: 'lightGray' }}>{item.tag}</Button>
           </StyledTag>
         );
       })}

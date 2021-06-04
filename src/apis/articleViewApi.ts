@@ -4,6 +4,7 @@ import instance from '#apis/common';
 
 export interface tagData {
   tag: string;
+  tagIdx: number;
 }
 
 export interface ArticleResultData {
