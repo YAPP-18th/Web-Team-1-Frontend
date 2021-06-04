@@ -58,6 +58,10 @@ export default function Header() {
   };
 
   const addTag = (tagText: string) => {
+    if (tagList.length >= 3) {
+      return;
+    }
+
     setTagList([
       ...tagList,
       {
