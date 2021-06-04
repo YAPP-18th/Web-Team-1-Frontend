@@ -1,13 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import HashTagBox from './HashTagBox';
 import { zIndex } from '#styles/index';
 import { TagItem } from '#containers/ArticleModalContainer';
-import HashTagBox from './HashTagBox';
+
+interface Warning {
+  isWarning: boolean;
+  warningMessage: string;
+}
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
   onClick: () => void;
-  isWarning: boolean;
+  warning: Warning;
   toggle: () => void;
   addTag: (tagText: string) => void;
   tagList: Array<TagItem>;
@@ -131,7 +136,7 @@ const Button = styled.button`
 const ArticleModal = ({
   onChange,
   onClick,
-  isWarning,
+  warning,
   toggle,
   addTag,
   tagList,
@@ -169,9 +174,7 @@ const ArticleModal = ({
               <br />
               해시태그는 최대 3개, 최대 16자까지만 노출됩니다.
             </HelpText>
-            <Warning visible={isWarning}>
-              카테고리를 선택했는지, 해시태그에 이상이 없는지 확인하세요.
-            </Warning>
+            <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning>
             <Button onClick={onClick}>글 작성하기</Button>
           </ModalBody>
         </StyledModal>

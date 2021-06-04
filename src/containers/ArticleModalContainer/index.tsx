@@ -15,8 +15,6 @@ export interface TagItem {
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const [modal, setModal] = useState(false);
-  const modalToggle = () => setModal(!modal);
 
   const [data, setData] = useState({
     category: '',
@@ -24,14 +22,35 @@ const ArticleModalContainer = () => {
   });
 
   const [tagList, setTagList] = useState<Array<TagItem>>([]);
-  const [warning, setWarning] = useState(false);
+  const [warning, setWarning] = useState({
+    isWarning: false,
+    warningMessage: '',
+  });
+
+  const [modal, setModal] = useState(false);
+  const modalToggle = () => {
+    if (modal) {
+      setTagList([]);
+      setWarning({
+        isWarning: false,
+        warningMessage: '',
+      });
+    }
+    setModal(!modal);
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const onClickWriteBtn = () => {
-    if (data.category === '' || data.templateIdx === 0) return setWarning(true);
+    if (data.category === '' || data.templateIdx === 0) {
+      setWarning({
+        isWarning: true,
+        warningMessage: '카테고리와 템플릿은 꼭 선택해야 합니다.',
+      });
+      return;
+    }
 
     const newTagList = tagList.map((item) => item.text);
 
@@ -77,7 +96,7 @@ const ArticleModalContainer = () => {
         <ArticleModal
           onChange={onChange}
           onClick={onClickWriteBtn}
-          isWarning={warning}
+          warning={warning}
           toggle={modalToggle}
           addTag={addTag}
           tagList={tagList}
