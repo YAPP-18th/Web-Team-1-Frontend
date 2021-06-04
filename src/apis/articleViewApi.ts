@@ -2,16 +2,27 @@ import { AxiosResponse } from 'axios';
 import instance from '#apis/common';
 /* eslint-disable no-console */
 
-export interface ArticleDetailData {
+export interface tagData {
+  tag: string;
+  tagIdx: number;
+}
+
+export interface ArticleResultData {
   category: string;
+  commentCnt: number;
   contents: string;
-  created_at: string;
+  createdAt: string;
   nickname: string;
   postIdx: number;
   profile: string;
-  tag: Array<string>;
+  tagList: Array<tagData>;
   title: string;
   view: number;
+}
+
+export interface ArticleDetailData {
+  result: ArticleResultData;
+  scrap: boolean;
   writer: boolean;
 }
 

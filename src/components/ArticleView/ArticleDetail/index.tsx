@@ -49,7 +49,8 @@ const StyledTag = styled.div`
 `;
 
 const ArticleDetailCard = ({ data, id }: Props) => {
-  const { contents, category, title, nickname, profile, created_at, tag, writer } = data;
+  const { result, writer } = data;
+  const { contents, category, title, nickname, profile, createdAt, tagList } = result;
   const viewerRef = useRef<Viewer>(null);
 
   useEffect(() => {
@@ -63,10 +64,10 @@ const ArticleDetailCard = ({ data, id }: Props) => {
       {writer && <EditBtnListContainer id={id} />}
       <StyledTag>
         <Category category={category} />
-        <TagList tag={tag} />
+        <TagList tag={tagList} />
       </StyledTag>
       <Title text={title} />
-      <SubtleInfo nickname={nickname} profile={profile} date={created_at} />
+      <SubtleInfo nickname={nickname} profile={profile} date={createdAt} />
       <StyledViewer>
         <Viewer ref={viewerRef} />
       </StyledViewer>
