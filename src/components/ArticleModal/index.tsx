@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { zIndex } from '#styles/index';
+import { TagItem } from '#containers/ArticleModalContainer';
 import HashTagBox from './HashTagBox';
-import { TagItem } from '#components/Header';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;

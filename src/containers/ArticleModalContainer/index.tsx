@@ -3,11 +3,14 @@ import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
 import { useHistory } from 'react-router-dom';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
-import { color } from '#styles/index';
 import { useAppDispatch } from '#hooks/useAppDispatch';
-import { TagItem } from '#components/Header';
 
 let tagCount = 0;
+
+export interface TagItem {
+  id: number;
+  text: string;
+}
 
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
@@ -28,23 +31,20 @@ const ArticleModalContainer = () => {
   };
 
   const onClickWriteBtn = () => {
-    // 카테고리 유효성 검사
-    if (data.category === '' || data.templateIdx === 0) {
-      setWarning(true);
-      return;
-    }
+    if (data.category === '' || data.templateIdx === 0) return setWarning(true);
+
     const newTagList = tagList.map((item) => item.text);
 
-    // 리덕스에 저장
     const reduxData: InnerArticleState = {
       category: data.category,
       tag: newTagList,
       templateIdx: data.templateIdx,
     };
-    dispatch(editorActions.setEditorData(reduxData));
 
-    // 페이지 이동
+    dispatch(editorActions.setEditorData(reduxData));
     history.push('/articleCreate');
+
+    modalToggle();
   };
 
   const deleteTag = (tagId: number) => {
@@ -53,6 +53,10 @@ const ArticleModalContainer = () => {
   };
 
   const addTag = (tagText: string) => {
+    if (tagList.length >= 3) {
+      return;
+    }
+
     setTagList([
       ...tagList,
       {
@@ -65,7 +69,7 @@ const ArticleModalContainer = () => {
 
   return (
     <>
-      <Button buttonColor={{ background: color.gray }} onClick={modalToggle}>
+      <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
         바로 회고하기
         <IconWrapper icon={IconPaths.Glitter} />
       </Button>

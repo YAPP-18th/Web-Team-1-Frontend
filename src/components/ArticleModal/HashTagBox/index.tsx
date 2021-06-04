@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { TagItem } from '#components/Header';
 import HashTag from './HashTag';
+import { TagItem } from '#containers/ArticleModalContainer';
 
 interface Props {
   addTag: (tagText: string) => void;
