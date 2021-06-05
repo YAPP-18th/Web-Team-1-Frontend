@@ -73,6 +73,10 @@ const ArticleModalContainer = () => {
 
   const addTag = (tagText: string) => {
     if (tagList.length >= 3) {
+      setWarning({
+        isWarning: true,
+        warningMessage: '해시태그는 최대 3개까지 가능합니다.',
+      });
       return;
     }
 
