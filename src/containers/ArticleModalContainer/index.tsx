@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
@@ -11,6 +12,10 @@ export interface TagItem {
   id: number;
   text: string;
 }
+
+const StyledBtn = styled.div`
+  margin-right: 16px;
+`;
 
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
@@ -92,10 +97,12 @@ const ArticleModalContainer = () => {
 
   return (
     <>
-      <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
-        바로 회고하기
-        <IconWrapper icon={IconPaths.Glitter} />
-      </Button>
+      <StyledBtn>
+        <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
+          바로 회고하기
+          <IconWrapper icon={IconPaths.Glitter} />
+        </Button>
+      </StyledBtn>
       {modal && (
         <ArticleModal
           onChange={onChange}
