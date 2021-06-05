@@ -18,7 +18,7 @@ const StyledIconBtn = styled.span`
   border-radius: 50%;
   background-color: white;
   position: relative;
-
+  box-shadow: 0px 5px 20px rgba(205, 204, 198, 0.25);
   &:hover {
     box-shadow: 0px 8px 8px rgba(172, 171, 165, 0.4);
   }
