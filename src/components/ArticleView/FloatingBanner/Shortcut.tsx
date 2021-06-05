@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
-import { color } from '#styles/index';
 
 const StyledShortcut = styled.div`
   position: fixed;
