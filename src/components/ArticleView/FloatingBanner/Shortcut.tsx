@@ -11,10 +11,9 @@ const StyledShortcut = styled.div`
 
 const Shortcut = () => {
   const text = `이 방법으로 회고하기`;
-  const background = color.purple;
   return (
     <StyledShortcut>
-      <Button buttonColor={{ background }}>
+      <Button buttonColor={{ background: 'blue' }}>
         {text}
         <IconWrapper icon={IconPaths.Glitter} />
       </Button>
