@@ -17,8 +17,8 @@ interface Card {
 // const baseUrl = 'http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1';
 
 const urls: { [key: string]: string } = {
-  최신순: `/posts/lists?page=0&pageSize=20`,
-  조회순: `/posts/lists/new?page=0&pageSize=20`,
+  최신순: `/posts/lists/new?page=0&pageSize=20`,
+  조회순: `/posts/lists?page=0&pageSize=20`,
 };
 
 export const fetchCardList = async ({ sortBy }: { sortBy: string }): Promise<Card[]> => {
