@@ -8,6 +8,7 @@ import Title from './Title';
 import SubtleInfo from '#components/ArticleView/ArticleDetail/SubtleInfo';
 import TagList from './TagList';
 import EditBtnListContainer from '#containers/EditBtnListContainer';
+import Comment from './Comment';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import 'codemirror/lib/codemirror.css';
 // import './Style/style.css';
@@ -71,6 +72,7 @@ const ArticleDetailCard = ({ data, id }: Props) => {
       <StyledViewer>
         <Viewer ref={viewerRef} />
       </StyledViewer>
+      <Comment />
     </StyleArticleCard>
   );
 };
