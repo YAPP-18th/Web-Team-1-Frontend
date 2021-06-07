@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import instance from '#apis/common';
+import { tokenInstance } from '#apis/common';
 /* eslint-disable no-console */
 
 export interface tagData {
@@ -28,7 +28,7 @@ export interface ArticleDetailData {
 
 export const getArticleDetail = async (index: string): Promise<AxiosResponse | null> => {
   try {
-    const res = await instance.get(`/posts/${index}`);
+    const res = await tokenInstance.get(`/posts/${index}`);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -38,7 +38,7 @@ export const getArticleDetail = async (index: string): Promise<AxiosResponse | n
 
 export const deleteArticle = async (index: string): Promise<AxiosResponse | null> => {
   try {
-    const res = await instance.delete(`/posts/${index}`);
+    const res = await tokenInstance.delete(`/posts/${index}`);
     return res.data;
   } catch (error) {
     console.log(error);
