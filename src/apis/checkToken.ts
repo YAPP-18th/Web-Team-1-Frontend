@@ -14,12 +14,10 @@ interface JWT {
 }
 
 export const refreshToken = async (): Promise<number | null> => {
-  const [cookies, setCookie, removeCookie] = useCookies(['JWT-Refresh-Token']);
   /* eslint-disable no-console */
   try {
-    // console.log(useCookies(['JWT-Refresh-Token'])[0].get());
-    console.log(cookies.get('JWT-Refresh-Token'));
-    const refreshTokenValue = cookies.get('JWT-Refresh-Token');
+    console.log(document.cookie.split('=')[1]);
+    const refreshTokenValue = document.cookie.split('=')[1];
     const res = await refreshInstance.post('auth/reissue', {
       refreshToken: refreshTokenValue,
     });
