@@ -21,4 +21,4 @@ const refreshInstance = axios.create({
 
 tokenInstance.interceptors.request.use(checkToken);
 
-export { instance, tokenInstance, refreshInstance };
+export { instance, refreshInstance, tokenInstance };

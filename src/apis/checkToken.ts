@@ -42,6 +42,8 @@ const checkToken = async (config: AxiosRequestConfig) => {
         window.localStorage.setItem('accessToken', newAccessToken);
         config.headers.Authorization = `Bearer ${newAccessToken}`;
       }
+    } else {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   }
