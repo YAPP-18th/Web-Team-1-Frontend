@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 // import axios, { AxiosRequestConfig } from 'axios';
 import jwtDecode from 'jwt-decode';
 import { useCookies, Cookies } from 'react-cookie';
-import { refreshInstance } from './common';
+import { refreshInstance, instance } from './common';
 
 interface JWT {
   auth: string;
@@ -18,7 +18,7 @@ export const refreshToken = async (): Promise<number | null> => {
   try {
     console.log(document.cookie.split('=')[1]);
     const refreshTokenValue = document.cookie.split('=')[1];
-    const res = await refreshInstance.post('auth/reissue', {
+    const res = await instance.post('auth/reissue', {
       refreshToken: refreshTokenValue,
     });
     return res.data;
