@@ -16,7 +16,6 @@ interface JWT {
 export const getRefreshToken = async (): Promise<string | null> => {
   /* eslint-disable no-console */
   try {
-    // console.log(document.cookie.split('=')[1]);
     const refreshTokenValue = document.cookie.split('=')[1];
     const res = await refreshInstance.post('auth/reissue', {
       refreshToken: refreshTokenValue,
@@ -35,10 +34,8 @@ const checkToken = async (config: AxiosRequestConfig) => {
     const nowDate = new Date().getTime() / 1000;
     /* eslint-disable no-console */
 
-    console.log('체크합니다');
     // // 토큰 만료시간이 지났다면
     if (decode.exp < nowDate) {
-      console.log('만료');
       const newAccessToken = await getRefreshToken();
       if (newAccessToken) {
         /* eslint-disable no-param-reassign */
