@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 // import axios, { AxiosRequestConfig } from 'axios';
 import jwtDecode from 'jwt-decode';
+import { useCookies } from 'react-cookie';
 import { refreshInstance } from './common';
 
 interface JWT {
@@ -14,10 +15,12 @@ interface JWT {
 
 export const refreshToken = async (): Promise<number | null> => {
   /* eslint-disable no-console */
-  // 쿠키에 리프레쉬토큰 있어야함!
   try {
-    const res = await refreshInstance.post('auth/reissue');
-    console.log(res.data);
+    console.log(useCookies(['JWT-Refresh-Token'])[0].get());
+    console.log(useCookies(['JWT-Refresh-Token'])[0]);
+    const res = await refreshInstance.post('auth/reissue', {
+      refreshToken: useCookies(['JWT-Refresh-Token'])[0].get(),
+    });
     return res.data;
   } catch (error) {
     console.log(error);
