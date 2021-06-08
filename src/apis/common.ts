@@ -17,6 +17,7 @@ const refreshInstance = axios.create({
   headers: {
     Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
   },
+  withCredentials: true,
 });
 
 tokenInstance.interceptors.request.use(checkToken);
