@@ -32,7 +32,7 @@ const checkToken = async (config: AxiosRequestConfig) => {
     const nowDate = new Date().getTime() / 1000;
     /* eslint-disable no-console */
 
-    console.log(decode);
+    console.log('체크합니다');
     // // 토큰 만료시간이 지났다면
     if (decode.exp < nowDate) {
       console.log('만료');
