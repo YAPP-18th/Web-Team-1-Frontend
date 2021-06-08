@@ -13,7 +13,7 @@ interface JWT {
   user_idx: number;
 }
 
-export const refreshToken = async (): Promise<string | null> => {
+export const getRefreshToken = async (): Promise<string | null> => {
   /* eslint-disable no-console */
   try {
     // console.log(document.cookie.split('=')[1]);
@@ -39,9 +39,10 @@ const checkToken = async (config: AxiosRequestConfig) => {
     // // 토큰 만료시간이 지났다면
     if (decode.exp < nowDate) {
       console.log('만료');
-      const newAccessToken = await refreshToken();
+      const newAccessToken = await getRefreshToken();
       if (newAccessToken) {
         /* eslint-disable no-param-reassign */
+        window.localStorage.setItem('accessToken', newAccessToken);
         config.headers.Authorization = `Bearer ${newAccessToken}`;
       }
     }
