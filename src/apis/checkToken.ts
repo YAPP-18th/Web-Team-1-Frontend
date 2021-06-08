@@ -18,7 +18,7 @@ export const refreshToken = async (): Promise<number | null> => {
   try {
     console.log(document.cookie.split('=')[1]);
     const refreshTokenValue = document.cookie.split('=')[1];
-    const res = await instance.post('auth/reissue', {
+    const res = await refreshInstance.post('auth/reissue', {
       refreshToken: refreshTokenValue,
     });
     return res.data;
