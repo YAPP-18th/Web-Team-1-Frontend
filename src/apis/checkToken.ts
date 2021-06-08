@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 // import axios, { AxiosRequestConfig } from 'axios';
 import jwtDecode from 'jwt-decode';
-import { instance } from './common';
+import { refreshInstance } from './common';
 
 interface JWT {
   auth: string;
@@ -16,7 +16,7 @@ export const refreshToken = async (): Promise<number | null> => {
   /* eslint-disable no-console */
   // 쿠키에 리프레쉬토큰 있어야함!
   try {
-    const res = await instance.post('/api/v1/auth/reissue');
+    const res = await refreshInstance.post('/api/v1/auth/reissue');
     console.log(res.data);
     return res.data;
   } catch (error) {

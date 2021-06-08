@@ -12,6 +12,13 @@ const instance = axios.create({
   baseURL: 'http://15.165.67.119:9000/api/v1/',
 });
 
+const refreshInstance = axios.create({
+  baseURL: 'http://15.165.67.119:9000/api/v1/',
+  headers: {
+    Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
+  },
+});
+
 tokenInstance.interceptors.request.use(checkToken);
 
-export { instance, tokenInstance };
+export { instance, tokenInstance, refreshInstance };

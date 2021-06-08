@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import qs from 'qs';
 import { useCookies } from 'react-cookie';
 import { Button, IconPaths, IconWrapper } from '#components/Atoms';
+import { tokenInstance } from '#apis/common';
 import * as S from './style';
 
 export interface Props {
@@ -26,6 +27,7 @@ const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) =
     localStorage.setItem('accessToken', accessToken as string);
     // localStorage.setItem('refreshToken', refreshToken as string);
     setCookie('JWT-Refresh-Token', refreshToken);
+    tokenInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     history.push('/');
     return () => {
       onCloseModal(false);
