@@ -16,7 +16,7 @@ export const refreshToken = async (): Promise<number | null> => {
   /* eslint-disable no-console */
   // 쿠키에 리프레쉬토큰 있어야함!
   try {
-    const res = await refreshInstance.post('auth/reissue', {});
+    const res = await refreshInstance.post('auth/reissue');
     console.log(res.data);
     return res.data;
   } catch (error) {
