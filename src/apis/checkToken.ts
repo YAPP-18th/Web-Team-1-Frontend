@@ -40,13 +40,12 @@ const checkToken = async (config: AxiosRequestConfig) => {
       if (newAccessToken) {
         /* eslint-disable no-param-reassign */
         window.localStorage.setItem('accessToken', newAccessToken);
-        config.headers.Authorization = `Bearer ${newAccessToken}`;
       }
-    } else {
-      config.headers.Authorization = `Bearer ${accessToken}`;
     }
+    config.headers.Authorization = `Bearer ${window.localStorage.getItem('accessToken')}`;
     return config;
   }
+  console.log('accessToken이 로컬에 없음');
   return config;
 };
 

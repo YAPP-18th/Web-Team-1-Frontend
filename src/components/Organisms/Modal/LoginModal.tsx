@@ -16,7 +16,7 @@ export interface Props {
 const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) => {
   const location = useLocation();
   const history = useHistory();
-  const [cookies, setCookie, removeCookie] = useCookies(['JWT-Refresh-Token']);
+  const [, setCookie] = useCookies(['JWT-Refresh-Token']);
 
   // 쿼리스트링으로 받은 token들을 local storage에 추가
   useEffect(() => {
@@ -25,9 +25,8 @@ const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) =
     });
     if (!accessToken || !refreshToken) return;
     localStorage.setItem('accessToken', accessToken as string);
-    // localStorage.setItem('refreshToken', refreshToken as string);
     setCookie('JWT-Refresh-Token', refreshToken, { maxAge: 3600 * 24 * 30 });
-    tokenInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    // tokenInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     history.push('/');
     return () => {
       onCloseModal(false);

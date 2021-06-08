@@ -17,12 +17,12 @@ import { tokenInstance } from '#apis/common';
 
 const App = () => {
   // 로컬 스토리지에 있는 access token을 axios에다가 적용
-  useLayoutEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      tokenInstance.defaults.headers.Authorization = `Bearer ${accessToken}`;
-    }
-  }, []);
+  // useLayoutEffect(() => {
+  //   const accessToken = localStorage.getItem('accessToken');
+  //   if (accessToken) {
+  //     tokenInstance.defaults.headers.Authorization = `Bearer ${accessToken}`;
+  //   }
+  // }, []);
 
   return (
     <>
