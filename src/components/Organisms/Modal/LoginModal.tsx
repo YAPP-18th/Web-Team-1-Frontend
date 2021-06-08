@@ -26,7 +26,7 @@ const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) =
     if (!accessToken || !refreshToken) return;
     localStorage.setItem('accessToken', accessToken as string);
     // localStorage.setItem('refreshToken', refreshToken as string);
-    setCookie('JWT-Refresh-Token', refreshToken, { domain: 'http://15.165.67.119/' });
+    setCookie('JWT-Refresh-Token', refreshToken);
     tokenInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     history.push('/');
     return () => {
