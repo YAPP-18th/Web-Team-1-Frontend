@@ -1,5 +1,5 @@
 import axios from 'axios';
-import checkToken from '#apis/checkToken';
+import checkToken, { checkRefreshAccessToken } from '#apis/checkToken';
 
 const tokenInstance = axios.create({
   baseURL: 'http://15.165.67.119/api/v1/',
@@ -20,5 +20,5 @@ const refreshInstance = axios.create({
 });
 
 tokenInstance.interceptors.request.use(checkToken);
-
+refreshInstance.interceptors.request.use(checkRefreshAccessToken);
 export { instance, refreshInstance, tokenInstance };

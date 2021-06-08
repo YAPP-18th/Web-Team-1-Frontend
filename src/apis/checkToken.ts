@@ -50,4 +50,10 @@ const checkToken = async (config: AxiosRequestConfig) => {
   return config;
 };
 
+export const checkRefreshAccessToken = async (config: AxiosRequestConfig) => {
+  const accessToken = window.localStorage.getItem('accessToken');
+  config.headers.Authorization = `Bearer ${accessToken}`;
+  return config;
+};
+
 export default checkToken;
