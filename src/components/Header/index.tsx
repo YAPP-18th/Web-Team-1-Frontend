@@ -12,11 +12,17 @@ import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
 
 export default function Header() {
-
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isLogined, setIsLogined] = useState(false);
+  const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
 
+  // 로그아웃 버튼 클릭
+  const onClickLogout = () => {
+    removeCookie('JWT-Refresh-Token');
+    window.localStorage.removeItem('accessToken');
+    setIsLogined(false);
+  };
 
   // 로그인 버튼 클릭
   const handleClickSignInButton = useCallback(() => {
