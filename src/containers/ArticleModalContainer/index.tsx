@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 let tagCount = 0;
 
@@ -19,6 +20,8 @@ const StyledBtn = styled.div`
 
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
+  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
+
   const history = useHistory();
 
   const [data, setData] = useState({
@@ -95,6 +98,18 @@ const ArticleModalContainer = () => {
     tagCount += 1;
   };
 
+  useEffect(() => {
+    if (tag.length) {
+      /* eslint-disable no-console */
+      console.log(tag);
+      const indexedTagList: TagItem[] = tag.map((item) => {
+        tagCount += 1;
+        return { id: tagCount, text: item };
+      });
+      setTagList(indexedTagList);
+    }
+  }, [tag]);
+
   return (
     <>
       <StyledBtn>
@@ -112,6 +127,8 @@ const ArticleModalContainer = () => {
           addTag={addTag}
           tagList={tagList}
           deleteTag={deleteTag}
+          category={category}
+          templateIdx={templateIdx}
         />
       )}
     </>
