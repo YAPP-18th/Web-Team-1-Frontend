@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
-import { color } from '#styles/index';
 import { useAppDispatch } from '#hooks/useAppDispatch';
-import { TagItem } from '#components/Header';
 
 let tagCount = 0;
+
+export interface TagItem {
+  id: number;
+  text: string;
+}
+
+const StyledBtn = styled.div`
+  margin-right: 16px;
+`;
 
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const [modal, setModal] = useState(false);
-  const modalToggle = () => setModal(!modal);
 
   const [data, setData] = useState({
     category: '',
@@ -21,30 +27,48 @@ const ArticleModalContainer = () => {
   });
 
   const [tagList, setTagList] = useState<Array<TagItem>>([]);
-  const [warning, setWarning] = useState(false);
+  const [warning, setWarning] = useState({
+    isWarning: false,
+    warningMessage: '',
+  });
+
+  const [modal, setModal] = useState(false);
+  const modalToggle = () => {
+    if (modal) {
+      setTagList([]);
+      setWarning({
+        isWarning: false,
+        warningMessage: '',
+      });
+    }
+    setModal(!modal);
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const onClickWriteBtn = () => {
-    // 카테고리 유효성 검사
     if (data.category === '' || data.templateIdx === 0) {
-      setWarning(true);
+      setWarning({
+        isWarning: true,
+        warningMessage: '카테고리와 템플릿은 꼭 선택해야 합니다.',
+      });
       return;
     }
+
     const newTagList = tagList.map((item) => item.text);
 
-    // 리덕스에 저장
     const reduxData: InnerArticleState = {
       category: data.category,
       tag: newTagList,
       templateIdx: data.templateIdx,
     };
-    dispatch(editorActions.setEditorData(reduxData));
 
-    // 페이지 이동
+    dispatch(editorActions.setEditorData(reduxData));
     history.push('/articleCreate');
+
+    modalToggle();
   };
 
   const deleteTag = (tagId: number) => {
@@ -53,6 +77,14 @@ const ArticleModalContainer = () => {
   };
 
   const addTag = (tagText: string) => {
+    if (tagList.length >= 3) {
+      setWarning({
+        isWarning: true,
+        warningMessage: '해시태그는 최대 3개까지 가능합니다.',
+      });
+      return;
+    }
+
     setTagList([
       ...tagList,
       {
@@ -65,15 +97,17 @@ const ArticleModalContainer = () => {
 
   return (
     <>
-      <Button buttonColor={{ background: color.gray }} onClick={modalToggle}>
-        바로 회고하기
-        <IconWrapper icon={IconPaths.Glitter} />
-      </Button>
+      <StyledBtn>
+        <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
+          바로 회고하기
+          <IconWrapper icon={IconPaths.Glitter} />
+        </Button>
+      </StyledBtn>
       {modal && (
         <ArticleModal
           onChange={onChange}
           onClick={onClickWriteBtn}
-          isWarning={warning}
+          warning={warning}
           toggle={modalToggle}
           addTag={addTag}
           tagList={tagList}

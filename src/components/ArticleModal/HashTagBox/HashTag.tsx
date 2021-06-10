@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TagItem } from '#components/Header';
+import { TagItem } from '#containers/ArticleModalContainer';
 
 interface Props {
   tag: TagItem;
