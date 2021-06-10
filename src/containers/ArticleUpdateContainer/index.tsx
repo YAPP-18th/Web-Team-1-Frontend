@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 import { useDispatch } from 'react-redux';
-import { editorActions, InnerArticleState } from 'slices/articleEditorSlice';
+import { editorActions } from 'slices/articleEditorSlice';
 import { updateArticle } from '#apis/articleEditorApi';
 import { useAppSelector } from '#hooks/useAppSelector';
 import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 import ConfirmModalContainer from '#containers/ConfirmModalContainer';
+import { tagData } from '#apis/articleViewApi';
 
 const ArticleUpdateContainer = () => {
   const history = useHistory();
@@ -17,9 +18,14 @@ const ArticleUpdateContainer = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { category, contents: beforeContents, title: beforeTitle, index } = useAppSelector(
-    (state) => state.articleViewReducer,
-  );
+  const {
+    category,
+    contents: beforeContents,
+    title: beforeTitle,
+    index,
+    tag,
+    templateIdx,
+  } = useAppSelector((state) => state.articleViewReducer);
 
   const callUpdateApi = async () => {
     if (editorRef.current !== null) {
@@ -32,12 +38,7 @@ const ArticleUpdateContainer = () => {
       const result = await updateArticle(index, data);
 
       if (result) {
-        const reduxData: InnerArticleState = {
-          category: '',
-          tag: [],
-          templateIdx: 0,
-        };
-        dispatch(editorActions.setEditorData(reduxData));
+        dispatch(editorActions.clearEditorSlice());
 
         history.push(`/articleDetail/${index}`);
       }
@@ -59,6 +60,13 @@ const ArticleUpdateContainer = () => {
   };
 
   useEffect(() => {
+    const editReduxData = {
+      category,
+      tag: tag.map((item: tagData) => item.tag),
+      templateIdx,
+    };
+    dispatch(editorActions.setEditorData(editReduxData));
+
     if (editorRef.current !== null) {
       editorRef.current.getInstance().setHtml(beforeContents);
     }
