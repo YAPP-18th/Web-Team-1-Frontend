@@ -1,4 +1,4 @@
-import instance from '#apis/common';
+import { instance } from '#apis/common';
 
 interface Card {
   postIdx: number;
