@@ -29,7 +29,7 @@ const StyledModal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 100%;
-  padding: 50px;
+  padding: 50px 40px;
   width: 400px;
   height: 240px;
 `;

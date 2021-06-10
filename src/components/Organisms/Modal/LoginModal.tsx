@@ -2,8 +2,8 @@ import React, { memo, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import qs from 'qs';
+import { useCookies } from 'react-cookie';
 import { Button, IconPaths, IconWrapper } from '#components/Atoms';
-import instance from '#apis/common';
 import * as S from './style';
 
 export interface Props {
@@ -15,6 +15,7 @@ export interface Props {
 const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) => {
   const location = useLocation();
   const history = useHistory();
+  const [, setCookie] = useCookies(['JWT-Refresh-Token']);
 
   // 쿼리스트링으로 받은 token들을 local storage에 추가
   useEffect(() => {
@@ -23,8 +24,7 @@ const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) =
     });
     if (!accessToken || !refreshToken) return;
     localStorage.setItem('accessToken', accessToken as string);
-    localStorage.setItem('refreshToken', refreshToken as string);
-    instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    setCookie('JWT-Refresh-Token', refreshToken, { maxAge: 3600 * 24 * 30 });
     history.push('/');
     return () => {
       onCloseModal(false);
@@ -47,14 +47,14 @@ const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) =
         <div className="button-wrapper">
           <Button
             buttonColor={{ background: 'google' }}
-            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google"
+            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1/auth/google"
           >
             <IconWrapper icon={IconPaths.Google} />
             구글
           </Button>
           <Button
             buttonColor={{ background: 'kakao', textColor: 'kakaoText' }}
-            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/kakao"
+            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1/auth/kakao"
           >
             <IconWrapper icon={IconPaths.Kakao} />
             카카오

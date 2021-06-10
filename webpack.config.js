@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
@@ -114,6 +115,7 @@ module.exports = () => {
         inject: 'body',
         template: path.join(__dirname, 'public', '/index.html'),
       }),
+      new CleanWebpackPlugin(),
       // new FaviconsWebpackPlugin({
       //   logo: path.join(__dirname, 'public', '/logo.png'),
       // }),

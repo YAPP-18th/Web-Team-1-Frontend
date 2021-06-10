@@ -2,17 +2,21 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import thumbnail from 'assets/images/thumbnail.png';
+import { useCookies } from 'react-cookie';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
 import { IconPaths, IconWrapper } from '#components/Atoms';
+
 import * as S from './style';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
 
 export default function Header() {
+
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isLogined, setIsLogined] = useState(false);
+
 
   // 로그인 버튼 클릭
   const handleClickSignInButton = useCallback(() => {
@@ -46,7 +50,9 @@ export default function Header() {
                   <img src={thumbnail} alt="썸네일" />
                   <div className="content">
                     <p>이름</p>
-                    <span>로그아웃</span>
+                    <button type="button" onClick={onClickLogout}>
+                      로그아웃
+                    </button>
                   </div>
                 </div>
                 <span>작성한 회고</span>
