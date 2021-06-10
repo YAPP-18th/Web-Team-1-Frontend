@@ -1,8 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-// import axios, { AxiosRequestConfig } from 'axios';
 import jwtDecode from 'jwt-decode';
-import { useCookies, Cookies } from 'react-cookie';
-import { refreshInstance, instance } from './common';
+import { refreshInstance } from './common';
 
 interface JWT {
   auth: string;
