@@ -15,6 +15,7 @@ const instance = axios.create({
 });
 
 // 만료 토큰으로 요청하는 instance (token refresh용)
+// tokenInstance에는 토큰유효기간 확인 인터셉터가 붙었으므로, 인터셉터 없는 버전 instance가 필요해서 만듬.
 const refreshInstance = axios.create({
   baseURL: 'http://15.165.67.119/api/v1/',
   headers: {
