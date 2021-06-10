@@ -1,6 +1,7 @@
 import axios from 'axios';
-import checkToken, { checkRefreshAccessToken } from '#apis/checkToken';
+import { checkTokenIntercepter, putExpiredAccessTokenIntercepter } from '#apis/checkToken';
 
+// 유효한 토큰으로 요청하는 instance
 const tokenInstance = axios.create({
   baseURL: 'http://15.165.67.119/api/v1/',
   headers: {
@@ -8,10 +9,12 @@ const tokenInstance = axios.create({
   },
 });
 
+// 토큰 없이 요청하는 instance
 const instance = axios.create({
   baseURL: 'http://15.165.67.119/api/v1/',
 });
 
+// 만료 토큰으로 요청하는 instance (token refresh용)
 const refreshInstance = axios.create({
   baseURL: 'http://15.165.67.119/api/v1/',
   headers: {
@@ -19,6 +22,7 @@ const refreshInstance = axios.create({
   },
 });
 
-tokenInstance.interceptors.request.use(checkToken);
-refreshInstance.interceptors.request.use(checkRefreshAccessToken);
+tokenInstance.interceptors.request.use(checkTokenIntercepter);
+refreshInstance.interceptors.request.use(putExpiredAccessTokenIntercepter);
+
 export { instance, refreshInstance, tokenInstance };
