@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { editorActions, InnerArticleState } from 'slices/articleEditorSlice';
 import thumbnail from 'assets/images/thumbnail.png';
+import { useCookies } from 'react-cookie';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
 import { LoginModal } from '#components/Organisms/Modal';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
+
 import * as S from './style';
 
 export interface TagItem {
@@ -22,6 +24,8 @@ let tagCount = 0;
 export default function Header() {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
+
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedArticleModal, setIsShowedArticleModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
@@ -38,6 +42,12 @@ export default function Header() {
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const onClickLogout = () => {
+    removeCookie('JWT-Refresh-Token');
+    window.localStorage.removeItem('accessToken');
+    setIsLogined(false);
   };
 
   const onClickWriteBtn = () => {
@@ -112,7 +122,9 @@ export default function Header() {
                   <img src={thumbnail} alt="썸네일" />
                   <div className="content">
                     <p>이름</p>
-                    <span>로그아웃</span>
+                    <button type="button" onClick={onClickLogout}>
+                      로그아웃
+                    </button>
                   </div>
                 </div>
                 <span>작성한 회고</span>
