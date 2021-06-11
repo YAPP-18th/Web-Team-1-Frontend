@@ -9,7 +9,7 @@ export interface HeaderBtnColor {
   color?: string;
 }
 const StyledCommentItem = styled.div`
-  padding: 24px 0 32px 0;
+  padding: 24px 0 0 0;
   display: flex;
   justify-content: space-between;
   font-family: Apple SD Gothic Neo;
@@ -84,11 +84,14 @@ const CommentContents = styled.p`
   letter-spacing: -0.04em;
 
   color: #666666;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 32px;
 `;
 
 const RecommentNickname = styled.span`
-  color: #8f7cda;
+  color: #6a84e1;
   margin-right: 5px;
+  cursor: pointer;
 `;
 
 const CommentItem = () => {

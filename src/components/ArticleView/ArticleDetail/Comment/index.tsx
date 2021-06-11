@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentHeader from './CommentHeader';
+import CommentInput from './CommentInput';
 import CommentItem from './CommentItem';
 
 const Comment = () => {
@@ -7,6 +8,8 @@ const Comment = () => {
     <>
       <CommentHeader />
       <CommentItem />
+      <CommentItem />
+      <CommentInput />
     </>
   );
 };
