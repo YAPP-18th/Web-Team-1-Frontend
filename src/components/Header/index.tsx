@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import thumbnail from 'assets/images/thumbnail.png';
 import { useCookies } from 'react-cookie';
+import { useAppSelector } from '#hooks/useAppSelector';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
 import { IconPaths, IconWrapper } from '#components/Atoms';
@@ -14,8 +15,10 @@ import { LoginModal } from '#components/Organisms/Modal';
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
+  const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
   const [isLogined, setIsLogined] = useState(false);
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
+  const { category } = useAppSelector((state) => state.articleEditorReducer);
 
   // 로그아웃 버튼 클릭
   const onClickLogout = () => {
@@ -42,13 +45,21 @@ export default function Header() {
     }
   }, []);
 
+  useEffect(() => {
+    if (category) {
+      setIsShowedQuickWrite(false);
+    } else {
+      setIsShowedQuickWrite(true);
+    }
+  }, [category]);
+
   return (
     <>
       <HeaderWrapper>
         <Logo to="/">돌아보다,</Logo>
         {isLogined ? (
           <S.LoginAfter>
-            <ArticleModalContainer />
+            {isShowedQuickWrite && <ArticleModalContainer />}
             <IconWrapper icon={IconPaths.Hamburger} onClick={handleClickHamburger} />
             {isShowedMenu && (
               <S.MenuWrapper>

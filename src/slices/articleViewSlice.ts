@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { tagData } from '#apis/articleViewApi';
 
 interface ViewState {
   category: string;
   contents: string;
-  tag: Array<string>;
+  tag: Array<tagData>;
   title: string;
   index: number;
+  templateIdx: number;
 }
 
 const initialState: ViewState = {
@@ -14,6 +16,7 @@ const initialState: ViewState = {
   tag: [],
   title: '',
   index: -1,
+  templateIdx: -1,
 };
 
 /* eslint-disable no-param-reassign */
@@ -27,6 +30,7 @@ const { actions: viewActions, reducer: articleViewReducer } = createSlice({
       state.tag = action.payload.tag;
       state.title = action.payload.title;
       state.index = action.payload.index;
+      state.templateIdx = action.payload.templateIdx;
     },
   },
 });

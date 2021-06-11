@@ -18,6 +18,7 @@ export interface ArticleResultData {
   tagList: Array<tagData>;
   title: string;
   view: number;
+  templateIdx: number;
 }
 
 export interface ArticleDetailData {
