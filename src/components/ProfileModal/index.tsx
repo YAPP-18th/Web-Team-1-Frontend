@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import zIndex from '#styles/zIndex';
+import ImageDrop from './ImageDrop';
 
 interface Warning {
   isWarning: boolean;
@@ -68,7 +69,7 @@ const ModalBody = styled.div`
 `;
 
 const Column = styled.div`
-  width: 296px;
+  width: 280px;
   display: flex;
   flex-direction: column;
   & select,
@@ -149,8 +150,13 @@ const ProfileModal = () => {
           <ModalBody>
             <Column>
               <Label>프로필 사진(선택)</Label>
-              <input />
-              <HelpText>800*800 이상의 JPG, PNG 이미지를 권장해요</HelpText>
+              {/* <input /> */}
+              <ImageDrop />
+              <HelpText>
+                상자를 클릭하여 이미지를 업로드하세요
+                <br />
+                800*800 이상의 JPG, PNG 이미지를 권장해요
+              </HelpText>
             </Column>
             <Column>
               <Label>별명</Label>
