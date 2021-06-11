@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import zIndex from '#styles/zIndex';
 
 interface Props {
   header: string;
@@ -12,6 +13,8 @@ interface Props {
 const StyledModalContainer = styled.div`
   background-color: hsla(0, 0%, 0%, 0.6);
   position: fixed;
+  z-index: ${zIndex.modal};
+
   top: 0;
   left: 0;
   right: 0;
