@@ -4,6 +4,7 @@ import { Editor } from '@toast-ui/react-editor';
 import TitleInput from '#components/ArticleEditor/ArticleEditor/TitleInput';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import TempSaveBtn from './TempSaveBtn';
+import ArticleModalContainer from '#containers/ArticleModalContainer';
 
 interface Props {
   onChangeTitle: (title: string) => void;
@@ -60,6 +61,7 @@ const ArticleEditor = ({ onChangeTitle, editorRef, onClickSaveBtn, initialValue 
           ref={editorRef}
         />
       </StyledViewer>
+      <ArticleModalContainer />
       <TempSaveBtn onClick={onClickSaveBtn} />
     </StyledArticleCard>
   );

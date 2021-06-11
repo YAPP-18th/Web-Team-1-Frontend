@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { zIndex } from '#styles/index';
+import { useLocation } from 'react-router';
 import HashTagBox from './HashTagBox';
-import { TagItem } from '#components/Header';
+import { zIndex } from '#styles/index';
+import { TagItem } from '#containers/ArticleModalContainer';
+
+interface Warning {
+  isWarning: boolean;
+  warningMessage: string;
+}
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
   onClick: () => void;
-  isWarning: boolean;
+  warning: Warning;
   toggle: () => void;
   addTag: (tagText: string) => void;
   tagList: Array<TagItem>;
   deleteTag: (tagId: number) => void;
+  category: string;
+  templateIdx: number;
 }
 
 export interface WarningProps {
@@ -71,6 +79,16 @@ const ModalHeader = styled.h2`
 const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
+
+  & select {
+    margin-bottom: 12px;
+    width: 296px;
+    height: 48px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: none;
+  }
 `;
 
 const Label = styled.small`
@@ -79,24 +97,6 @@ const Label = styled.small`
   margin: 12px 0;
   color: #333333;
 `;
-
-const Select = styled.select`
-  margin-bottom: 12px;
-  width: 296px;
-  height: 48px;
-  background: #f8f8f8;
-  border-radius: 8px;
-  padding: 12px 16px;
-  border: none;
-`;
-
-const CategorySelect = styled(Select).attrs(() => ({
-  name: 'category',
-}))``;
-
-const TemplateSelect = styled(Select).attrs(() => ({
-  name: 'templateIdx',
-}))``;
 
 const HelpText = styled.small`
   font-family: Apple SD Gothic Neo;
@@ -128,15 +128,40 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const categoryIndex: { [key: string]: number } = {
+  marketing: 1,
+  design: 2,
+  plan: 3,
+  develop: 4,
+};
+
 const ArticleModal = ({
   onChange,
   onClick,
-  isWarning,
+  warning,
   toggle,
   addTag,
   tagList,
   deleteTag,
+  category,
+  templateIdx,
 }: Props) => {
+  const categorySelectRef = useRef<HTMLSelectElement>(null);
+  const templateSelectRef = useRef<HTMLSelectElement>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (categorySelectRef.current && category) {
+      /* eslint-disable no-console */
+      // console.log('here');
+      /* eslint-disable no-param-reassign */
+      categorySelectRef.current.options[categoryIndex[category]].selected = true;
+    }
+    if (templateSelectRef.current && templateIdx > 0) {
+      templateSelectRef.current.options[templateIdx].selected = true;
+    }
+  }, []);
+
   return (
     <>
       <StyledModalContainer>
@@ -145,15 +170,20 @@ const ArticleModal = ({
           <ModalHeader>글 설정</ModalHeader>
           <ModalBody>
             <Label>카테고리</Label>
-            <CategorySelect onChange={onChange}>
+            <select name="category" onChange={onChange} ref={categorySelectRef}>
               <option value="">선택하세요</option>
               <option value="marketing">마케팅</option>
               <option value="design">디자인</option>
               <option value="plan">기획</option>
               <option value="develop">개발</option>
-            </CategorySelect>
+            </select>
             <Label>템플릿</Label>
-            <TemplateSelect onChange={onChange}>
+            <select
+              name="templateIdx"
+              onChange={onChange}
+              ref={templateSelectRef}
+              disabled={location.pathname === '/articleUpdate'}
+            >
               <option value="">선택하세요</option>
               <option value={1}>4F</option>
               <option value={2}>PMI</option>
@@ -161,7 +191,7 @@ const ArticleModal = ({
               <option value={4}>DAKI</option>
               <option value={5}>4L</option>
               <option value={6}>KPT</option>
-            </TemplateSelect>
+            </select>
             <Label>해시태그</Label>
             <HashTagBox addTag={addTag} tagList={tagList} deleteTag={deleteTag} />
             <HelpText>
@@ -169,9 +199,7 @@ const ArticleModal = ({
               <br />
               해시태그는 최대 3개, 최대 16자까지만 노출됩니다.
             </HelpText>
-            <Warning visible={isWarning}>
-              카테고리를 선택했는지, 해시태그에 이상이 없는지 확인하세요.
-            </Warning>
+            <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning>
             <Button onClick={onClick}>글 작성하기</Button>
           </ModalBody>
         </StyledModal>

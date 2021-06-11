@@ -5,9 +5,6 @@ export const LoginAfter = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  button {
-    margin-right: 16px;
-  }
 `;
 
 export const MenuWrapper = styled.div`

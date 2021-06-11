@@ -26,6 +26,10 @@ export const Title = styled.h1`
   font-size: 20px;
   color: #333333;
   line-height: 20px;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const Category = styled.span<{ category: string }>`

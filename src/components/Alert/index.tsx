@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { alertActions } from 'slices/alertSlice';
 import { useAppSelector } from '#hooks/useAppSelector';
+import zIndex from '#styles/zIndex';
 
 export interface Props {
   fadeIn: boolean;
@@ -21,7 +22,7 @@ const StyledAlert = styled.div<Props>`
   position: absolute;
   top: 5%;
   left: 50%;
-  z-index: 1000;
+  z-index: ${zIndex.modal};
   animation: ${(props) => (props.fadeIn ? 'fadein 2s' : 'fadeout 2s')};
   display: inline;
   @keyframes fadein {

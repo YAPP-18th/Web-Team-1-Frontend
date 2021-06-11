@@ -1,5 +1,5 @@
-import instance from '#apis/common';
+import { tokenInstance } from '#apis/common';
 
 export const getLists = () => {
-  return instance.get('/lists');
+  return tokenInstance.get('/lists');
 };

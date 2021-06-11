@@ -1,4 +1,4 @@
-import instance from '#apis/common';
+import { tokenInstance } from '#apis/common';
 /* eslint-disable no-console */
 
 export interface PostArticleData {
@@ -14,11 +14,12 @@ export interface UpdateArticleData {
   category: string;
   contents: string;
   title: string | null;
+  tagList: Array<string>;
 }
 
 export const postArticle = async (data: PostArticleData): Promise<number | null> => {
   try {
-    const res = await instance.post('/posts', data);
+    const res = await tokenInstance.post('/posts', data);
     return res.data.data;
   } catch (error) {
     console.log(error);
@@ -31,7 +32,7 @@ export const updateArticle = async (
   data: UpdateArticleData,
 ): Promise<number | null> => {
   try {
-    const res = await instance.put(`/posts/${index}`, data);
+    const res = await tokenInstance.put(`/posts/${index}`, data);
     return res.data.data;
   } catch (error) {
     console.log(error);
@@ -41,7 +42,7 @@ export const updateArticle = async (
 
 export const getTemplate = async (templateIdx: number): Promise<string | null> => {
   try {
-    const res = await instance.get(`/templates/${templateIdx}`);
+    const res = await tokenInstance.get(`/templates/${templateIdx}`);
     return res.data.data;
   } catch (error) {
     console.log(error);

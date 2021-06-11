@@ -10,15 +10,23 @@ interface EditorMetaState {
   titleWarning: boolean;
 }
 
+interface ArticleEditorSlice {
+  category: string;
+  tag: Array<string>;
+  templateIdx: number;
+  titleWarning: boolean;
+}
+
+const initialState: ArticleEditorSlice = {
+  category: '',
+  tag: [],
+  templateIdx: 0,
+  titleWarning: false,
+};
 /* eslint-disable no-param-reassign */
 const { actions: editorActions, reducer: articleEditorReducer } = createSlice({
   name: 'articleEditor',
-  initialState: {
-    category: '',
-    tag: [''],
-    templateIdx: 0,
-    titleWarning: false,
-  },
+  initialState,
 
   reducers: {
     setEditorData: (state, action: PayloadAction<InnerArticleState>) => {
@@ -33,7 +41,7 @@ const { actions: editorActions, reducer: articleEditorReducer } = createSlice({
 
     clearEditorSlice: (state) => {
       state.category = '';
-      state.tag = [''];
+      state.tag = [];
       state.templateIdx = 0;
       state.titleWarning = false;
     },
