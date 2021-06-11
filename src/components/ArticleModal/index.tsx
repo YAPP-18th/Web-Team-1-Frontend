@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router';
 import HashTagBox from './HashTagBox';
 import { zIndex } from '#styles/index';
 import { TagItem } from '#containers/ArticleModalContainer';
@@ -147,6 +148,7 @@ const ArticleModal = ({
 }: Props) => {
   const categorySelectRef = useRef<HTMLSelectElement>(null);
   const templateSelectRef = useRef<HTMLSelectElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     if (categorySelectRef.current && category) {
@@ -176,7 +178,12 @@ const ArticleModal = ({
               <option value="develop">개발</option>
             </select>
             <Label>템플릿</Label>
-            <select name="templateIdx" onChange={onChange} ref={templateSelectRef}>
+            <select
+              name="templateIdx"
+              onChange={onChange}
+              ref={templateSelectRef}
+              disabled={location.pathname === '/articleUpdate'}
+            >
               <option value="">선택하세요</option>
               <option value={1}>4F</option>
               <option value={2}>PMI</option>
