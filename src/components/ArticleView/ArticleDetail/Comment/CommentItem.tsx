@@ -5,7 +5,9 @@ import thumbnail from '../../../../assets/images/thumbnail.png';
 export interface ImgProps {
   imgSrc: string;
 }
-
+export interface HeaderBtnColor {
+  color?: string;
+}
 const StyledCommentItem = styled.div`
   padding: 24px 0 32px 0;
   display: flex;
@@ -39,7 +41,18 @@ const HeaderLeft = styled.div`
   flex-direction: column;
 `;
 
-const HeaderRight = styled.div``;
+const HeaderRight = styled.div`
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.01em;
+
+  display: flex;
+`;
+
+const HeaderBtn = styled.small<HeaderBtnColor>`
+  color: ${(props) => (props.color === 'dark' ? '#666666' : '#999999')};
+  margin-left: 8px;
+`;
 
 const HeaderNickname = styled.span`
   font-weight: 500;
@@ -73,6 +86,11 @@ const CommentContents = styled.p`
   color: #666666;
 `;
 
+const RecommentNickname = styled.span`
+  color: #8f7cda;
+  margin-right: 5px;
+`;
+
 const CommentItem = () => {
   return (
     <>
@@ -81,12 +99,17 @@ const CommentItem = () => {
         <TextColumn>
           <CommentItemHeader>
             <HeaderLeft>
-              <HeaderNickname>빈센조 까사노</HeaderNickname>
+              <HeaderNickname>필리포 인자기</HeaderNickname>
               <CommentCreatedAt>Oct 28, 2020</CommentCreatedAt>
             </HeaderLeft>
-            <HeaderRight>dd</HeaderRight>
+            <HeaderRight>
+              <HeaderBtn color="dark">답글</HeaderBtn>
+              <HeaderBtn>신고</HeaderBtn>
+              <HeaderBtn>삭제</HeaderBtn>
+            </HeaderRight>
           </CommentItemHeader>
           <CommentContents>
+            <RecommentNickname>@빈센조 까사노</RecommentNickname>
             국가는 사회보장·사회복지의 증진에 노력할 의무를 진다. 대한민국의 국민이 되는 요건은
             법률로 정한다. 국회는 국가의 예산안을 심의·확정한다. 모든 국민은 법률이 정하는 바에
             의하여 국방의 의무를 진다. 대통령의 임기는 5년으로 하며, 중임할 수 없다. 공공필요에 의한
