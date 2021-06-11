@@ -27,11 +27,16 @@ const ArticleUpdateContainer = () => {
     templateIdx,
   } = useAppSelector((state) => state.articleViewReducer);
 
+  const { category: updatedCategory, tag: updatedTag } = useAppSelector(
+    (state) => state.articleEditorReducer,
+  );
+
   const callUpdateApi = async () => {
     if (editorRef.current !== null) {
       const data = {
-        category,
+        category: updatedCategory,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
+        tagList: updatedTag,
         title: titleRef.current,
       };
 
