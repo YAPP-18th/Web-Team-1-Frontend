@@ -24,8 +24,10 @@ const FloatingBanner = () => {
   const [isScrap, setIsScrap] = useState(false);
   const toggleScrap = () => {
     if (isScrap) {
+      // 스크랩 취소
       setIsScrap(!isScrap);
     } else {
+      // 스크랩 하기
       setIsScrap(!isScrap);
     }
   };
