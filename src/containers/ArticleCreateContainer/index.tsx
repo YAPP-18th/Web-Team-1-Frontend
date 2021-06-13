@@ -30,7 +30,7 @@ const ArticleCreateContainer = () => {
   const callPostApi = async () => {
     if (editorRef.current !== null) {
       const data = {
-        tag,
+        tagList: tag,
         category,
         templateIdx,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,

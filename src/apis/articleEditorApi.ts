@@ -5,7 +5,7 @@ export interface PostArticleData {
   category: string;
   contents: string;
   imageList: Array<string>;
-  tag: Array<string>;
+  tagList: Array<string>;
   templateIdx: number;
   title: string | null;
 }
