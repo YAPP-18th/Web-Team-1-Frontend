@@ -35,7 +35,7 @@ const ArticleCreateContainer = () => {
         templateIdx,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         title: titleRef.current,
-        image: [],
+        imageList: [],
       };
       const index = await postArticle(data);
 
