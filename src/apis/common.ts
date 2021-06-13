@@ -23,7 +23,16 @@ const refreshInstance = axios.create({
   },
 });
 
+// 유효한 토큰으로 요청하는 instance
+const imageInstance = axios.create({
+  baseURL: 'http://15.165.67.119/api/v1/',
+  headers: {
+    Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
+    'Content-Type': 'multipart/form-data',
+  },
+});
 tokenInstance.interceptors.request.use(checkTokenIntercepter);
+imageInstance.interceptors.request.use(checkTokenIntercepter);
 refreshInstance.interceptors.request.use(putExpiredAccessTokenIntercepter);
 
 export { instance, refreshInstance, tokenInstance };

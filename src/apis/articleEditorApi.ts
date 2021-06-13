@@ -50,3 +50,15 @@ export const getTemplate = async (templateIdx: number): Promise<string | null> =
     return null;
   }
 };
+
+export const uploadImage = async (image: Blob | File): Promise<string | null> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', image);
+    const res = await tokenInstance.post(`/images`, formData);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
