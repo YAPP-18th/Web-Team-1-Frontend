@@ -1,19 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const { actions, reducer: conditionReducer } = createSlice({
+const { reducer: conditionReducer } = createSlice({
   name: 'condition',
-  initialState: {
-    sortBy: '최신순',
-  },
-  reducers: {
-    setSortBy(state, { payload: sortBy }) {
-      return {
-        ...state,
-        sortBy,
-      };
-    },
-  },
+  initialState: {},
+  reducers: {},
 });
 
-export const { setSortBy } = actions;
 export default conditionReducer;
