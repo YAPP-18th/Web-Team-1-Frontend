@@ -38,6 +38,7 @@ const ArticleUpdateContainer = () => {
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         tagList: updatedTag,
         title: titleRef.current,
+        imageList: [],
       };
 
       const result = await updateArticle(index, data);

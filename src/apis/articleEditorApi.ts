@@ -15,6 +15,7 @@ export interface UpdateArticleData {
   contents: string;
   title: string | null;
   tagList: Array<string>;
+  imageList: Array<string>;
 }
 
 export const postArticle = async (data: PostArticleData): Promise<number | null> => {
