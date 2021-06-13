@@ -4,8 +4,8 @@ import { tokenInstance } from '#apis/common';
 export interface PostArticleData {
   category: string;
   contents: string;
-  image: Array<string>;
-  tag: Array<string>;
+  imageList: Array<string>;
+  tagList: Array<string>;
   templateIdx: number;
   title: string | null;
 }
