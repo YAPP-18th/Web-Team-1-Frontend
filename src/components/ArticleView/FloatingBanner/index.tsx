@@ -6,6 +6,8 @@ import Share from './svg/Share';
 import Comment from './svg/Comment';
 import ShareOption from './ShareOption';
 import Shortcut from './Shortcut';
+import { cancelScrapArticle, scrapArticle } from '#apis/articleViewApi';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 const StyledFloatingBanner = styled.div`
   display: flex;
@@ -21,11 +23,23 @@ const StyledFloatingBanner = styled.div`
 
 const FloatingBanner = () => {
   // scrap 여부, 토글에 따른 동작 분기
+
+  const { index } = useAppSelector((state) => state.articleViewReducer);
   const [isScrap, setIsScrap] = useState(false);
-  const toggleScrap = () => {
+  let isRunning = false;
+  const toggleScrap = async () => {
+    if (isRunning) {
+      return;
+    }
     if (isScrap) {
+      // 스크랩 취소
+      isRunning = true;
+      await cancelScrapArticle(index);
       setIsScrap(!isScrap);
     } else {
+      // 스크랩 하기
+      isRunning = true;
+      await scrapArticle(index);
       setIsScrap(!isScrap);
     }
   };
