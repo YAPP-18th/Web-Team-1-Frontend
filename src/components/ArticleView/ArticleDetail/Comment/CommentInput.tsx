@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { createComment } from '#apis/articleViewApi';
-import { useAppSelector } from '#hooks/useAppSelector';
 import thumbnail from '../../../../assets/images/thumbnail.png';
 
 export interface ImgProps {
   imgSrc: string;
+}
+
+interface Props {
+  index: number;
 }
 
 const StyledCommentInput = styled.div`
@@ -73,9 +76,8 @@ const InputBox = styled.div`
 //   cursor: pointer;
 // `;
 
-const CommentInput = () => {
+const CommentInput = ({ index }: Props) => {
   const [content, setContent] = useState('');
-  const { index } = useAppSelector((state) => state.articleViewReducer);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -95,7 +97,7 @@ const CommentInput = () => {
       <TextColumn>
         <InputBox>
           {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
-          <textarea value={content} onChange={onChange} />
+          <textarea value={content} onChange={onChange} spellCheck={false} />
           <button type="button" onClick={() => callApi()}>
             완료
           </button>

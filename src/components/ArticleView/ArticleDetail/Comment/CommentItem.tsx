@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import thumbnail from '../../../../assets/images/thumbnail.png';
+// import thumbnail from '../../../../assets/images/thumbnail.png';
+import { CommentType } from '#containers/CommentContainer/CommentList';
 
 export interface ImgProps {
   imgSrc: string;
@@ -79,7 +80,7 @@ const CommentCreatedAt = styled.span`
 
 const CommentContents = styled.p`
   display: inline;
-  max-width: 740px;
+  width: 740px;
   font-size: 15px;
   line-height: 24px;
 
@@ -90,21 +91,25 @@ const CommentContents = styled.p`
   padding-bottom: 32px;
 `;
 
-const RecommentNickname = styled.span`
-  color: #6a84e1;
-  margin-right: 5px;
-  cursor: pointer;
-`;
+// const RecommentNickname = styled.span`
+//   color: #6a84e1;
+//   margin-right: 5px;
+//   cursor: pointer;
+// `;
 
-const CommentItem = () => {
+interface Props {
+  data: CommentType;
+}
+
+const CommentItem = ({ data }: Props) => {
   return (
     <>
       <StyledCommentItem>
-        <ImgColumn imgSrc={thumbnail} />
+        <ImgColumn imgSrc={data.profile} />
         <TextColumn>
           <CommentItemHeader>
             <HeaderLeft>
-              <HeaderNickname>필리포 인자기</HeaderNickname>
+              <HeaderNickname>{data.nickname}</HeaderNickname>
               <CommentCreatedAt>Oct 28, 2020</CommentCreatedAt>
             </HeaderLeft>
             <HeaderRight>
@@ -114,12 +119,8 @@ const CommentItem = () => {
             </HeaderRight>
           </CommentItemHeader>
           <CommentContents>
-            <RecommentNickname>@빈센조 까사노</RecommentNickname>
-            국가는 사회보장·사회복지의 증진에 노력할 의무를 진다. 대한민국의 국민이 되는 요건은
-            법률로 정한다. 국회는 국가의 예산안을 심의·확정한다. 모든 국민은 법률이 정하는 바에
-            의하여 국방의 의무를 진다. 대통령의 임기는 5년으로 하며, 중임할 수 없다. 공공필요에 의한
-            재산권의 수용·사용 또는 제한 및 그에 대한 보상은 법률로써 하되, 정당한 보상을 지급하여야
-            한다.
+            {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
+            {data.comments}
           </CommentContents>
         </TextColumn>
       </StyledCommentItem>

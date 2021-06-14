@@ -1,15 +1,21 @@
 import React from 'react';
 import CommentHeader from '#components/ArticleView/ArticleDetail/Comment/CommentHeader';
-import CommentItem from '#components/ArticleView/ArticleDetail/Comment/CommentItem';
 import CommentInput from '#components/ArticleView/ArticleDetail/Comment/CommentInput';
+import CommentList from './CommentList';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 const CommentContainer = () => {
+  const { index } = useAppSelector((state) => state.articleViewReducer);
+
   return (
     <>
-      <CommentHeader />
-      <CommentItem />
-      <CommentItem />
-      <CommentInput />
+      {index >= 0 && (
+        <>
+          <CommentHeader />
+          <CommentList index={index} />
+          <CommentInput index={index} />
+        </>
+      )}
     </>
   );
 };
