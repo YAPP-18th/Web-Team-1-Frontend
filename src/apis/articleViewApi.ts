@@ -48,3 +48,23 @@ export const deleteArticle = async (index: string): Promise<AxiosResponse | null
     return null;
   }
 };
+
+export const scrapArticle = async (index: number): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.post(`/likes`, { postIdx: index });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const cancelScrapArticle = async (index: number): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.delete(`/likes/${index}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

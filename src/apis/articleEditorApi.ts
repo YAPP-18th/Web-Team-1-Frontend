@@ -4,8 +4,8 @@ import { tokenInstance } from '#apis/common';
 export interface PostArticleData {
   category: string;
   contents: string;
-  image: Array<string>;
-  tag: Array<string>;
+  imageList: Array<string>;
+  tagList: Array<string>;
   templateIdx: number;
   title: string | null;
 }
@@ -15,6 +15,7 @@ export interface UpdateArticleData {
   contents: string;
   title: string | null;
   tagList: Array<string>;
+  imageList: Array<string>;
 }
 
 export const postArticle = async (data: PostArticleData): Promise<number | null> => {
@@ -43,6 +44,18 @@ export const updateArticle = async (
 export const getTemplate = async (templateIdx: number): Promise<string | null> => {
   try {
     const res = await tokenInstance.get(`/templates/${templateIdx}`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const uploadImage = async (image: Blob | File): Promise<string | null> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', image);
+    const res = await tokenInstance.post(`/images`, formData);
     return res.data.data;
   } catch (error) {
     console.log(error);

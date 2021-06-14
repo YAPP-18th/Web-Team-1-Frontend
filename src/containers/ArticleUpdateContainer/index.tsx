@@ -10,6 +10,22 @@ import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 import { tagData } from '#apis/articleViewApi';
 
 const ArticleUpdateContainer = () => {
+  // 추후 util 함수로 빼기
+  const findImageUrlList = (contents: string) => {
+    let m;
+    const rex = /<img[^>]*src=["']?([^>"']+)["']?[^>]*>/g;
+    const urls: Array<string> = [];
+    while (contents) {
+      m = rex.exec(contents);
+      if (!m) {
+        break;
+      }
+      urls.push(m[1]);
+    }
+    /* eslint-disable no-console */
+    // console.log(urls);
+    return urls;
+  };
   const history = useHistory();
   const dispatch = useDispatch();
   const editorRef = useRef<Editor | null>(null);
@@ -38,13 +54,15 @@ const ArticleUpdateContainer = () => {
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         tagList: updatedTag,
         title: titleRef.current,
+        imageList: findImageUrlList(
+          editorRef.current.getInstance().getSquire().getBody().innerHTML,
+        ),
       };
 
       const result = await updateArticle(index, data);
 
       if (result) {
         dispatch(editorActions.clearEditorSlice());
-
         history.push(`/articleDetail/${index}`);
       }
     }
