@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { viewActions } from 'slices/articleViewSlice';
-// import { editorActions } from 'slices/articleEditorSlice';
 import { ArticleDetailData, getArticleDetail } from '#apis/articleViewApi';
 import { ArticleDetail } from '#components/ArticleView';
-/* eslint-disable no-console */
+import FloatingBanner from '#components/ArticleView/FloatingBanner';
 
 interface Props {
   id: string;
@@ -32,9 +31,7 @@ const ArticleDetailContainer = ({ id }: Props) => {
 
   const getData = async () => {
     const apiData = await getArticleDetail(id);
-    /* eslint-disable no-console */
     if (apiData) {
-      // console.log(apiData.data);
       const innerData = apiData.data;
       setData({
         ...innerData,
@@ -52,13 +49,7 @@ const ArticleDetailContainer = ({ id }: Props) => {
         commentCnt: innerData.result.commentCnt,
       };
 
-      // const editReduxData = {
-      //   category: innerData.result.category,
-      //   tag: innerData.result.tagList.map((tag: tagData) => tag.tag),
-      //   templateIdx: 0,
-      // };
       dispatch(viewActions.setViewData(viewReduxData));
-      // dispatch(editorActions.setEditorData(editReduxData));
     }
     // else{
     //    정상적으로 데이터를 가져오지 못한 경우 -> 추후 ui 구현 (ex. 올바르지 않은 접근입니다.)
@@ -71,7 +62,12 @@ const ArticleDetailContainer = ({ id }: Props) => {
 
   return (
     <>
-      <ArticleDetail data={data} id={id} />
+      {data.result.category && (
+        <>
+          <ArticleDetail data={data} id={id} />
+          <FloatingBanner scrap={data.scrap} />
+        </>
+      )}
     </>
   );
 };

@@ -61,7 +61,7 @@ export const scrapArticle = async (index: number): Promise<AxiosResponse | null>
 
 export const cancelScrapArticle = async (index: number): Promise<AxiosResponse | null> => {
   try {
-    const res = await tokenInstance.delete(`/likes/${index}`);
+    const res = await tokenInstance.delete(`/likes?postIdx=${index}`);
     return res.data;
   } catch (error) {
     console.log(error);
