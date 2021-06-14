@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 const StyledCommentHeader = styled.header`
   font-family: Apple SD Gothic Neo;
@@ -19,11 +20,12 @@ const CommentCount = styled.span`
 `;
 
 const CommentHeader = () => {
+  const { commentCnt } = useAppSelector((state) => state.articleViewReducer);
   return (
     <>
       <StyledCommentHeader>
         댓글
-        <CommentCount>8</CommentCount>
+        <CommentCount>{commentCnt}</CommentCount>
       </StyledCommentHeader>
     </>
   );
