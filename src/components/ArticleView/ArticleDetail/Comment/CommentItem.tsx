@@ -52,6 +52,7 @@ const HeaderRight = styled.div`
 const HeaderBtn = styled.small<HeaderBtnColor>`
   color: ${(props) => (props.color === 'dark' ? '#666666' : '#999999')};
   margin-left: 8px;
+  cursor: pointer;
 `;
 
 const HeaderNickname = styled.span`
@@ -61,6 +62,7 @@ const HeaderNickname = styled.span`
   letter-spacing: -0.04em;
   margin: 10px 0 8px 0;
   /* margin-bottom: 8px; */
+  cursor: pointer;
 
   color: #333333;
 `;

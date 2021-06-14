@@ -65,11 +65,11 @@ const InputBox = styled.div`
   }
 `;
 
-const RecommentNickname = styled.span`
-  color: #6a84e1;
-  margin: 0 5px 5px 0;
-  cursor: pointer;
-`;
+// const RecommentNickname = styled.span`
+//   color: #6a84e1;
+//   margin: 0 5px 5px 0;
+//   cursor: pointer;
+// `;
 
 const CommentInput = () => {
   return (
@@ -77,7 +77,7 @@ const CommentInput = () => {
       <ImgColumn imgSrc={thumbnail} />
       <TextColumn>
         <InputBox>
-          <RecommentNickname>@빈센조 까사노</RecommentNickname>
+          {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
           <textarea />
           <button type="button">완료</button>
         </InputBox>

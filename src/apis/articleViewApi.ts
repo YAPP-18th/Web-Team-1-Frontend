@@ -68,3 +68,39 @@ export const cancelScrapArticle = async (index: number): Promise<AxiosResponse |
     return null;
   }
 };
+
+export const createComment = async (
+  index: number,
+  contents: string,
+): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.post(`/comments`, {
+      comments: contents,
+      postIdx: index,
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const deleteComment = async (commentIndex: number): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.delete(`/comments/${commentIndex}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+// export const updateComment = async (commentIndex: number): Promise<AxiosResponse | null> => {
+//   try {
+//     const res = await tokenInstance.delete(`/comments/${commentIndex}`);
+//     return res.data;
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   }
+// };
