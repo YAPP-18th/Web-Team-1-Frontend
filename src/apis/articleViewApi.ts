@@ -104,3 +104,19 @@ export const deleteComment = async (commentIndex: number): Promise<AxiosResponse
 //     return null;
 //   }
 // };
+
+export const getCommentList = async (
+  index: number,
+  page: number,
+  pageSize: number,
+): Promise<AxiosResponse | null> => {
+  try {
+    const res = await instance.get(
+      `/comments/lists?page=${page}&pageSize=${pageSize}&postIdx=${index}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
