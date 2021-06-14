@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { createComment } from '#apis/articleViewApi';
+import { useAppSelector } from '#hooks/useAppSelector';
 import thumbnail from '../../../../assets/images/thumbnail.png';
 
 export interface ImgProps {
@@ -72,14 +74,31 @@ const InputBox = styled.div`
 // `;
 
 const CommentInput = () => {
+  const [content, setContent] = useState('');
+  const { index } = useAppSelector((state) => state.articleViewReducer);
+
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  };
+
+  const callApi = async () => {
+    const result = await createComment(index, content);
+    if (result) {
+      // 성공
+      setContent('');
+    }
+  };
+
   return (
     <StyledCommentInput>
       <ImgColumn imgSrc={thumbnail} />
       <TextColumn>
         <InputBox>
           {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
-          <textarea />
-          <button type="button">완료</button>
+          <textarea value={content} onChange={onChange} />
+          <button type="button" onClick={() => callApi()}>
+            완료
+          </button>
         </InputBox>
       </TextColumn>
     </StyledCommentInput>
