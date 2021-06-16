@@ -1,26 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { AppThunk } from './index';
+import { getMyProfile } from '#apis/myPage';
 
 interface UserState {
   name: string;
   nickname: string;
   profile: string;
-  job: string;
-  intro: string;
+  job: string | null;
+  intro: string | null;
 }
 
+const initialState: UserState = {
+  name: '',
+  nickname: '',
+  profile: '',
+  job: '',
+  intro: '',
+};
 const { actions: userActions, reducer: userReducer } = createSlice({
   name: 'user',
-  initialState: {
-    name: '',
-    nickname: '',
-    profile: '',
-    job: '',
-    intro: '',
-  },
-
+  initialState,
   /* eslint-disable no-param-reassign */
   reducers: {
-    setAlert: (state, action: PayloadAction<UserState>) => {
+    setProfile: (state, action: PayloadAction<UserState>) => {
       state.name = action.payload.name;
       state.nickname = action.payload.nickname;
       state.profile = action.payload.profile;
@@ -31,4 +33,13 @@ const { actions: userActions, reducer: userReducer } = createSlice({
 });
 
 export { userActions, UserState };
+
+export function fetchProfile(): AppThunk {
+  return async (dispatch) => {
+    const data = await getMyProfile();
+    if (data) {
+      dispatch(userActions.setProfile(data));
+    }
+  };
+}
 export default userReducer;
