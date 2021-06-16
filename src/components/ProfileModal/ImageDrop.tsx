@@ -22,11 +22,11 @@ const ImageBox = styled(Box)<ImageProps>`
   background-size: cover;
 `;
 
-const InputBox = styled(Box)`
-  background-color: #dddddd;
-`;
+interface Props {
+  defaultImage: string;
+}
 
-const ImageDrop = () => {
+const ImageDrop = ({ defaultImage }: Props) => {
   const [image, setImage] = useState<ProfileImageFile>({
     file: null,
     url: '',
@@ -35,6 +35,7 @@ const ImageDrop = () => {
     accept: ['.png', '.jpeg', '.jpg'],
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
+      // 여기서 s3서버에 이미지 전송 후, 이미지 겅로 를 state에 저장
       setImage({
         file: acceptedFiles[0],
         url: URL.createObjectURL(acceptedFiles[0]),
@@ -46,7 +47,7 @@ const ImageDrop = () => {
   return (
     <div {...getRootProps({ className: 'dropzone' })}>
       <input {...getInputProps()} />
-      {image.file ? <ImageBox src={image.url} /> : <InputBox />}
+      {image.file ? <ImageBox src={image.url} /> : <ImageBox src={defaultImage} />}
     </div>
   );
 };

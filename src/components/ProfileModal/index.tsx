@@ -160,7 +160,7 @@ const ProfileModal = ({ toggle, user, onChange }: Props) => {
             <Column>
               <Label>프로필 사진(선택)</Label>
               {/* <input /> */}
-              <ImageDrop />
+              <ImageDrop defaultImage={user.profile} />
               <HelpText>
                 상자를 클릭하여 이미지를 업로드하세요
                 <br />
