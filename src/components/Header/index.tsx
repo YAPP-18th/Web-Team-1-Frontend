@@ -70,8 +70,6 @@ export default function Header() {
             <HamburgerWrapper onClick={handleClickHamburger}>
               <Hamburger />
             </HamburgerWrapper>
-            {/* <IconWrapper icon={IconPaths.Hamburger} onClick={handleClickHamburger} /> */}
-
             {isShowedMenu && (
               <S.MenuWrapper>
                 <div className="profile">

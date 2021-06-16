@@ -131,7 +131,7 @@ const ArticleModalContainer = () => {
       <StyledBtn>
         <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
           바로 회고하기
-          <IconWrapper icon={IconPaths.Glitter} />
+          <IconWrapper icon={IconPaths.Writing} />
         </Button>
       </StyledBtn>
       {modal && (
