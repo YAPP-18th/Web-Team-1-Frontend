@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { UserState } from 'slices/userSlice';
 import zIndex from '#styles/zIndex';
 import ImageDrop from './ImageDrop';
 
@@ -142,9 +143,13 @@ const Button = styled.button`
 
 interface Props {
   toggle: () => void;
+  user: UserState;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => void;
 }
 
-const ProfileModal = ({ toggle }: Props) => {
+const ProfileModal = ({ toggle, user, onChange }: Props) => {
   return (
     <>
       <StyledModalContainer>
@@ -164,10 +169,10 @@ const ProfileModal = ({ toggle }: Props) => {
             </Column>
             <Column>
               <Label>별명</Label>
-              <input />
+              <input name="nickname" value={user.nickname} onChange={onChange} />
 
               <Label>포지션</Label>
-              <select name="category">
+              <select name="job" value={user.job} onChange={onChange}>
                 {/* <select name="category" onChange={onChange} ref={categorySelectRef}> */}
                 <option value="">선택하세요</option>
                 <option value="marketing">마케팅</option>
@@ -176,7 +181,7 @@ const ProfileModal = ({ toggle }: Props) => {
                 <option value="develop">개발</option>
               </select>
               <Label>소개글 (선택)</Label>
-              <textarea />
+              <textarea name="intro" value={user.intro} onChange={onChange} />
               {/* <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning> */}
               <Warning visible>이미 사용중인 별명입니다.</Warning>
               {/* <Button onClick={onClick}>글 작성하기</Button> */}

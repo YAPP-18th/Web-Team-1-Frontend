@@ -10,7 +10,14 @@ export const getLists = () => {
 export const getMyProfile = async (): Promise<UserState | null> => {
   try {
     const res = await tokenInstance.get(`/users/profiles`);
-    return res.data.data;
+    const { data } = res.data;
+    if (!data.job) {
+      data.job = '';
+    }
+    if (!data.intro) {
+      data.intro = '';
+    }
+    return data;
   } catch (error) {
     console.log(error);
     return null;

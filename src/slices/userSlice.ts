@@ -6,8 +6,8 @@ interface UserState {
   name: string;
   nickname: string;
   profile: string;
-  job: string | null;
-  intro: string | null;
+  job: string;
+  intro: string;
 }
 
 const initialState: UserState = {
