@@ -11,6 +11,7 @@ import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
+import ProfileModalContainer from '#containers/ProfileModalContainer';
 
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
@@ -76,6 +77,8 @@ export default function Header() {
                 <span>작성 중인 회고</span>
                 <span>최근 읽은 회고</span>
                 <span>스크랩한 회고</span>
+
+                <ProfileModalContainer />
               </S.MenuWrapper>
             )}
           </S.LoginAfter>

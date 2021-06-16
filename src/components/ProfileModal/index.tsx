@@ -140,12 +140,16 @@ const Button = styled.button`
 //   develop: 4,
 // };
 
-const ProfileModal = () => {
+interface Props {
+  toggle: () => void;
+}
+
+const ProfileModal = ({ toggle }: Props) => {
   return (
     <>
       <StyledModalContainer>
         <StyledModal>
-          <CloseBtn>X</CloseBtn>
+          <CloseBtn onClick={toggle}>X</CloseBtn>
           <ModalHeader>프로필 변경</ModalHeader>
           <ModalBody>
             <Column>
