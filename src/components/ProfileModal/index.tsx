@@ -148,9 +148,10 @@ interface Props {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => void;
   onClick: () => Promise<void>;
+  setImage: React.Dispatch<React.SetStateAction<null | File>>;
 }
 
-const ProfileModal = ({ toggle, user, onChange, onClick }: Props) => {
+const ProfileModal = ({ toggle, user, onChange, onClick, setImage }: Props) => {
   return (
     <>
       <StyledModalContainer>
@@ -161,7 +162,7 @@ const ProfileModal = ({ toggle, user, onChange, onClick }: Props) => {
             <Column>
               <Label>프로필 사진(선택)</Label>
               {/* <input /> */}
-              <ImageDrop defaultImage={user.profile} />
+              <ImageDrop defaultImage={user.profile} setImage={setImage} />
               <HelpText>
                 상자를 클릭하여 이미지를 업로드하세요
                 <br />

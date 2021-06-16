@@ -33,3 +33,15 @@ export const updateMyProfile = async (data: UserState): Promise<number | null> =
     return null;
   }
 };
+
+export const uploadProfileImage = async (image: Blob | File): Promise<string | null> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', image);
+    const res = await tokenInstance.post(`/images/profiles`, formData);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

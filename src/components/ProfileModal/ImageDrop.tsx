@@ -6,11 +6,6 @@ export interface ImageProps {
   src: string;
 }
 
-interface ProfileImageFile {
-  file: File | null;
-  url: string;
-}
-
 const Box = styled.div`
   width: 300px;
   height: 300px;
@@ -24,30 +19,23 @@ const ImageBox = styled(Box)<ImageProps>`
 
 interface Props {
   defaultImage: string;
+  setImage: React.Dispatch<React.SetStateAction<null | File>>;
 }
 
-const ImageDrop = ({ defaultImage }: Props) => {
-  const [image, setImage] = useState<ProfileImageFile>({
-    file: null,
-    url: '',
-  });
+const ImageDrop = ({ defaultImage, setImage }: Props) => {
+  const [preview, setPreview] = useState('');
   const { getRootProps, getInputProps } = useDropzone({
     accept: ['.png', '.jpeg', '.jpg'],
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
-      // 여기서 s3서버에 이미지 전송 후, 이미지 겅로 를 state에 저장
-      setImage({
-        file: acceptedFiles[0],
-        url: URL.createObjectURL(acceptedFiles[0]),
-      });
-      /* eslint-disable no-console */
-      // console.log(acceptedFiles);
+      setImage(acceptedFiles[0]);
+      setPreview(URL.createObjectURL(acceptedFiles[0]));
     },
   });
   return (
     <div {...getRootProps({ className: 'dropzone' })}>
       <input {...getInputProps()} />
-      {image.file ? <ImageBox src={image.url} /> : <ImageBox src={defaultImage} />}
+      {preview ? <ImageBox src={preview} /> : <ImageBox src={defaultImage} />}
     </div>
   );
 };
