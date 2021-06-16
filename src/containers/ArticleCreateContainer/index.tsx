@@ -9,6 +9,23 @@ import ArticleEditor from '#components/ArticleEditor/ArticleEditor';
 import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 
 const ArticleCreateContainer = () => {
+  // 추후 util 함수로 빼기
+  const findImageUrlList = (contents: string) => {
+    let m;
+    const rex = /<img[^>]*src=["']?([^>"']+)["']?[^>]*>/g;
+    const urls: Array<string> = [];
+    while (contents) {
+      m = rex.exec(contents);
+      if (!m) {
+        break;
+      }
+      urls.push(m[1]);
+    }
+    /* eslint-disable no-console */
+    // console.log(urls);
+    return urls;
+  };
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -30,12 +47,14 @@ const ArticleCreateContainer = () => {
   const callPostApi = async () => {
     if (editorRef.current !== null) {
       const data = {
-        tag,
+        tagList: tag,
         category,
         templateIdx,
         contents: editorRef.current.getInstance().getSquire().getBody().innerHTML,
         title: titleRef.current,
-        image: [],
+        imageList: findImageUrlList(
+          editorRef.current.getInstance().getSquire().getBody().innerHTML,
+        ),
       };
       const index = await postArticle(data);
 

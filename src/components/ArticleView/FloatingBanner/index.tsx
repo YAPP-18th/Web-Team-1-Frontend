@@ -5,7 +5,9 @@ import Scrap from './svg/Scrap';
 import Share from './svg/Share';
 import Comment from './svg/Comment';
 import ShareOption from './ShareOption';
-import Shortcut from './Shortcut';
+// import Shortcut from './Shortcut';
+import { cancelScrapArticle, scrapArticle } from '#apis/articleViewApi';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 const StyledFloatingBanner = styled.div`
   display: flex;
@@ -19,13 +21,30 @@ const StyledFloatingBanner = styled.div`
   transform: translateY(-50%);
 `;
 
-const FloatingBanner = () => {
+interface Props {
+  scrap: boolean;
+}
+
+const FloatingBanner = ({ scrap }: Props) => {
   // scrap 여부, 토글에 따른 동작 분기
-  const [isScrap, setIsScrap] = useState(false);
-  const toggleScrap = () => {
+
+  const { index } = useAppSelector((state) => state.articleViewReducer);
+  const [isScrap, setIsScrap] = useState(scrap);
+
+  let isRunning = false;
+  const toggleScrap = async () => {
+    if (isRunning) {
+      return;
+    }
     if (isScrap) {
+      // 스크랩 취소
+      isRunning = true;
+      await cancelScrapArticle(index);
       setIsScrap(!isScrap);
     } else {
+      // 스크랩 하기
+      isRunning = true;
+      await scrapArticle(index);
       setIsScrap(!isScrap);
     }
   };
@@ -47,7 +66,8 @@ const FloatingBanner = () => {
         {isShareOption && <ShareOption />}
         <BannerItem icon={Comment} onClick={onClickCommentBanner} />
       </StyledFloatingBanner>
-      <Shortcut />
+      {/* Shortcut 은 v3 */}
+      {/* <Shortcut /> */}
     </>
   );
 };
