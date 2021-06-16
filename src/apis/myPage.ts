@@ -23,3 +23,13 @@ export const getMyProfile = async (): Promise<UserState | null> => {
     return null;
   }
 };
+
+export const updateMyProfile = async (data: UserState): Promise<number | null> => {
+  try {
+    await tokenInstance.patch(`/users/profiles`, data);
+    return 1;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

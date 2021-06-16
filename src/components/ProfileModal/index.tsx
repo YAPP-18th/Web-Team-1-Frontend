@@ -147,9 +147,10 @@ interface Props {
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => void;
+  onClick: () => Promise<void>;
 }
 
-const ProfileModal = ({ toggle, user, onChange }: Props) => {
+const ProfileModal = ({ toggle, user, onChange, onClick }: Props) => {
   return (
     <>
       <StyledModalContainer>
@@ -185,7 +186,7 @@ const ProfileModal = ({ toggle, user, onChange }: Props) => {
               {/* <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning> */}
               <Warning visible>이미 사용중인 별명입니다.</Warning>
               {/* <Button onClick={onClick}>글 작성하기</Button> */}
-              <Button>프로필 변경 완료</Button>
+              <Button onClick={() => onClick()}>프로필 변경 완료</Button>
             </Column>
           </ModalBody>
         </StyledModal>
