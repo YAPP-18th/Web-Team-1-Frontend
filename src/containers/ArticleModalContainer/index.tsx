@@ -15,7 +15,7 @@ export interface TagItem {
 }
 
 const StyledBtn = styled.div`
-  margin-right: 16px;
+  margin-right: 24px;
 `;
 
 const ArticleModalContainer = () => {

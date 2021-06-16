@@ -12,6 +12,12 @@ import * as S from './style';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
 import ProfileModalContainer from '#containers/ProfileModalContainer';
+import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
+
+// interface Props {
+//   icon: FunctionComponent;
+//   onClick: () => void;
+// }
 
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
@@ -61,7 +67,11 @@ export default function Header() {
         {isLogined ? (
           <S.LoginAfter>
             {isShowedQuickWrite && <ArticleModalContainer />}
-            <IconWrapper icon={IconPaths.Hamburger} onClick={handleClickHamburger} />
+            <HamburgerWrapper onClick={handleClickHamburger}>
+              <Hamburger />
+            </HamburgerWrapper>
+            {/* <IconWrapper icon={IconPaths.Hamburger} onClick={handleClickHamburger} /> */}
+
             {isShowedMenu && (
               <S.MenuWrapper>
                 <div className="profile">
@@ -98,7 +108,8 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 0 60px 0;
+  padding: 60px 0px 60px 0;
+  margin-right: 2px;
 `;
 
 const Logo = styled(Link)`
@@ -108,4 +119,8 @@ const Logo = styled(Link)`
   font-weight: 400;
   letter-spacing: -0.06em;
   color: ${color.gray || 'none'};
+`;
+
+const HamburgerWrapper = styled.div`
+  cursor: pointer;
 `;

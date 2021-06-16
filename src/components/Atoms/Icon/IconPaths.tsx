@@ -8,7 +8,6 @@ import Bulb from './SVG/Bulb.svg';
 import Laptop from './SVG/Laptop.svg';
 import Palette from './SVG/Palette.svg';
 import Search from './SVG/Search.svg';
-import Hamburger from './SVG/Hamburger.svg';
 import Bookmark from './SVG/Bookmark.svg';
 import Commant from './SVG/Commant.svg';
 import PolygonBottom from './SVG/PolygonBottom.svg';
@@ -23,7 +22,6 @@ type Icon =
   | 'Laptop'
   | 'Palette'
   | 'Search'
-  | 'Hamburger'
   | 'Bookmark'
   | 'Commant'
   | 'PolygonBottom';
@@ -42,7 +40,6 @@ const IconPaths: IconPathKey = {
   Laptop,
   Palette,
   Search,
-  Hamburger,
   Bookmark,
   Commant,
   PolygonBottom,
