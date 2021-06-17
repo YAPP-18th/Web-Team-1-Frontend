@@ -69,16 +69,13 @@ export const cancelScrapArticle = async (index: number): Promise<AxiosResponse |
   }
 };
 
-export const createComment = async (
-  index: string,
-  contents: string,
-): Promise<AxiosResponse | null> => {
+export const createComment = async (index: string, contents: string): Promise<number | null> => {
   try {
-    const res = await tokenInstance.post(`/comments`, {
+    await tokenInstance.post(`/comments`, {
       comments: contents,
       postIdx: Number(index),
     });
-    return res.data;
+    return 1;
   } catch (error) {
     console.log(error);
     return null;
@@ -115,6 +112,16 @@ export const getCommentList = async (
       `/comments/lists?page=${page}&pageSize=${pageSize}&postIdx=${index}`,
     );
     return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getCommentCount = async (index: string): Promise<number | null> => {
+  try {
+    const res = await instance.get(`/comments/lists/count?postIdx=${index}`);
+    return res.data.data;
   } catch (error) {
     console.log(error);
     return null;

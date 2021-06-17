@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // import thumbnail from '../../../../assets/images/thumbnail.png';
-import { CommentType } from '#containers/CommentContainer/CommentList';
+import { CommentType } from '#containers/CommentContainer';
 
 export interface ImgProps {
   imgSrc: string;

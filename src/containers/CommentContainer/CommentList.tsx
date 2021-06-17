@@ -1,44 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CommentItem from '#components/ArticleView/ArticleDetail/Comment/CommentItem';
-import { getCommentList } from '#apis/articleViewApi';
+import { CommentType } from '.';
 /* eslint-disable no-console */
 
 interface Props {
-  index: string;
+  commentList: CommentType[];
 }
 
-export interface CommentType {
-  commentIdx: number;
-  comments: string;
-  createdAt: string;
-  modifiedAt: string;
-  nickname: string;
-  profile: string;
-  userIdx: number;
-  writer: boolean;
-}
-
-const CommentList = ({ index }: Props) => {
-  const [list, setList] = useState<Array<CommentType>>([]);
-
-  const callApi = async () => {
-    const result = await getCommentList(index, 0, 10);
-    // console.log(result);
-    if (result) {
-      setList(result.data);
-    }
-  };
-
-  useEffect(() => {
-    callApi();
-  }, []);
-
+const CommentList = ({ commentList }: Props) => {
   return (
     <>
-      {list.length > 0 &&
-        list.map((comment) => <CommentItem key={comment.commentIdx} data={comment} />)}
+      {commentList.length > 0 &&
+        commentList.map((comment) => <CommentItem key={comment.commentIdx} data={comment} />)}
     </>
   );
 };
 
-export default CommentList;
+export default React.memo(CommentList);

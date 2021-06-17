@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { createComment } from '#apis/articleViewApi';
 import thumbnail from '../../../../assets/images/thumbnail.png';
 
 export interface ImgProps {
@@ -8,7 +7,7 @@ export interface ImgProps {
 }
 
 interface Props {
-  index: string;
+  callApi: (content: string) => Promise<number | null>;
 }
 
 const StyledCommentInput = styled.div`
@@ -76,15 +75,15 @@ const InputBox = styled.div`
 //   cursor: pointer;
 // `;
 
-const CommentInput = ({ index }: Props) => {
+const CommentInput = ({ callApi }: Props) => {
   const [content, setContent] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
 
-  const callApi = async () => {
-    const result = await createComment(index, content);
+  const onClick = async () => {
+    const result = await callApi(content);
     if (result) {
       // 성공
       setContent('');
@@ -98,7 +97,7 @@ const CommentInput = ({ index }: Props) => {
         <InputBox>
           {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
           <textarea value={content} onChange={onChange} spellCheck={false} />
-          <button type="button" onClick={() => callApi()}>
+          <button type="button" onClick={() => onClick()}>
             완료
           </button>
         </InputBox>
@@ -107,4 +106,4 @@ const CommentInput = ({ index }: Props) => {
   );
 };
 
-export default CommentInput;
+export default React.memo(CommentInput);
