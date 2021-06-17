@@ -1,6 +1,6 @@
 // import { AxiosResponse } from 'axios';
 import { UserState } from 'slices/userSlice';
-import { tokenInstance } from '#apis/common';
+import { tokenInstance, instance } from '#apis/common';
 /* eslint-disable no-console */
 
 export const getLists = () => {
@@ -39,6 +39,16 @@ export const uploadProfileImage = async (image: Blob | File): Promise<string | n
     const formData = new FormData();
     formData.append('file', image);
     const res = await tokenInstance.post(`/images/profiles`, formData);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const checkDuplicatedNickname = async (nickname: string): Promise<boolean | null> => {
+  try {
+    const res = await instance.get(`/users?nickname=${nickname}`);
     return res.data.data;
   } catch (error) {
     console.log(error);

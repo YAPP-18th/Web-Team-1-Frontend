@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { alertActions } from 'slices/alertSlice';
 import { fetchProfile } from 'slices/userSlice';
-import ProfileModal from '#components/ProfileModal';
+import ProfileModal, { Warning } from '#components/ProfileModal';
 import { useAppSelector } from '#hooks/useAppSelector';
-import { updateMyProfile, uploadProfileImage } from '#apis/myPage';
+import { checkDuplicatedNickname, updateMyProfile, uploadProfileImage } from '#apis/myPage';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 
 const ProfileModalContainer = () => {
@@ -12,6 +12,10 @@ const ProfileModalContainer = () => {
   const userData = useAppSelector((state) => state.userReducer);
   const [user, setUser] = useState(userData);
   const [image, setImage] = useState<null | File>(null);
+  const [warning, setWarning] = useState<Warning>({
+    isWarning: false,
+    warningMessage: '',
+  });
 
   const [modal, setModal] = useState(false);
 
@@ -33,6 +37,22 @@ const ProfileModalContainer = () => {
   };
 
   const onClick = async () => {
+    // 닉네임 중복처리부터
+    if (userData.nickname !== user.nickname) {
+      const isDuplicated = await checkDuplicatedNickname(user.nickname);
+      if (isDuplicated) {
+        // warning
+        setWarning({
+          isWarning: true,
+          warningMessage: '중복된 닉네임입니다.',
+        });
+        return;
+      }
+    }
+    setWarning({
+      isWarning: false,
+      warningMessage: '',
+    });
     let imageUrl;
     let result;
     if (image) {
@@ -70,6 +90,7 @@ const ProfileModalContainer = () => {
           onChange={onChange}
           onClick={onClick}
           setImage={setImage}
+          warning={warning}
         />
       )}
     </>

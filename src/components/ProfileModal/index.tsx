@@ -4,7 +4,7 @@ import { UserState } from 'slices/userSlice';
 import zIndex from '#styles/zIndex';
 import ImageDrop from './ImageDrop';
 
-interface Warning {
+export interface Warning {
   isWarning: boolean;
   warningMessage: string;
 }
@@ -149,9 +149,10 @@ interface Props {
   ) => void;
   onClick: () => Promise<void>;
   setImage: React.Dispatch<React.SetStateAction<null | File>>;
+  warning: Warning;
 }
 
-const ProfileModal = ({ toggle, user, onChange, onClick, setImage }: Props) => {
+const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Props) => {
   return (
     <>
       <StyledModalContainer>
@@ -184,9 +185,7 @@ const ProfileModal = ({ toggle, user, onChange, onClick, setImage }: Props) => {
               </select>
               <Label>소개글 (선택)</Label>
               <textarea name="intro" value={user.intro} onChange={onChange} />
-              {/* <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning> */}
-              <Warning visible>이미 사용중인 별명입니다.</Warning>
-              {/* <Button onClick={onClick}>글 작성하기</Button> */}
+              <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning>
               <Button onClick={() => onClick()}>프로필 변경 완료</Button>
             </Column>
           </ModalBody>
