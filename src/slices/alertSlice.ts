@@ -51,13 +51,27 @@ const { actions: alertActions, reducer: alertReducer } = createSlice({
 
 export { alertActions, AlertState };
 export function startAlert(message: string): AppThunk {
-  return async (dispatch) => {
-    let timer2;
+  return async (dispatch, state) => {
+    // 여기서 이전 타이머들을 가져와서 clear 시켜야함
+    const before1 = state().alertReducer.timer1;
+    if (before1) {
+      clearTimeout(before1);
+    }
+    const before2 = state().alertReducer.timer2;
+    if (before2) {
+      clearTimeout(before2);
+    }
+
+    let timer2: NodeJS.Timeout | undefined;
     const timer1 = setTimeout(() => {
       dispatch(alertActions.hideAlert());
       timer2 = setTimeout(() => {
         dispatch(alertActions.clearAlert());
+        if (timer2) {
+          clearTimeout(timer2);
+        }
       }, 2000);
+      clearTimeout(timer1);
     }, 5000);
 
     dispatch(

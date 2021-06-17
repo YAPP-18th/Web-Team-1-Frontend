@@ -19,7 +19,6 @@ const StyledCommentInput = styled.div`
 `;
 
 const ImgColumn = styled.div<ImgProps>`
-  /* background-image: url(${(props) => props.imgSrc}); */
   background-size: cover;
   width: 56px;
   height: 56px;
