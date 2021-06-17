@@ -74,8 +74,7 @@ export default function Header() {
             <HamburgerWrapper onClick={handleClickHamburger}>
               <Hamburger />
             </HamburgerWrapper>
-            {/* {isShowedMenu && userData.nickname && ( */}
-            {isShowedMenu && (
+            {isShowedMenu && userData.nickname && (
               <S.MenuWrapper>
                 <div className="profile">
                   <img src={userData.profile} alt="썸네일" />
