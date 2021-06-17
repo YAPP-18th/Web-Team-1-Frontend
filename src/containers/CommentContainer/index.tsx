@@ -3,7 +3,12 @@ import { useLocation } from 'react-router';
 import CommentHeader from '#components/ArticleView/ArticleDetail/Comment/CommentHeader';
 import CommentInput from '#components/ArticleView/ArticleDetail/Comment/CommentInput';
 import CommentList from './CommentList';
-import { createComment, getCommentCount, getCommentList } from '#apis/articleViewApi';
+import {
+  createComment,
+  getCommentCount,
+  getCommentList,
+  getCommentListWithToken,
+} from '#apis/articleViewApi';
 
 export interface CommentType {
   commentIdx: number;
@@ -32,7 +37,12 @@ const CommentContainer = () => {
   }, []);
 
   const callCommentListApi = useCallback(async () => {
-    const result = await getCommentList(index, 0, 10);
+    let result;
+    if (window.localStorage.getItem('accessToken')) {
+      result = await getCommentListWithToken(index, 0, 10);
+    } else {
+      result = await getCommentList(index, 0, 10);
+    }
     if (result) {
       setCommentList(result.data);
     }

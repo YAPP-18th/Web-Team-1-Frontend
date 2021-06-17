@@ -43,7 +43,7 @@ const HeaderLeft = styled.div`
 `;
 
 const HeaderRight = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   line-height: 14px;
   letter-spacing: -0.01em;
 
@@ -113,9 +113,9 @@ const CommentItem = ({ data }: Props) => {
               <CommentCreatedAt>Oct 28, 2020</CommentCreatedAt>
             </HeaderLeft>
             <HeaderRight>
-              <HeaderBtn color="dark">답글</HeaderBtn>
-              <HeaderBtn>신고</HeaderBtn>
-              <HeaderBtn>삭제</HeaderBtn>
+              {/* <HeaderBtn color="dark">답글</HeaderBtn> */}
+              {/* <HeaderBtn>신고</HeaderBtn> */}
+              {data.writer && <HeaderBtn>삭제</HeaderBtn>}
             </HeaderRight>
           </CommentItemHeader>
           <CommentContents>
