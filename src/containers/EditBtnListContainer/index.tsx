@@ -23,11 +23,6 @@ const EditBtnListContainer = ({ id }: Props) => {
     const result = await deleteArticle(id);
     if (result) {
       history.push('/');
-      // const reduxData: AlertState = {
-      //   isFadeIn: true,
-      //   message: '삭제가 완료되었습니다 🤣',
-      // };
-      // dispatch(alertActions.showAlert(reduxData));
       dispatch(startAlert('삭제가 완료되었습니다 🤣'));
     }
   };

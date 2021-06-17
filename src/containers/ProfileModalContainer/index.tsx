@@ -68,12 +68,6 @@ const ProfileModalContainer = () => {
     }
     if (result) {
       dispatch(fetchProfile());
-      // dispatch(
-      //   alertActions.showAlert({
-      //     isFadeIn: true,
-      //     message: '프로필 설정이 완료되었습니다🥳',
-      //   }),
-      // );
       dispatch(startAlert('프로필 설정이 완료되었습니다 🥳'));
       toggle();
     }

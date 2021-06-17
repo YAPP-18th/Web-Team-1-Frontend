@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '#hooks/useAppSelector';
 import thumbnail from '../../../../assets/images/thumbnail.png';
 
 export interface ImgProps {
@@ -18,13 +19,19 @@ const StyledCommentInput = styled.div`
 `;
 
 const ImgColumn = styled.div<ImgProps>`
-  background-image: url(${(props) => props.imgSrc});
   background-size: cover;
   width: 56px;
   height: 56px;
   margin-right: 16px;
-
   border-radius: 50%;
+`;
+
+const MemberImg = styled(ImgColumn)<ImgProps>`
+  background-image: url(${(props) => props.imgSrc});
+`;
+
+const NonMemberImg = styled(ImgColumn)<ImgProps>`
+  background-image: ${(props) => props.imgSrc};
 `;
 
 const TextColumn = styled.div`
@@ -77,6 +84,7 @@ const InputBox = styled.div`
 
 const CommentInput = ({ callApi }: Props) => {
   const [content, setContent] = useState('');
+  const { profile } = useAppSelector((state) => state.userReducer);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -92,7 +100,7 @@ const CommentInput = ({ callApi }: Props) => {
 
   return (
     <StyledCommentInput>
-      <ImgColumn imgSrc={thumbnail} />
+      {profile ? <MemberImg imgSrc={profile} /> : <NonMemberImg imgSrc={thumbnail} />}
       <TextColumn>
         <InputBox>
           {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
