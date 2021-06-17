@@ -46,6 +46,7 @@ const ArticleDetailContainer = ({ id }: Props) => {
         title: innerData.result.title,
         index: innerData.result.postIdx,
         templateIdx: innerData.result.templateIdx,
+        commentCnt: innerData.result.commentCnt,
       };
 
       dispatch(viewActions.setViewData(viewReduxData));

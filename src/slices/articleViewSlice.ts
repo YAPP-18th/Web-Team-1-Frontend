@@ -8,6 +8,7 @@ interface ViewState {
   title: string;
   index: number;
   templateIdx: number;
+  commentCnt: number;
 }
 
 const initialState: ViewState = {
@@ -17,6 +18,7 @@ const initialState: ViewState = {
   title: '',
   index: -1,
   templateIdx: -1,
+  commentCnt: 0,
 };
 
 /* eslint-disable no-param-reassign */
@@ -31,6 +33,7 @@ const { actions: viewActions, reducer: articleViewReducer } = createSlice({
       state.title = action.payload.title;
       state.index = action.payload.index;
       state.templateIdx = action.payload.templateIdx;
+      state.commentCnt = action.payload.commentCnt;
     },
   },
 });
