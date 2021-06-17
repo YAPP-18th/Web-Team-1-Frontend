@@ -52,7 +52,8 @@ export const MenuWrapper = styled.div`
     padding: 0 0 0 47px;
     color: #999999;
   }
-  button {
+  button.menu-item,
+  .logout {
     background-color: transparent;
     border: none;
     text-align: left;
