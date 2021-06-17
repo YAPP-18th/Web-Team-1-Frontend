@@ -5,6 +5,7 @@ import CommentInput from '#components/ArticleView/ArticleDetail/Comment/CommentI
 import CommentList from './CommentList';
 import {
   createComment,
+  deleteComment,
   getCommentCount,
   getCommentList,
   getCommentListWithToken,
@@ -58,6 +59,15 @@ const CommentContainer = () => {
     return result;
   }, []);
 
+  const callDeleteCommentApi = useCallback(async (commentIndex: number) => {
+    const result = await deleteComment(commentIndex);
+    if (result) {
+      // 성공
+      callCommentCountApi();
+      callCommentListApi();
+    }
+  }, []);
+
   useEffect(() => {
     callCommentCountApi();
     callCommentListApi();
@@ -68,7 +78,7 @@ const CommentContainer = () => {
       {index && (
         <>
           <CommentHeader commentCount={commentCount} />
-          <CommentList commentList={commentList} />
+          <CommentList commentList={commentList} deleteApi={callDeleteCommentApi} />
           <CommentInput callApi={callCreateCommentApi} />
         </>
       )}
