@@ -18,6 +18,7 @@ export interface ArticleResultData {
   tagList: Array<tagData>;
   title: string;
   view: number;
+  templateIdx: number;
 }
 
 export interface ArticleDetailData {
@@ -42,6 +43,85 @@ export const deleteArticle = async (index: string): Promise<AxiosResponse | null
   try {
     const res = await tokenInstance.delete(`/posts/${index}`);
     return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const scrapArticle = async (index: number): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.post(`/likes`, { postIdx: index });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const cancelScrapArticle = async (index: number): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.delete(`/likes?postIdx=${index}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const createComment = async (index: string, contents: string): Promise<number | null> => {
+  try {
+    await tokenInstance.post(`/comments`, {
+      comments: contents,
+      postIdx: Number(index),
+    });
+    return 1;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const deleteComment = async (commentIndex: number): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.delete(`/comments/${commentIndex}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+// export const updateComment = async (commentIndex: number): Promise<AxiosResponse | null> => {
+//   try {
+//     const res = await tokenInstance.delete(`/comments/${commentIndex}`);
+//     return res.data;
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   }
+// };
+
+export const getCommentList = async (
+  index: string,
+  page: number,
+  pageSize: number,
+): Promise<AxiosResponse | null> => {
+  try {
+    const res = await instance.get(
+      `/comments/lists?page=${page}&pageSize=${pageSize}&postIdx=${index}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getCommentCount = async (index: string): Promise<number | null> => {
+  try {
+    const res = await instance.get(`/comments/lists/count?postIdx=${index}`);
+    return res.data.data;
   } catch (error) {
     console.log(error);
     return null;

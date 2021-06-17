@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { fetchProfile } from 'slices/userSlice';
 import { GlobalStyle } from '#styles/index';
 
 import Header from './components/Header';
@@ -13,8 +14,17 @@ import ArticleCreatePage from '#pages/ArticleCreatePage';
 import ArticleUpdatePage from '#pages/ArticleUpdatePage';
 
 import Alert from '#components/Alert';
+import { useAppDispatch } from '#hooks/useAppDispatch';
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (window.localStorage.getItem('accessToken')) {
+      dispatch(fetchProfile());
+    }
+  }, []);
+
   return (
     <>
       <GlobalStyle />

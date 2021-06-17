@@ -47,14 +47,14 @@ const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) =
         <div className="button-wrapper">
           <Button
             buttonColor={{ background: 'google' }}
-            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1/auth/google"
+            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1/oauth2/google"
           >
             <IconWrapper icon={IconPaths.Google} />
             구글
           </Button>
           <Button
             buttonColor={{ background: 'kakao', textColor: 'kakaoText' }}
-            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1/auth/kakao"
+            href="http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1/oauth2/kakao"
           >
             <IconWrapper icon={IconPaths.Kakao} />
             카카오

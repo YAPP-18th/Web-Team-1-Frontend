@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import ArticleModal from '#components/ArticleModal';
 import { IconPaths, IconWrapper, Button } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
+import { useAppSelector } from '#hooks/useAppSelector';
 
 let tagCount = 0;
 
@@ -14,12 +15,15 @@ export interface TagItem {
 }
 
 const StyledBtn = styled.div`
-  margin-right: 16px;
+  margin-right: 24px;
 `;
 
 const ArticleModalContainer = () => {
   const dispatch = useAppDispatch();
+  const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
+
   const history = useHistory();
+  const location = useLocation();
 
   const [data, setData] = useState({
     category: '',
@@ -66,7 +70,10 @@ const ArticleModalContainer = () => {
     };
 
     dispatch(editorActions.setEditorData(reduxData));
-    history.push('/articleCreate');
+    if (location.pathname !== '/articleUpdate' && location.pathname !== '/articleCreate') {
+      history.push('/articleCreate');
+    }
+    /* eslint-disable no-console */
 
     modalToggle();
   };
@@ -85,6 +92,7 @@ const ArticleModalContainer = () => {
       return;
     }
 
+    tagCount += 1;
     setTagList([
       ...tagList,
       {
@@ -92,15 +100,38 @@ const ArticleModalContainer = () => {
         text: tagText,
       },
     ]);
-    tagCount += 1;
   };
+
+  // useEffect 합치기
+
+  useEffect(() => {
+    if (tag.length) {
+      /* eslint-disable no-console */
+      // console.log(tag);
+      const indexedTagList: TagItem[] = tag.map((item) => {
+        tagCount += 1;
+        return { id: tagCount, text: item };
+      });
+      setTagList(indexedTagList);
+    }
+  }, [tag]);
+
+  useEffect(() => {
+    if (category && templateIdx) {
+      setData({
+        ...data,
+        category,
+        templateIdx,
+      });
+    }
+  }, [category, templateIdx]);
 
   return (
     <>
       <StyledBtn>
         <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
           바로 회고하기
-          <IconWrapper icon={IconPaths.Glitter} />
+          <IconWrapper icon={IconPaths.Writing} />
         </Button>
       </StyledBtn>
       {modal && (
@@ -112,6 +143,8 @@ const ArticleModalContainer = () => {
           addTag={addTag}
           tagList={tagList}
           deleteTag={deleteTag}
+          category={category}
+          templateIdx={templateIdx}
         />
       )}
     </>

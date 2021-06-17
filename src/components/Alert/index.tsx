@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { alertActions } from 'slices/alertSlice';
 import { useAppSelector } from '#hooks/useAppSelector';
+import zIndex from '#styles/zIndex';
 
 export interface Props {
   fadeIn: boolean;
+  fadeOut: boolean;
 }
 
 const StyledAlert = styled.div<Props>`
@@ -21,8 +23,9 @@ const StyledAlert = styled.div<Props>`
   position: absolute;
   top: 5%;
   left: 50%;
-  z-index: 1000;
-  animation: ${(props) => (props.fadeIn ? 'fadein 2s' : 'fadeout 2s')};
+  z-index: ${zIndex.modal};
+  animation: ${(props) => props.fadeIn && 'fadein 2s'};
+  animation: ${(props) => props.fadeOut && 'fadeout 2s'};
   display: inline;
   @keyframes fadein {
     from {
@@ -30,6 +33,15 @@ const StyledAlert = styled.div<Props>`
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
     }
   }
   visibility: ${(props) => (props.fadeIn ? 'visible' : 'hidden')};
@@ -43,19 +55,23 @@ const StyledBtn = styled.div`
 
 const Alert = () => {
   const dispatch = useDispatch();
-  const { isShow, message } = useAppSelector((state) => state.alertReducer);
+  const { isFadeIn, isFadeOut, message, timer1, timer2 } = useAppSelector(
+    (state) => state.alertReducer,
+  );
 
   const toggle = () => {
-    const reduxData = {
-      isShow: false,
-      message: '',
-    };
-    dispatch(alertActions.setAlert(reduxData));
+    dispatch(alertActions.clearAlert());
+    if (timer1) {
+      clearTimeout(timer1);
+    }
+    if (timer2) {
+      clearTimeout(timer2);
+    }
   };
 
   return (
     <>
-      <StyledAlert fadeIn={isShow}>
+      <StyledAlert fadeIn={isFadeIn} fadeOut={isFadeOut}>
         {message} <StyledBtn onClick={toggle}>x</StyledBtn>
       </StyledAlert>
     </>

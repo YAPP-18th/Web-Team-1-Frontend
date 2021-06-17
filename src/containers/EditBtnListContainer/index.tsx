@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { alertActions, AlertState } from 'slices/alertSlice';
+import { startAlert } from 'slices/alertSlice';
 import { useHistory } from 'react-router';
 import EditBtnList from '#components/ArticleView/ArticleDetail/EditBtnList';
 import { deleteArticle } from '#apis/articleViewApi';
@@ -23,11 +23,12 @@ const EditBtnListContainer = ({ id }: Props) => {
     const result = await deleteArticle(id);
     if (result) {
       history.push('/');
-      const reduxData: AlertState = {
-        isShow: true,
-        message: '삭제가 완료되었습니다 🤣',
-      };
-      dispatch(alertActions.setAlert(reduxData));
+      // const reduxData: AlertState = {
+      //   isFadeIn: true,
+      //   message: '삭제가 완료되었습니다 🤣',
+      // };
+      // dispatch(alertActions.showAlert(reduxData));
+      dispatch(startAlert('삭제가 완료되었습니다 🤣'));
     }
   };
 

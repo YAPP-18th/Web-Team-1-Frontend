@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import thumbnail from 'assets/images/thumbnail.png';
 import { useCookies } from 'react-cookie';
+import { userActions } from 'slices/userSlice';
+import { startAlert } from 'slices/alertSlice';
+import { useAppSelector } from '#hooks/useAppSelector';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
 import { IconPaths, IconWrapper } from '#components/Atoms';
@@ -10,13 +12,31 @@ import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
+import ProfileModalContainer from '#containers/ProfileModalContainer';
+import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
+import { useAppDispatch } from '#hooks/useAppDispatch';
+/* eslint-disable no-console */
 
 export default function Header() {
-
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
+  const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
   const [isLogined, setIsLogined] = useState(false);
+  const history = useHistory();
 
+  const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
+  const { category } = useAppSelector((state) => state.articleEditorReducer);
+  const userData = useAppSelector((state) => state.userReducer);
+  const dispatch = useAppDispatch();
+
+  // 로그아웃 버튼 클릭
+  const onClickLogout = () => {
+    removeCookie('JWT-Refresh-Token');
+    window.localStorage.removeItem('accessToken');
+    dispatch(userActions.clearProfile());
+    setIsLogined(false);
+    history.push('/');
+  };
 
   // 로그인 버튼 클릭
   const handleClickSignInButton = useCallback(() => {
@@ -36,29 +56,55 @@ export default function Header() {
     }
   }, []);
 
+  useEffect(() => {
+    if (category) {
+      setIsShowedQuickWrite(false);
+    } else {
+      setIsShowedQuickWrite(true);
+    }
+  }, [category]);
+
   return (
     <>
       <HeaderWrapper>
         <Logo to="/">돌아보다,</Logo>
         {isLogined ? (
           <S.LoginAfter>
-            <ArticleModalContainer />
-            <IconWrapper icon={IconPaths.Hamburger} onClick={handleClickHamburger} />
-            {isShowedMenu && (
+            {isShowedQuickWrite && <ArticleModalContainer />}
+            <HamburgerWrapper onClick={handleClickHamburger}>
+              <Hamburger />
+            </HamburgerWrapper>
+            {isShowedMenu && userData.nickname && (
               <S.MenuWrapper>
                 <div className="profile">
-                  <img src={thumbnail} alt="썸네일" />
+                  <img src={userData.profile} alt="썸네일" />
                   <div className="content">
-                    <p>이름</p>
-                    <button type="button" onClick={onClickLogout}>
+                    <p>{userData.nickname}</p>
+                    <button type="button" className="logout" onClick={onClickLogout}>
                       로그아웃
                     </button>
                   </div>
                 </div>
-                <span>작성한 회고</span>
-                <span>작성 중인 회고</span>
-                <span>최근 읽은 회고</span>
-                <span>스크랩한 회고</span>
+                <button
+                  type="button"
+                  className="menu-item"
+                  onClick={() => {
+                    dispatch(startAlert('테스트다 🚀'));
+                  }}
+                >
+                  작성한 회고
+                </button>
+                <button type="button" className="menu-item">
+                  작성 중인 회고
+                </button>
+                <button type="button" className="menu-item">
+                  최근 읽은 회고
+                </button>
+                <button type="button" className="menu-item">
+                  스크랩한 회고
+                </button>
+
+                <ProfileModalContainer />
               </S.MenuWrapper>
             )}
           </S.LoginAfter>
@@ -78,7 +124,8 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 0 60px 0;
+  padding: 60px 0px 60px 0;
+  margin-right: 2px;
 `;
 
 const Logo = styled(Link)`
@@ -88,4 +135,8 @@ const Logo = styled(Link)`
   font-weight: 400;
   letter-spacing: -0.06em;
   color: ${color.gray || 'none'};
+`;
+
+const HamburgerWrapper = styled.div`
+  cursor: pointer;
 `;

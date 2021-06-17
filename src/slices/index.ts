@@ -6,6 +6,7 @@ import conditionReducer from './conditionSlice';
 import alertReducer from './alertSlice';
 import articleEditorReducer from './articleEditorSlice';
 import articleViewReducer from './articleViewSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     articleEditorReducer,
     alertReducer,
     articleViewReducer,
+    userReducer,
   },
 });
 
