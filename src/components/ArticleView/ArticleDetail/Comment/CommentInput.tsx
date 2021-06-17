@@ -8,7 +8,7 @@ export interface ImgProps {
 }
 
 interface Props {
-  index: number;
+  index: string;
 }
 
 const StyledCommentInput = styled.div`

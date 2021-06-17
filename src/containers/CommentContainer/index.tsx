@@ -1,15 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router';
 import CommentHeader from '#components/ArticleView/ArticleDetail/Comment/CommentHeader';
 import CommentInput from '#components/ArticleView/ArticleDetail/Comment/CommentInput';
 import CommentList from './CommentList';
-import { useAppSelector } from '#hooks/useAppSelector';
 
 const CommentContainer = () => {
-  const { index } = useAppSelector((state) => state.articleViewReducer);
+  // 리덕스에서 가져오니까, 타이밍때문에 한타임 전의 인덱스로 api요청하고, 리덕스 값이 바뀜
+  /* eslint-disable no-console */
+  const location = useLocation();
+  const index = location.pathname.split('/')[2];
 
   return (
     <>
-      {index >= 0 && (
+      {index && (
         <>
           <CommentHeader />
           <CommentList index={index} />

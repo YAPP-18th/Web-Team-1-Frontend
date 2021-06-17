@@ -4,7 +4,7 @@ import { getCommentList } from '#apis/articleViewApi';
 /* eslint-disable no-console */
 
 interface Props {
-  index: number;
+  index: string;
 }
 
 export interface CommentType {
@@ -35,7 +35,7 @@ const CommentList = ({ index }: Props) => {
 
   return (
     <>
-      {list.length &&
+      {list.length > 0 &&
         list.map((comment) => <CommentItem key={comment.commentIdx} data={comment} />)}
     </>
   );
