@@ -36,6 +36,7 @@ export default function Header() {
     dispatch(userActions.clearProfile());
     setIsLogined(false);
     history.push('/');
+    dispatch(startAlert('정상적으로 로그아웃 되었습니다. 🙇🏻'));
   };
 
   // 로그인 버튼 클릭
