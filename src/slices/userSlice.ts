@@ -29,6 +29,13 @@ const { actions: userActions, reducer: userReducer } = createSlice({
       state.job = action.payload.job;
       state.intro = action.payload.intro;
     },
+    clearProfile: (state) => {
+      state.name = '';
+      state.nickname = '';
+      state.profile = '';
+      state.job = '';
+      state.intro = '';
+    },
   },
 });
 

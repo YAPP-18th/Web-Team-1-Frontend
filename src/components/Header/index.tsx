@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
+import { userActions } from 'slices/userSlice';
 import { useAppSelector } from '#hooks/useAppSelector';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
@@ -12,21 +13,27 @@ import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
 import ProfileModalContainer from '#containers/ProfileModalContainer';
 import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
+import { useAppDispatch } from '#hooks/useAppDispatch';
 
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
   const [isLogined, setIsLogined] = useState(false);
+  const history = useHistory();
+
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
   const { category } = useAppSelector((state) => state.articleEditorReducer);
   const userData = useAppSelector((state) => state.userReducer);
+  const dispatch = useAppDispatch();
 
   // 로그아웃 버튼 클릭
   const onClickLogout = () => {
     removeCookie('JWT-Refresh-Token');
     window.localStorage.removeItem('accessToken');
+    dispatch(userActions.clearProfile());
     setIsLogined(false);
+    history.push('/');
   };
 
   // 로그인 버튼 클릭
