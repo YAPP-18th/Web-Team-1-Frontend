@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import thumbnail from 'assets/images/thumbnail.png';
 import { useCookies } from 'react-cookie';
 import { useAppSelector } from '#hooks/useAppSelector';
 import { color } from '#styles/index';
@@ -14,11 +13,6 @@ import { LoginModal } from '#components/Organisms/Modal';
 import ProfileModalContainer from '#containers/ProfileModalContainer';
 import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
 
-// interface Props {
-//   icon: FunctionComponent;
-//   onClick: () => void;
-// }
-
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
@@ -26,6 +20,7 @@ export default function Header() {
   const [isLogined, setIsLogined] = useState(false);
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
   const { category } = useAppSelector((state) => state.articleEditorReducer);
+  const userData = useAppSelector((state) => state.userReducer);
 
   // 로그아웃 버튼 클릭
   const onClickLogout = () => {
@@ -70,21 +65,29 @@ export default function Header() {
             <HamburgerWrapper onClick={handleClickHamburger}>
               <Hamburger />
             </HamburgerWrapper>
-            {isShowedMenu && (
+            {isShowedMenu && userData.nickname && (
               <S.MenuWrapper>
                 <div className="profile">
-                  <img src={thumbnail} alt="썸네일" />
+                  <img src={userData.profile} alt="썸네일" />
                   <div className="content">
-                    <p>이름</p>
-                    <button type="button" onClick={onClickLogout}>
+                    <p>{userData.nickname}</p>
+                    <button type="button" className="logout" onClick={onClickLogout}>
                       로그아웃
                     </button>
                   </div>
                 </div>
-                <span>작성한 회고</span>
-                <span>작성 중인 회고</span>
-                <span>최근 읽은 회고</span>
-                <span>스크랩한 회고</span>
+                <button type="button" className="menu-item">
+                  작성한 회고
+                </button>
+                <button type="button" className="menu-item">
+                  작성 중인 회고
+                </button>
+                <button type="button" className="menu-item">
+                  최근 읽은 회고
+                </button>
+                <button type="button" className="menu-item">
+                  스크랩한 회고
+                </button>
 
                 <ProfileModalContainer />
               </S.MenuWrapper>

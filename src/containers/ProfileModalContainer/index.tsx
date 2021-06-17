@@ -60,7 +60,7 @@ const ProfileModalContainer = () => {
 
   return (
     <>
-      <button type="button" onClick={toggle}>
+      <button type="button" onClick={toggle} className="menu-item">
         프로필모달 임시 버튼
       </button>
       {modal && userData.name && (
