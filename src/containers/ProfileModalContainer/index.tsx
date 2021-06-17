@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { alertActions } from 'slices/alertSlice';
+import { startAlert } from 'slices/alertSlice';
 import { fetchProfile } from 'slices/userSlice';
 import ProfileModal, { Warning } from '#components/ProfileModal';
 import { useAppSelector } from '#hooks/useAppSelector';
@@ -68,12 +68,13 @@ const ProfileModalContainer = () => {
     }
     if (result) {
       dispatch(fetchProfile());
-      dispatch(
-        alertActions.setAlert({
-          isShow: true,
-          message: '프로필 설정이 완료되었습니다🥳',
-        }),
-      );
+      // dispatch(
+      //   alertActions.showAlert({
+      //     isFadeIn: true,
+      //     message: '프로필 설정이 완료되었습니다🥳',
+      //   }),
+      // );
+      dispatch(startAlert('프로필 설정이 완료되었습니다 🥳'));
       toggle();
     }
   };

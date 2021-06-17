@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { userActions } from 'slices/userSlice';
+import { startAlert } from 'slices/alertSlice';
 import { useAppSelector } from '#hooks/useAppSelector';
 import { color } from '#styles/index';
 import Button from '#components/Atoms/Button';
@@ -14,6 +15,7 @@ import { LoginModal } from '#components/Organisms/Modal';
 import ProfileModalContainer from '#containers/ProfileModalContainer';
 import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
 import { useAppDispatch } from '#hooks/useAppDispatch';
+/* eslint-disable no-console */
 
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
@@ -72,7 +74,8 @@ export default function Header() {
             <HamburgerWrapper onClick={handleClickHamburger}>
               <Hamburger />
             </HamburgerWrapper>
-            {isShowedMenu && userData.nickname && (
+            {/* {isShowedMenu && userData.nickname && ( */}
+            {isShowedMenu && (
               <S.MenuWrapper>
                 <div className="profile">
                   <img src={userData.profile} alt="썸네일" />
@@ -83,7 +86,13 @@ export default function Header() {
                     </button>
                   </div>
                 </div>
-                <button type="button" className="menu-item">
+                <button
+                  type="button"
+                  className="menu-item"
+                  onClick={() => {
+                    dispatch(startAlert('테스트다 🚀'));
+                  }}
+                >
                   작성한 회고
                 </button>
                 <button type="button" className="menu-item">
