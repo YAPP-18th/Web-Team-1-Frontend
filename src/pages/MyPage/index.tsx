@@ -5,6 +5,13 @@ import * as S from './style';
 import { useAppSelector } from '#hooks/useAppSelector';
 import Edit from './Edit';
 
+const job: { [key: string]: string } = {
+  marketing: '마케터 ✍🏻',
+  design: '디자이너 🎨',
+  plan: '기획자 💡',
+  develop: '개발자 💻',
+};
+
 const MyPage = () => {
   const history = useHistory();
 
@@ -28,7 +35,7 @@ const MyPage = () => {
                   <Edit />
                 </div>
               </div>
-              <h2>{userData.job}</h2>
+              <h2>{job[userData.job]}</h2>
               <p>{userData.intro}</p>
             </div>
           </S.ProfileWrapper>
