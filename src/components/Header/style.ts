@@ -33,10 +33,12 @@ export const MenuWrapper = styled.div`
     span {
       font-size: 14px;
     }
-    p {
+    button.nickname {
+      /* cursor: pointer; */
       font-weight: bold;
       margin-left: 9px;
       font-size: 16px;
+      display: block;
     }
 
     button.logout {
@@ -53,7 +55,8 @@ export const MenuWrapper = styled.div`
     color: #999999;
   }
   button.menu-item,
-  .logout {
+  .logout,
+  .nickname {
     background-color: transparent;
     border: none;
     text-align: left;

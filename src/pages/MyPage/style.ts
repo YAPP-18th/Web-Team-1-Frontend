@@ -4,6 +4,8 @@ export const ProfileWrapper = styled.div`
   display: flex;
   height: 240px;
   margin-bottom: 16px;
+  font-family: Apple SD Gothic Neo;
+  font-style: normal;
 
   img {
     width: 200px;
@@ -13,12 +15,34 @@ export const ProfileWrapper = styled.div`
   }
 
   .content {
-    width: 50%;
+    padding-top: 15px;
+    margin-left: 40px;
+    width: 45%;
+
+    .header {
+      display: flex;
+      align-items: baseline;
+      h1 {
+        margin-right: 11px;
+      }
+      .edit-btn {
+        cursor: pointer;
+      }
+    }
+
     h2 {
-      margin-bottom: 16px;
+      margin: 9px 0 16px;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 24px;
+      letter-spacing: -0.04em;
+      color: #acaba5;
     }
     p {
       color: #666666;
+      font-size: 18px;
+      line-height: 150%;
+      letter-spacing: -0.04em;
     }
   }
 `;

@@ -49,6 +49,10 @@ export default function Header() {
     setIsShowedMenu((prev) => !prev);
   }, []);
 
+  const handleClickNickname = useCallback(() => {
+    history.push('/me');
+  }, []);
+
   // access token 유무 체크
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -80,7 +84,9 @@ export default function Header() {
                 <div className="profile">
                   <img src={userData.profile} alt="썸네일" />
                   <div className="content">
-                    <p>{userData.nickname}</p>
+                    <button type="button" className="nickname" onClick={handleClickNickname}>
+                      {userData.nickname}
+                    </button>
                     <button type="button" className="logout" onClick={onClickLogout}>
                       로그아웃
                     </button>

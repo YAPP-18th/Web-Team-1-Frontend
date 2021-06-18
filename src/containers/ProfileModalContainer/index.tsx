@@ -8,7 +8,6 @@ import { useAppDispatch } from '#hooks/useAppDispatch';
 
 const ProfileModalContainer = () => {
   const dispatch = useAppDispatch();
-
   const userData = useAppSelector((state) => state.userReducer);
   const [user, setUser] = useState(userData);
   const [image, setImage] = useState<null | File>(null);
