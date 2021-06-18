@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import CardsContainer from '#containers/CardsContainer';
 import * as S from './style';
 import { useAppSelector } from '#hooks/useAppSelector';
 import Edit from './Edit';
+import ProfileModalContainer from '#containers/ProfileModalContainer';
 
 const job: { [key: string]: string } = {
   marketing: '마케터 ✍🏻',
@@ -14,7 +15,8 @@ const job: { [key: string]: string } = {
 
 const MyPage = () => {
   const history = useHistory();
-
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
   const handleClickCard = (postIdx: number) => {
     const url = `/articleDetail/${postIdx}`;
     history.push(url);
@@ -31,11 +33,12 @@ const MyPage = () => {
             <div className="content">
               <div className="header">
                 <h1>{userData.nickname}</h1>
-                <div className="edit-btn">
+                <button onClick={toggle} type="button" className="edit-btn">
                   <Edit />
-                </div>
+                </button>
+                {modal && <ProfileModalContainer modal={modal} setModal={setModal} />}
               </div>
-              <h2>{job[userData.job]}</h2>
+              <h2 className="job">{job[userData.job]}</h2>
               <p>{userData.intro}</p>
             </div>
           </S.ProfileWrapper>

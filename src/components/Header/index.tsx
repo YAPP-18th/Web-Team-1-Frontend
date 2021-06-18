@@ -22,6 +22,8 @@ export default function Header() {
   const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
   const [isLogined, setIsLogined] = useState(false);
+  const [isShowProfileModal, setIsShowProfileModal] = useState(false);
+  const profileModalToggle = () => setIsShowProfileModal(!isShowProfileModal);
   const history = useHistory();
 
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
@@ -110,8 +112,16 @@ export default function Header() {
                 <button type="button" className="menu-item">
                   스크랩한 회고
                 </button>
+                <button type="button" onClick={profileModalToggle} className="menu-item">
+                  프로필모달 임시 버튼
+                </button>
 
-                <ProfileModalContainer />
+                {isShowProfileModal && (
+                  <ProfileModalContainer
+                    modal={isShowProfileModal}
+                    setModal={setIsShowProfileModal}
+                  />
+                )}
               </S.MenuWrapper>
             )}
           </S.LoginAfter>

@@ -27,10 +27,12 @@ export const ProfileWrapper = styled.div`
       }
       .edit-btn {
         cursor: pointer;
+        background-color: transparent;
+        border: none;
       }
     }
 
-    h2 {
+    h2.job {
       margin: 9px 0 16px;
       font-weight: 600;
       font-size: 24px;
