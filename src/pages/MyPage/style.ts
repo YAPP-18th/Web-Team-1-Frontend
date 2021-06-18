@@ -8,8 +8,8 @@ export const ProfileWrapper = styled.div`
   font-style: normal;
 
   img {
-    width: 200px;
-    height: 200px;
+    width: 165px;
+    height: 165px;
     margin-right: 16px;
     border-radius: 50%;
   }
@@ -23,7 +23,7 @@ export const ProfileWrapper = styled.div`
       display: flex;
       align-items: baseline;
       h1 {
-        margin-right: 11px;
+        margin: 0 11px 9px 0;
       }
       .edit-btn {
         cursor: pointer;
@@ -33,7 +33,7 @@ export const ProfileWrapper = styled.div`
     }
 
     h2.job {
-      margin: 9px 0 16px;
+      margin: 9px 0 24px;
       font-weight: 600;
       font-size: 24px;
       line-height: 24px;

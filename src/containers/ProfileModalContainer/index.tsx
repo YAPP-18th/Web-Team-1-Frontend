@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { startAlert } from 'slices/alertSlice';
 import { fetchProfile } from 'slices/userSlice';
-import ProfileModal, { Warning } from '#components/ProfileModal';
+import ProfileModal, { Warning } from '#components/Profile/ProfileModal';
 import { useAppSelector } from '#hooks/useAppSelector';
 import { checkDuplicatedNickname, updateMyProfile, uploadProfileImage } from '#apis/myPage';
 import { useAppDispatch } from '#hooks/useAppDispatch';
