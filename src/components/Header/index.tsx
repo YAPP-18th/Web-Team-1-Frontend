@@ -12,7 +12,6 @@ import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
-import ProfileModalContainer from '#containers/ProfileModalContainer';
 import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 /* eslint-disable no-console */
@@ -22,8 +21,6 @@ export default function Header() {
   const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
   const [isLogined, setIsLogined] = useState(false);
-  const [isShowProfileModal, setIsShowProfileModal] = useState(false);
-  const profileModalToggle = () => setIsShowProfileModal(!isShowProfileModal);
   const history = useHistory();
 
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
@@ -112,16 +109,6 @@ export default function Header() {
                 <button type="button" className="menu-item">
                   스크랩한 회고
                 </button>
-                <button type="button" onClick={profileModalToggle} className="menu-item">
-                  프로필모달 임시 버튼
-                </button>
-
-                {isShowProfileModal && (
-                  <ProfileModalContainer
-                    modal={isShowProfileModal}
-                    setModal={setIsShowProfileModal}
-                  />
-                )}
               </S.MenuWrapper>
             )}
           </S.LoginAfter>
