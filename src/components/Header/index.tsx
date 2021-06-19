@@ -22,6 +22,8 @@ export default function Header() {
   const [isShowedMenu, setIsShowedMenu] = useState(false);
   const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
   const [isLogined, setIsLogined] = useState(false);
+  const [isShowProfileModal, setIsShowProfileModal] = useState(false);
+  const profileModalToggle = () => setIsShowProfileModal(!isShowProfileModal);
   const history = useHistory();
 
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
@@ -47,6 +49,10 @@ export default function Header() {
   // 햄버거 아이콘 클릭
   const handleClickHamburger = useCallback(() => {
     setIsShowedMenu((prev) => !prev);
+  }, []);
+
+  const handleClickNickname = useCallback(() => {
+    history.push('/me');
   }, []);
 
   // access token 유무 체크
@@ -80,7 +86,9 @@ export default function Header() {
                 <div className="profile">
                   <img src={userData.profile} alt="썸네일" />
                   <div className="content">
-                    <p>{userData.nickname}</p>
+                    <button type="button" className="nickname" onClick={handleClickNickname}>
+                      {userData.nickname}
+                    </button>
                     <button type="button" className="logout" onClick={onClickLogout}>
                       로그아웃
                     </button>
@@ -104,8 +112,16 @@ export default function Header() {
                 <button type="button" className="menu-item">
                   스크랩한 회고
                 </button>
+                <button type="button" onClick={profileModalToggle} className="menu-item">
+                  프로필모달 임시 버튼
+                </button>
 
-                <ProfileModalContainer />
+                {isShowProfileModal && (
+                  <ProfileModalContainer
+                    modal={isShowProfileModal}
+                    setModal={setIsShowProfileModal}
+                  />
+                )}
               </S.MenuWrapper>
             )}
           </S.LoginAfter>

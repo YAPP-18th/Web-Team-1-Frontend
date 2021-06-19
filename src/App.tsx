@@ -12,6 +12,7 @@ import ViewPage from '#pages/ViewPage';
 import ArticleDetailPage from '#pages/ArticleDetailPage';
 import ArticleCreatePage from '#pages/ArticleCreatePage';
 import ArticleUpdatePage from '#pages/ArticleUpdatePage';
+import MyPage from '#pages/MyPage';
 
 import Alert from '#components/Alert';
 import { useAppDispatch } from '#hooks/useAppDispatch';
@@ -38,7 +39,7 @@ const App = () => {
         <Route exact path="/articleDetail/:id" component={ArticleDetailPage} />
         <Route exact path="/articleCreate" component={ArticleCreatePage} />
         <Route exact path="/articleUpdate" component={ArticleUpdatePage} />
-        {/* <Route exact path="/me" component={MyPage} /> */}
+        <Route exact path="/me" component={MyPage} />
         <Route component={NotFound} />
       </Switch>
     </>
