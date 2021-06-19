@@ -12,6 +12,7 @@ export const ProfileWrapper = styled.div`
     height: 165px;
     margin-right: 16px;
     border-radius: 50%;
+    object-fit: cover;
   }
 
   .content {

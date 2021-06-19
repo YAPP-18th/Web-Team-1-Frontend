@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { AppThunk } from './index';
-import { getMyProfile } from '#apis/myPage';
+import { getMyProfile } from '#apis/userApi';
 
 interface UserState {
   name: string;

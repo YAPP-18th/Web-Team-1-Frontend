@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router';
-// import CardsContainer from '#containers/CardsContainer';
 import * as S from './style';
 import { useAppSelector } from '#hooks/useAppSelector';
 import Edit from './Edit';
@@ -15,14 +13,8 @@ const job: { [key: string]: string } = {
 };
 
 const MyPage = () => {
-  // const history = useHistory();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  // const handleClickCard = (postIdx: number) => {
-  //   const url = `/articleDetail/${postIdx}`;
-  //   history.push(url);
-  // };
-
   const userData = useAppSelector((state) => state.userReducer);
 
   return (
@@ -44,13 +36,6 @@ const MyPage = () => {
             </div>
           </S.ProfileWrapper>
           <ProfileTab />
-          {/* <S.Tabs>
-            <span className="bold">작성한 회고 0</span>
-            <span>작성 중인 회고 0</span>
-            <span>최근 읽은 회고 0</span>
-            <span>스크랩한 회고 0</span>
-          </S.Tabs>
-          <CardsContainer onClickCard={handleClickCard} /> */}
         </>
       )}
     </div>

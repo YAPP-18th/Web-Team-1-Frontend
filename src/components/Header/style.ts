@@ -28,6 +28,7 @@ export const MenuWrapper = styled.div`
       height: 56px;
       margin-right: 8px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     span {

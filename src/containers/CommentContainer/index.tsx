@@ -32,7 +32,7 @@ const CommentContainer = () => {
 
   const callCommentCountApi = useCallback(async () => {
     const result = await getCommentCount(index);
-    if (result) {
+    if (result !== null && result !== undefined) {
       setCommentCount(result);
     }
   }, []);

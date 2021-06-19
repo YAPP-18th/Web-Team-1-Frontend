@@ -15,6 +15,7 @@ const Box = styled.div`
 const ImageBox = styled(Box)<ImageProps>`
   background-image: url(${(props) => props.src});
   background-size: cover;
+  background-position: center;
 `;
 
 interface Props {

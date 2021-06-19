@@ -1,10 +1,37 @@
 // import { AxiosResponse } from 'axios';
 import { UserState } from 'slices/userSlice';
 import { tokenInstance, instance } from '#apis/common';
+import { Card } from '#components/Cards';
 /* eslint-disable no-console */
 
-export const getLists = () => {
-  return tokenInstance.get('/lists');
+export const getMyLists = async (): Promise<Card[] | null> => {
+  try {
+    const res = await tokenInstance.get(`/lists`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getRecentlyViewedLists = async (): Promise<Card[] | null> => {
+  try {
+    const res = await tokenInstance.get(`/lists/recent`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getLikedList = async (): Promise<Card[] | null> => {
+  try {
+    const res = await tokenInstance.get(`/likes/lists?page=0&pageSize=${20}`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
 
 export const getProfile = async (index: string): Promise<UserState | null> => {

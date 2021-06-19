@@ -3,7 +3,7 @@ import { startAlert } from 'slices/alertSlice';
 import { fetchProfile } from 'slices/userSlice';
 import ProfileModal, { Warning } from '#components/Profile/ProfileModal';
 import { useAppSelector } from '#hooks/useAppSelector';
-import { checkDuplicatedNickname, updateMyProfile, uploadProfileImage } from '#apis/myPage';
+import { checkDuplicatedNickname, updateMyProfile, uploadProfileImage } from '#apis/userApi';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 
 interface Props {
