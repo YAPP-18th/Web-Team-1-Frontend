@@ -20,7 +20,7 @@ const StyledAlert = styled.div<Props>`
   width: fit-content;
   margin: auto;
   text-align: center;
-  position: absolute;
+  position: fixed;
   top: 5%;
   left: 50%;
   z-index: ${zIndex.modal};
