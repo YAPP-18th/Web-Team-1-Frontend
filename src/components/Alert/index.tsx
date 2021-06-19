@@ -61,10 +61,10 @@ const Alert = () => {
 
   const toggle = () => {
     dispatch(alertActions.clearAlert());
-    if (timer1) {
+    if (timer1 !== undefined && typeof timer1 !== 'number') {
       clearTimeout(timer1);
     }
-    if (timer2) {
+    if (timer2 !== undefined && typeof timer2 !== 'number') {
       clearTimeout(timer2);
     }
   };
