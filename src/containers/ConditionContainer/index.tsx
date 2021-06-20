@@ -16,11 +16,14 @@ export default function ConditionContainer() {
     dispatch(fetchPostsWithCategory());
   };
 
-  const checkedState = useAppSelector((state) => state.conditionReducer.categories);
+  const { categoryCheckedState } = useAppSelector((state) => state.conditionReducer);
 
   return (
     <Conditions>
-      <Categories handleChangeCategory={handleChangeCategory} checkedState={checkedState} />
+      <Categories
+        handleChangeCategory={handleChangeCategory}
+        categoryCheckedState={categoryCheckedState}
+      />
       <SearchForm handleClickSearch={handleClickSearch} />
     </Conditions>
   );

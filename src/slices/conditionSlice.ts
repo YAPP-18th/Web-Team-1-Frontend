@@ -15,14 +15,14 @@ const initialCheckedState = {
 const { actions, reducer: conditionReducer } = createSlice({
   name: 'condition',
   initialState: {
-    categories: initialCheckedState,
+    categoryCheckedState: initialCheckedState,
   },
   reducers: {
     setCategories(state, { payload: { id, checked } }) {
       if (id === 'total') {
         return {
           ...state,
-          categories: {
+          categoryCheckedState: {
             ...initialCheckedState,
           },
         };
@@ -30,8 +30,8 @@ const { actions, reducer: conditionReducer } = createSlice({
 
       return {
         ...state,
-        categories: {
-          ...state.categories,
+        categoryCheckedState: {
+          ...state.categoryCheckedState,
           total: false,
           [id]: checked,
         },
@@ -45,8 +45,8 @@ export default conditionReducer;
 
 export function fetchPostsWithCategory(): AppThunk {
   return async (dispatch, getState) => {
-    const { categories } = getState().conditionReducer;
-    const query = getQuery(categories);
+    const { categoryCheckedState } = getState().conditionReducer;
+    const query = getQuery(categoryCheckedState);
     const cards = await fetchPostsWith({ query });
     dispatch(setCards(cards));
   };

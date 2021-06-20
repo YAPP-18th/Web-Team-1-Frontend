@@ -9,6 +9,6 @@ export default {
 } as Meta;
 
 const CategoriesTemplate: Story<Props> = () => {
-  return <Categories handleChangeCategory={action('onClick')} checkedState={{}} />;
+  return <Categories handleChangeCategory={action('onClick')} categoryCheckedState={{}} />;
 };
 export const BasicCategories = CategoriesTemplate.bind({});

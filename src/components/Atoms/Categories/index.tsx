@@ -4,13 +4,13 @@ import { IconPaths, IconWrapper } from '#components/Atoms';
 
 export interface Props {
   handleChangeCategory: ({ id, checked }: { id: string; checked: boolean }) => void;
-  checkedState: {
+  categoryCheckedState: {
     [key: string]: boolean;
   };
 }
 
-export default function Categories({ handleChangeCategory, checkedState }: Props) {
-  const mapper = [
+export default function Categories({ handleChangeCategory, categoryCheckedState }: Props) {
+  const categories = [
     { text: '전체', value: 'total', icon: IconPaths.Glitter },
     { text: '마케팅', value: 'marketing', icon: IconPaths.Writing },
     { text: '디자인', value: 'design', icon: IconPaths.Palette },
@@ -29,14 +29,14 @@ export default function Categories({ handleChangeCategory, checkedState }: Props
 
   return (
     <S.Categories>
-      {mapper.map(({ text, value, icon }) => (
+      {categories.map(({ text, value, icon }) => (
         <S.Category key={text}>
           <S.Input
             type="checkbox"
             id={value}
             name="category-checkbox-group"
             onChange={onChangeCategory()}
-            checked={checkedState[value]}
+            checked={categoryCheckedState[value]}
           />
           <S.Label htmlFor={value}>
             {text}
