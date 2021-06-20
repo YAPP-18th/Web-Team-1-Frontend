@@ -25,3 +25,14 @@ export const fetchCardList = async (): Promise<Card[]> => {
     throw new Error(error);
   }
 };
+
+export const fetchPostsWith = async ({ query }: { query: string }): Promise<Card[]> => {
+  const url = `/posts/search?page=0&pageSize=8&query=${query}&type=category`;
+
+  try {
+    const { data } = await instance.get(url);
+    return data.data.result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
