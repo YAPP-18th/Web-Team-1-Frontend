@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const { reducer: conditionReducer } = createSlice({
+const { actions, reducer: conditionReducer } = createSlice({
   name: 'condition',
   initialState: {
     categories: {
@@ -11,7 +11,18 @@ const { reducer: conditionReducer } = createSlice({
       develop: false,
     },
   },
-  reducers: {},
+  reducers: {
+    setCategories(state, { payload: { category, checked } }) {
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          [category]: checked,
+        },
+      };
+    },
+  },
 });
 
+export const { setCategories } = actions;
 export default conditionReducer;
