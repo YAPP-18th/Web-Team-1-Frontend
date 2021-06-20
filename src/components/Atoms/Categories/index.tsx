@@ -3,11 +3,14 @@ import * as S from './style';
 import { IconPaths, IconWrapper } from '#components/Atoms';
 
 export interface Props {
-  handleClickCategory: ({ id, checked }: { id: string; checked: boolean }) => void;
+  handleChangeCategory: ({ id, checked }: { id: string; checked: boolean }) => void;
+  checkedState: {
+    [key: string]: boolean;
+  };
 }
 
-export default function Categories({ handleClickCategory }: Props) {
-  const categories = [
+export default function Categories({ handleChangeCategory, checkedState }: Props) {
+  const mapper = [
     { text: '전체', value: 'total', icon: IconPaths.Glitter },
     { text: '마케팅', value: 'marketing', icon: IconPaths.Writing },
     { text: '디자인', value: 'design', icon: IconPaths.Palette },
@@ -15,24 +18,25 @@ export default function Categories({ handleClickCategory }: Props) {
     { text: '개발', value: 'develop', icon: IconPaths.Laptop },
   ];
 
-  const onClickCategory = () => {
-    return (event: React.MouseEvent<HTMLInputElement>) => {
+  const onChangeCategory = () => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
       const {
         currentTarget: { id, checked },
       } = event;
-      handleClickCategory({ id, checked });
+      handleChangeCategory({ id, checked });
     };
   };
 
   return (
     <S.Categories>
-      {categories.map(({ text, value, icon }) => (
+      {mapper.map(({ text, value, icon }) => (
         <S.Category key={text}>
           <S.Input
             type="checkbox"
             id={value}
             name="category-checkbox-group"
-            onClick={onClickCategory()}
+            onChange={onChangeCategory()}
+            checked={checkedState[value]}
           />
           <S.Label htmlFor={value}>
             {text}
