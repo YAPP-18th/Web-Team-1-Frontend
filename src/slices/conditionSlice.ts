@@ -12,12 +12,12 @@ const { actions, reducer: conditionReducer } = createSlice({
     },
   },
   reducers: {
-    setCategories(state, { payload: { category, checked } }) {
+    setCategories(state, { payload: { id, checked } }) {
       return {
         ...state,
         categories: {
           ...state.categories,
-          [category]: checked,
+          [id]: checked,
         },
       };
     },
