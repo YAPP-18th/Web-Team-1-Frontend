@@ -15,7 +15,7 @@ export default function Categories() {
     <S.Categories>
       {categories.map(({ text, value, icon }) => (
         <S.Category key={text}>
-          <S.Input type="radio" id={value} name="category-radio-group" />
+          <S.Input type="checkbox" id={value} name="category-checkbox-group" />
           <S.Label htmlFor={value} backgroundColor={S.backgroundColors[text]}>
             {text}
             <IconWrapper icon={icon} />
