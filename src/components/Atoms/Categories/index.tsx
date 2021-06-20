@@ -34,7 +34,7 @@ export default function Categories({ handleClickCategory }: Props) {
             name="category-checkbox-group"
             onClick={onClickCategory()}
           />
-          <S.Label htmlFor={value} backgroundColor={S.backgroundColors[text]}>
+          <S.Label htmlFor={value}>
             {text}
             <IconWrapper icon={icon} />
           </S.Label>

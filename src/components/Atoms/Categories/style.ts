@@ -10,11 +10,11 @@ export interface Props {
 }
 
 export const backgroundColors: CategoryColorType = {
-  전체: '#6E8551',
-  마케팅: '#D56D5D',
-  디자인: '#6A84E1',
-  기획: '#8F7CDA',
-  개발: '#F4BB4A',
+  total: '#6E8551',
+  marketing: '#D56D5D',
+  design: '#6A84E1',
+  plan: '#8F7CDA',
+  develop: '#F4BB4A',
 };
 
 export const Categories = styled.div`
@@ -27,7 +27,7 @@ export const Category = styled.div`
   }
 `;
 
-export const Label = styled.label<Props>`
+export const Label = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,7 @@ export const Label = styled.label<Props>`
   padding: 12px 16px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: #acaba5;
   border: 1px solid #ffffff;
   color: #fefefe;
   font-family: Apple SD Gothic Neo;
@@ -48,9 +48,9 @@ export const Label = styled.label<Props>`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ id: string }>`
   display: none;
   &:checked + ${Label} {
-    background-color: #acaba5;
+    background-color: ${(props) => backgroundColors[props.id]}};
   }
 `;
