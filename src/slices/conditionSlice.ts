@@ -1,8 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AppThunk } from 'slices';
-import { fetchPostsWith } from '#apis/fetchCardList';
-import { setCards } from './cardsSlice';
-import { getQuery } from '../utils';
 
 const initialCheckedState = {
   total: true,
@@ -42,12 +38,3 @@ const { actions, reducer: conditionReducer } = createSlice({
 
 export const { setCategories } = actions;
 export default conditionReducer;
-
-export function fetchPostsWithCategory(): AppThunk {
-  return async (dispatch, getState) => {
-    const { categoryCheckedState } = getState().conditionReducer;
-    const query = getQuery(categoryCheckedState);
-    const cards = await fetchPostsWith({ query });
-    dispatch(setCards(cards));
-  };
-}

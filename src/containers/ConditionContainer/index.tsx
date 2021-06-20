@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fetchCards } from 'slices/cardsSlice';
 import { Categories, SearchForm } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 import { useAppSelector } from '#hooks/useAppSelector';
 
-import { fetchPostsWithCategory, setCategories } from '../../slices/conditionSlice';
+import { setCategories } from '../../slices/conditionSlice';
 
 export default function ConditionContainer() {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ export default function ConditionContainer() {
   };
 
   const handleClickSearch = () => {
-    dispatch(fetchPostsWithCategory());
+    dispatch(fetchCards());
   };
 
   const { categoryCheckedState } = useAppSelector((state) => state.conditionReducer);

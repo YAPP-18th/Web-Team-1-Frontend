@@ -15,19 +15,13 @@ interface Card {
 }
 
 // const baseUrl = 'http://ec2-15-165-67-119.ap-northeast-2.compute.amazonaws.com/api/v1';
-export const fetchCardList = async (): Promise<Card[]> => {
-  const url = '/posts/lists?page=0&pageSize=20';
-
-  try {
-    const { data } = await instance.get(url);
-    return data.data.result;
-  } catch (error) {
-    throw new Error(error);
+export const fetchCardList = async ({ query }: { query: string }): Promise<Card[]> => {
+  let url;
+  if (query === 'total') {
+    url = '/posts/lists?page=0&pageSize=20';
+  } else {
+    url = `/posts/search?page=0&pageSize=8&query=${query}&type=category`;
   }
-};
-
-export const fetchPostsWith = async ({ query }: { query: string }): Promise<Card[]> => {
-  const url = `/posts/search?page=0&pageSize=8&query=${query}&type=category`;
 
   try {
     const { data } = await instance.get(url);
