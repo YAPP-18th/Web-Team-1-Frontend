@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Categories, SearchForm } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
-import { setCategories } from '../../slices/conditionSlice';
+import { fetchPostsWithCategory, setCategories } from '../../slices/conditionSlice';
 
 export default function ConditionContainer() {
   const dispatch = useAppDispatch();
@@ -10,10 +10,14 @@ export default function ConditionContainer() {
     dispatch(setCategories({ id, checked }));
   };
 
+  const handleClickSearch = () => {
+    dispatch(fetchPostsWithCategory());
+  };
+
   return (
     <Conditions>
       <Categories handleClickCategory={handleClickCategory} />
-      <SearchForm />
+      <SearchForm handleClickSearch={handleClickSearch} />
     </Conditions>
   );
 }
