@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Categories, SearchForm } from '#components/Atoms';
+import { useAppDispatch } from '#hooks/useAppDispatch';
+import { setCategories } from '../../slices/conditionSlice';
 
 export default function ConditionContainer() {
+  const dispatch = useAppDispatch();
+  const handleClickCategory = ({ id, checked }: { id: string; checked: boolean }) => {
+    dispatch(setCategories({ id, checked }));
+  };
+
   return (
     <Conditions>
-      <Categories />
+      <Categories handleClickCategory={handleClickCategory} />
       <SearchForm />
     </Conditions>
   );
