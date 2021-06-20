@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 
-export default function SearchForm() {
+export interface Props {
+  handleClickSearch: () => void;
+}
+
+export default function SearchForm({ handleClickSearch }: Props) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState({
     isOpen: false,
@@ -66,7 +70,7 @@ export default function SearchForm() {
           onChange={handleChange}
           value={text}
         />
-        <IconWrapper icon={IconPaths.Search} />
+        <IconWrapper icon={IconPaths.Search} onClick={handleClickSearch} />
       </S.SearchField>
     </S.SearchBox>
   );

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCardList } from '#apis/fetchCardList';
+import { getQuery } from '../utils';
 
 import type { AppThunk } from './index';
 
@@ -23,8 +24,10 @@ export const { setCards } = actions;
 export default cardsReducer;
 
 export function fetchCards(): AppThunk {
-  return async (dispatch) => {
-    const cards = await fetchCardList();
+  return async (dispatch, getState) => {
+    const { categoryCheckedState } = getState().conditionReducer;
+    const query = getQuery(categoryCheckedState);
+    const cards = await fetchCardList({ query });
     dispatch(setCards(cards));
   };
 }
