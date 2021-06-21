@@ -38,7 +38,24 @@ const ProfileModalContainer = ({ modal, setModal }: Props) => {
   };
 
   const onClick = async () => {
-    // 닉네임 중복처리부터
+    // 필수값 validation
+    if (!user.nickname) {
+      setWarning({
+        isWarning: true,
+        warningMessage: '닉네임을 입력하세요',
+      });
+      return;
+    }
+
+    if (!user.job) {
+      setWarning({
+        isWarning: true,
+        warningMessage: '포지션을 선택하세요',
+      });
+      return;
+    }
+
+    // 닉네임 중복처리
     if (userData.nickname !== user.nickname) {
       const isDuplicated = await checkDuplicatedNickname(user.nickname);
       if (isDuplicated) {
@@ -54,6 +71,7 @@ const ProfileModalContainer = ({ modal, setModal }: Props) => {
       isWarning: false,
       warningMessage: '',
     });
+
     let imageUrl;
     let result;
     if (image) {
