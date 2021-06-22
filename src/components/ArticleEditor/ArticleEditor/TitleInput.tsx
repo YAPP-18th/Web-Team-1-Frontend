@@ -20,9 +20,7 @@ const StyledTitleInput = styled.div`
     font-size: 56px;
     line-height: 56px;
     letter-spacing: -0.04em;
-    /* margin-bottom: 64px; */
-    padding-left: 30px;
-    padding-top: 30px;
+    padding-left: 25px;
   }
 
   & .title-input:focus {
