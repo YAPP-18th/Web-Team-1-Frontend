@@ -114,6 +114,7 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         inject: 'body',
         template: path.join(__dirname, 'public', '/index.html'),
+        favicon: path.join(__dirname, 'public', '/favicon.png'),
       }),
       new CleanWebpackPlugin(),
       // new FaviconsWebpackPlugin({
