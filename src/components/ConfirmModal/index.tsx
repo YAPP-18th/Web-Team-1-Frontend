@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import zIndex from '#styles/zIndex';
 
@@ -7,7 +7,7 @@ interface Props {
   body: string;
   btnMsg: string;
   toggle: () => void;
-  callApi: () => void;
+  callApi: () => Promise<void>;
 }
 
 const StyledModalContainer = styled.div`
@@ -74,6 +74,10 @@ const FooterBtn = styled.button`
   letter-spacing: -0.04em;
   cursor: pointer;
   color: #666666;
+
+  &:disabled {
+    color: #cccccc;
+  }
 `;
 
 const ColorBtn = styled(FooterBtn)`
@@ -81,6 +85,13 @@ const ColorBtn = styled(FooterBtn)`
 `;
 
 const ConfirmModal = ({ header, body, btnMsg, toggle, callApi }: Props) => {
+  const [blocking, setBlocking] = useState(false);
+
+  const handleClick = async () => {
+    setBlocking(true);
+    await callApi();
+  };
+
   return (
     <StyledModalContainer>
       <StyledModal>
@@ -88,7 +99,9 @@ const ConfirmModal = ({ header, body, btnMsg, toggle, callApi }: Props) => {
         <ModalBody>{body}</ModalBody>
         <ModalFooter>
           <FooterBtn onClick={toggle}>취소</FooterBtn>
-          <ColorBtn onClick={callApi}>{btnMsg}</ColorBtn>
+          <ColorBtn onClick={handleClick} disabled={blocking}>
+            {btnMsg}
+          </ColorBtn>
         </ModalFooter>
       </StyledModal>
     </StyledModalContainer>

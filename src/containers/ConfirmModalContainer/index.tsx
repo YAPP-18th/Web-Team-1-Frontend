@@ -3,7 +3,7 @@ import ConfirmModal from '#components/ConfirmModal';
 
 interface Props {
   type: string;
-  callApi: () => void;
+  callApi: () => Promise<void>;
   toggle: () => void;
 }
 
