@@ -5,13 +5,16 @@ import { CommentType } from '.';
 
 interface Props {
   commentList: CommentType[];
+  deleteApi: (commentIndex: number) => Promise<void>;
 }
 
-const CommentList = ({ commentList }: Props) => {
+const CommentList = ({ commentList, deleteApi }: Props) => {
   return (
     <>
       {commentList.length > 0 &&
-        commentList.map((comment) => <CommentItem key={comment.commentIdx} data={comment} />)}
+        commentList.map((comment) => (
+          <CommentItem key={comment.commentIdx} data={comment} deleteApi={deleteApi} />
+        ))}
     </>
   );
 };

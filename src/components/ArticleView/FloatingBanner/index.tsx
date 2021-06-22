@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { startAlert } from 'slices/alertSlice';
 import BannerItem from './BannerItem';
 import Scrap from './svg/Scrap';
 import Share from './svg/Share';
@@ -8,6 +9,7 @@ import ShareOption from './ShareOption';
 // import Shortcut from './Shortcut';
 import { cancelScrapArticle, scrapArticle } from '#apis/articleViewApi';
 import { useAppSelector } from '#hooks/useAppSelector';
+import { useAppDispatch } from '#hooks/useAppDispatch';
 
 const StyledFloatingBanner = styled.div`
   display: flex;
@@ -29,6 +31,7 @@ const FloatingBanner = ({ scrap }: Props) => {
   // scrap 여부, 토글에 따른 동작 분기
 
   const { index } = useAppSelector((state) => state.articleViewReducer);
+  const dispatch = useAppDispatch();
   const [isScrap, setIsScrap] = useState(scrap);
 
   let isRunning = false;
@@ -41,11 +44,13 @@ const FloatingBanner = ({ scrap }: Props) => {
       isRunning = true;
       await cancelScrapArticle(index);
       setIsScrap(!isScrap);
+      dispatch(startAlert('스크랩을 취소했어요! 🥲'));
     } else {
       // 스크랩 하기
       isRunning = true;
       await scrapArticle(index);
       setIsScrap(!isScrap);
+      dispatch(startAlert('스크랩을 완료했어요! 😎'));
     }
   };
 

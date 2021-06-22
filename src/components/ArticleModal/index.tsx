@@ -61,14 +61,13 @@ const CloseBtn = styled.button`
 `;
 
 const ModalHeader = styled.h2`
-  margin-bottom: 40px;
-  width: 111px;
+  margin-bottom: 20px;
   height: 50px;
 
   font-family: Apple SD Gothic Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 33px;
   line-height: 125%;
 
   letter-spacing: -0.03em;

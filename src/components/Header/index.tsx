@@ -12,7 +12,6 @@ import { IconPaths, IconWrapper } from '#components/Atoms';
 import * as S from './style';
 import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { LoginModal } from '#components/Organisms/Modal';
-import ProfileModalContainer from '#containers/ProfileModalContainer';
 import Hamburger from '#components/Atoms/Icon/SVG/Hamburger';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 /* eslint-disable no-console */
@@ -36,6 +35,7 @@ export default function Header() {
     dispatch(userActions.clearProfile());
     setIsLogined(false);
     history.push('/');
+    dispatch(startAlert('정상적으로 로그아웃 되었습니다. 🙇🏻'));
   };
 
   // 로그인 버튼 클릭
@@ -46,6 +46,10 @@ export default function Header() {
   // 햄버거 아이콘 클릭
   const handleClickHamburger = useCallback(() => {
     setIsShowedMenu((prev) => !prev);
+  }, []);
+
+  const handleClickNickname = useCallback(() => {
+    history.push('/me');
   }, []);
 
   // access token 유무 체크
@@ -79,7 +83,9 @@ export default function Header() {
                 <div className="profile">
                   <img src={userData.profile} alt="썸네일" />
                   <div className="content">
-                    <p>{userData.nickname}</p>
+                    <button type="button" className="nickname" onClick={handleClickNickname}>
+                      {userData.nickname}
+                    </button>
                     <button type="button" className="logout" onClick={onClickLogout}>
                       로그아웃
                     </button>
@@ -103,8 +109,6 @@ export default function Header() {
                 <button type="button" className="menu-item">
                   스크랩한 회고
                 </button>
-
-                <ProfileModalContainer />
               </S.MenuWrapper>
             )}
           </S.LoginAfter>

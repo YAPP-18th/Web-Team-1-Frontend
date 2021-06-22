@@ -118,6 +118,22 @@ export const getCommentList = async (
   }
 };
 
+export const getCommentListWithToken = async (
+  index: string,
+  page: number,
+  pageSize: number,
+): Promise<AxiosResponse | null> => {
+  try {
+    const res = await tokenInstance.get(
+      `/comments/lists?page=${page}&pageSize=${pageSize}&postIdx=${index}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 export const getCommentCount = async (index: string): Promise<number | null> => {
   try {
     const res = await instance.get(`/comments/lists/count?postIdx=${index}`);

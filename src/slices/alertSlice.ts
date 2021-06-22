@@ -2,20 +2,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { AppThunk } from './index';
 
 interface AlertTotalState {
-  timer1: NodeJS.Timeout | undefined;
-  timer2: NodeJS.Timeout | undefined;
+  timer1: NodeJS.Timeout | undefined | number;
+  timer2: NodeJS.Timeout | undefined | number;
   isFadeIn: boolean;
   isFadeOut: boolean;
   message: string;
 }
 
-interface AlertState {
-  isFadeIn: boolean;
+interface AlertMessage {
+  // isFadeIn: boolean;
   message: string;
 }
 interface Timer {
-  timer1: NodeJS.Timeout | undefined;
-  timer2: NodeJS.Timeout | undefined;
+  timer1: NodeJS.Timeout | undefined | number;
+  timer2: NodeJS.Timeout | undefined | number;
 }
 const initialState: AlertTotalState = {
   timer1: undefined,
@@ -31,8 +31,9 @@ const { actions: alertActions, reducer: alertReducer } = createSlice({
 
   /* eslint-disable no-param-reassign */
   reducers: {
-    showAlert: (state, action: PayloadAction<AlertState>) => {
-      state.isFadeIn = action.payload.isFadeIn;
+    showAlert: (state, action: PayloadAction<AlertMessage>) => {
+      state.isFadeIn = true;
+      state.isFadeOut = false;
       state.message = action.payload.message;
     },
     setTimer: (state, action: PayloadAction<Timer>) => {
@@ -49,16 +50,28 @@ const { actions: alertActions, reducer: alertReducer } = createSlice({
   },
 });
 
-export { alertActions, AlertState };
+export { alertActions };
 export function startAlert(message: string): AppThunk {
-  return async (dispatch) => {
-    let timer2;
+  return async (dispatch, state) => {
+    // 여기서 이전 타이머들을 가져와서 clear 시켜야함
+    const before1 = state().alertReducer.timer1;
+    if (before1 !== undefined && typeof before1 !== 'number') {
+      clearTimeout(before1);
+    }
+    const before2 = state().alertReducer.timer2;
+    if (before2 !== undefined && typeof before2 !== 'number') {
+      clearTimeout(before2);
+    }
+
     const timer1 = setTimeout(() => {
       dispatch(alertActions.hideAlert());
-      timer2 = setTimeout(() => {
-        dispatch(alertActions.clearAlert());
-      }, 2000);
+      clearTimeout(timer1);
     }, 5000);
+
+    const timer2 = setTimeout(() => {
+      dispatch(alertActions.clearAlert());
+      clearTimeout(timer2);
+    }, 7000);
 
     dispatch(
       alertActions.setTimer({
@@ -69,7 +82,6 @@ export function startAlert(message: string): AppThunk {
 
     dispatch(
       alertActions.showAlert({
-        isFadeIn: true,
         message,
       }),
     );

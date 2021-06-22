@@ -3,7 +3,13 @@ import { useLocation } from 'react-router';
 import CommentHeader from '#components/ArticleView/ArticleDetail/Comment/CommentHeader';
 import CommentInput from '#components/ArticleView/ArticleDetail/Comment/CommentInput';
 import CommentList from './CommentList';
-import { createComment, getCommentCount, getCommentList } from '#apis/articleViewApi';
+import {
+  createComment,
+  deleteComment,
+  getCommentCount,
+  getCommentList,
+  getCommentListWithToken,
+} from '#apis/articleViewApi';
 
 export interface CommentType {
   commentIdx: number;
@@ -26,13 +32,18 @@ const CommentContainer = () => {
 
   const callCommentCountApi = useCallback(async () => {
     const result = await getCommentCount(index);
-    if (result) {
+    if (result !== null && result !== undefined) {
       setCommentCount(result);
     }
   }, []);
 
   const callCommentListApi = useCallback(async () => {
-    const result = await getCommentList(index, 0, 10);
+    let result;
+    if (window.localStorage.getItem('accessToken')) {
+      result = await getCommentListWithToken(index, 0, 10);
+    } else {
+      result = await getCommentList(index, 0, 10);
+    }
     if (result) {
       setCommentList(result.data);
     }
@@ -48,6 +59,15 @@ const CommentContainer = () => {
     return result;
   }, []);
 
+  const callDeleteCommentApi = useCallback(async (commentIndex: number) => {
+    const result = await deleteComment(commentIndex);
+    if (result) {
+      // 성공
+      callCommentCountApi();
+      callCommentListApi();
+    }
+  }, []);
+
   useEffect(() => {
     callCommentCountApi();
     callCommentListApi();
@@ -58,7 +78,7 @@ const CommentContainer = () => {
       {index && (
         <>
           <CommentHeader commentCount={commentCount} />
-          <CommentList commentList={commentList} />
+          <CommentList commentList={commentList} deleteApi={callDeleteCommentApi} />
           <CommentInput callApi={callCreateCommentApi} />
         </>
       )}

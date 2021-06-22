@@ -10,7 +10,7 @@ const StyledTitle = styled.h1`
   font-family: Apple SD Gothic Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 56px;
+  font-size: 45px;
   line-height: 56px;
   letter-spacing: -0.04em;
 

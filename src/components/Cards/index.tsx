@@ -2,7 +2,7 @@ import React from 'react';
 import { IconWrapper, IconPaths } from '#components/Atoms';
 import * as S from './style';
 
-interface Card {
+export interface Card {
   postIdx: number;
   title: string;
   category: string;

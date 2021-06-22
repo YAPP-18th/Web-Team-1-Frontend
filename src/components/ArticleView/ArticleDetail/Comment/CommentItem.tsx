@@ -50,9 +50,12 @@ const HeaderRight = styled.div`
   display: flex;
 `;
 
-const HeaderBtn = styled.small<HeaderBtnColor>`
+const HeaderBtn = styled.button<HeaderBtnColor>`
   color: ${(props) => (props.color === 'dark' ? '#666666' : '#999999')};
   margin-left: 8px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 `;
 
@@ -99,9 +102,10 @@ const CommentContents = styled.p`
 
 interface Props {
   data: CommentType;
+  deleteApi: (commentIndex: number) => Promise<void>;
 }
 
-const CommentItem = ({ data }: Props) => {
+const CommentItem = ({ data, deleteApi }: Props) => {
   return (
     <>
       <StyledCommentItem>
@@ -113,9 +117,13 @@ const CommentItem = ({ data }: Props) => {
               <CommentCreatedAt>Oct 28, 2020</CommentCreatedAt>
             </HeaderLeft>
             <HeaderRight>
-              <HeaderBtn color="dark">답글</HeaderBtn>
-              <HeaderBtn>신고</HeaderBtn>
-              <HeaderBtn>삭제</HeaderBtn>
+              {/* <HeaderBtn color="dark">답글</HeaderBtn> */}
+              {/* <HeaderBtn>신고</HeaderBtn> */}
+              {data.writer && (
+                <HeaderBtn type="button" onClick={() => deleteApi(data.commentIdx)}>
+                  삭제
+                </HeaderBtn>
+              )}
             </HeaderRight>
           </CommentItemHeader>
           <CommentContents>
