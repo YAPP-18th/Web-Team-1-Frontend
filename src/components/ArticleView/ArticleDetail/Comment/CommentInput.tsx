@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '#hooks/useAppSelector';
 import thumbnail from '../../../../assets/images/thumbnail.png';
 
 export interface ImgProps {
   imgSrc: string;
+}
+
+export interface WarningProps {
+  visible: boolean;
 }
 
 interface Props {
@@ -74,6 +78,21 @@ const InputBox = styled.div`
     right: 16px;
     bottom: 16px;
   }
+
+  & button:disabled {
+    background-color: #cccccc;
+    color: #333333;
+  }
+`;
+
+const Warning = styled.small<WarningProps>`
+  font-family: Apple SD Gothic Neo;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  margin: 30px 0 0 0;
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  color: red;
 `;
 
 // const RecommentNickname = styled.span`
@@ -85,6 +104,7 @@ const InputBox = styled.div`
 const CommentInput = ({ callApi }: Props) => {
   const [content, setContent] = useState('');
   const { profile } = useAppSelector((state) => state.userReducer);
+  const [warning, setWarning] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -98,6 +118,13 @@ const CommentInput = ({ callApi }: Props) => {
     }
   };
 
+  useEffect(() => {
+    if (!window.localStorage.getItem('accessToken')) {
+      setWarning(true);
+    } else {
+      setWarning(false);
+    }
+  }, []);
   return (
     <StyledCommentInput>
       {profile ? <MemberImg imgSrc={profile} /> : <NonMemberImg imgSrc={thumbnail} />}
@@ -105,7 +132,12 @@ const CommentInput = ({ callApi }: Props) => {
         <InputBox>
           {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
           <textarea value={content} onChange={onChange} spellCheck={false} />
-          <button type="button" onClick={() => onClick()}>
+          <Warning visible={warning}>로그인이 필요한 서비스입니다.</Warning>
+          <button
+            type="button"
+            onClick={() => onClick()}
+            disabled={content === '' || !window.localStorage.getItem('accessToken')}
+          >
             완료
           </button>
         </InputBox>
