@@ -81,7 +81,6 @@ const InputBox = styled.div`
 
   & button:disabled {
     background-color: #cccccc;
-    color: #333333;
   }
 `;
 

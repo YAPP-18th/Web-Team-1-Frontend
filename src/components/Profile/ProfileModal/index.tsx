@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { UserState } from 'slices/userSlice';
 import zIndex from '#styles/zIndex';
@@ -132,6 +132,10 @@ const Button = styled.button`
   margin-top: 8px;
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    background-color: #cccccc;
+  }
 `;
 
 // const categoryIndex: { [key: string]: number } = {
@@ -153,6 +157,11 @@ interface Props {
 }
 
 const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Props) => {
+  const [blocking, setBlocking] = useState(false);
+  const handleClick = () => {
+    setBlocking(true);
+    onClick();
+  };
   return (
     <>
       <StyledModalContainer>
@@ -186,7 +195,10 @@ const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Pr
               <Label>소개글 (선택)</Label>
               <textarea name="intro" value={user.intro} onChange={onChange} />
               <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning>
-              <Button onClick={() => onClick()}>프로필 변경 완료</Button>
+
+              <Button onClick={handleClick} disabled={blocking}>
+                프로필 변경 완료
+              </Button>
             </Column>
           </ModalBody>
         </StyledModal>
