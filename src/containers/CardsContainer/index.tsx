@@ -5,7 +5,7 @@ import { useAppDispatch } from '#hooks/useAppDispatch';
 
 import Cards from '#components/Cards';
 
-import { fetchCards } from '../../slices/cardsSlice';
+import { loadCards, loadNextPage } from '../../slices/cardsSlice';
 
 interface Props {
   onClickCard: (postIdx: number) => void;
@@ -23,12 +23,11 @@ export default function CardsContainer({ onClickCard }: Props) {
       new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // dispatch(fetchCards());
-            console.log('GOGOGO');
+            dispatch(loadNextPage());
           }
         });
       }),
-    [fetchCards],
+    [loadCards],
   );
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function CardsContainer({ onClickCard }: Props) {
   }, [observer, cards.length]);
 
   useEffect(() => {
-    dispatch(fetchCards());
+    dispatch(loadCards());
   }, []);
 
   return (

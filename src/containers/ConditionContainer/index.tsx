@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fetchCards } from 'slices/cardsSlice';
+import { loadCardsWithSearchQuery } from 'slices/cardsSlice';
 import { Categories, SearchForm } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 import { useAppSelector } from '#hooks/useAppSelector';
@@ -14,7 +14,7 @@ export default function ConditionContainer() {
   };
 
   const handleClickSearch = () => {
-    dispatch(fetchCards());
+    dispatch(loadCardsWithSearchQuery());
   };
 
   const { categoryCheckedState } = useAppSelector((state) => state.conditionReducer);
