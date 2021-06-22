@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 // import thumbnail from '../../../../assets/images/thumbnail.png';
 import { CommentType } from '#containers/CommentContainer';
+import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 
 export interface ImgProps {
   imgSrc: string;
@@ -106,6 +107,13 @@ interface Props {
 }
 
 const CommentItem = ({ data, deleteApi }: Props) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+  const handleClick = async () => {
+    await deleteApi(data.commentIdx);
+  };
+
   return (
     <>
       <StyledCommentItem>
@@ -120,7 +128,7 @@ const CommentItem = ({ data, deleteApi }: Props) => {
               {/* <HeaderBtn color="dark">답글</HeaderBtn> */}
               {/* <HeaderBtn>신고</HeaderBtn> */}
               {data.writer && (
-                <HeaderBtn type="button" onClick={() => deleteApi(data.commentIdx)}>
+                <HeaderBtn type="button" onClick={toggle}>
                   삭제
                 </HeaderBtn>
               )}
@@ -131,6 +139,7 @@ const CommentItem = ({ data, deleteApi }: Props) => {
             {data.comments}
           </CommentContents>
         </TextColumn>
+        {modal && <ConfirmModalContainer type="comment" callApi={handleClick} toggle={toggle} />}
       </StyledCommentItem>
     </>
   );

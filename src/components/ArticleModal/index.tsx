@@ -181,7 +181,9 @@ const ArticleModal = ({
               name="templateIdx"
               onChange={onChange}
               ref={templateSelectRef}
-              disabled={location.pathname === '/articleUpdate'}
+              disabled={
+                location.pathname === '/articleUpdate' || location.pathname === '/articleCreate'
+              }
             >
               <option value="">선택하세요</option>
               <option value={1}>4F</option>

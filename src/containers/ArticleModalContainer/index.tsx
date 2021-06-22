@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { InnerArticleState, editorActions } from 'slices/articleEditorSlice';
 import { useHistory, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
 import ArticleModal from '#components/ArticleModal';
-import { IconPaths, IconWrapper, Button } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 import { useAppSelector } from '#hooks/useAppSelector';
 
 let tagCount = 0;
+
+interface Props {
+  toggle: () => void;
+}
 
 export interface TagItem {
   id: number;
   text: string;
 }
 
-const StyledBtn = styled.div`
-  margin-right: 24px;
-`;
-
-const ArticleModalContainer = () => {
+const ArticleModalContainer = ({ toggle }: Props) => {
   const dispatch = useAppDispatch();
   const { tag, category, templateIdx } = useAppSelector((state) => state.articleEditorReducer);
 
@@ -35,18 +33,6 @@ const ArticleModalContainer = () => {
     isWarning: false,
     warningMessage: '',
   });
-
-  const [modal, setModal] = useState(false);
-  const modalToggle = () => {
-    if (modal) {
-      setTagList([]);
-      setWarning({
-        isWarning: false,
-        warningMessage: '',
-      });
-    }
-    setModal(!modal);
-  };
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -73,9 +59,8 @@ const ArticleModalContainer = () => {
     if (location.pathname !== '/articleUpdate' && location.pathname !== '/articleCreate') {
       history.push('/articleCreate');
     }
-    /* eslint-disable no-console */
 
-    modalToggle();
+    toggle();
   };
 
   const deleteTag = (tagId: number) => {
@@ -128,25 +113,17 @@ const ArticleModalContainer = () => {
 
   return (
     <>
-      <StyledBtn>
-        <Button buttonColor={{ background: 'gray' }} onClick={modalToggle}>
-          바로 회고하기
-          <IconWrapper icon={IconPaths.Writing} />
-        </Button>
-      </StyledBtn>
-      {modal && (
-        <ArticleModal
-          onChange={onChange}
-          onClick={onClickWriteBtn}
-          warning={warning}
-          toggle={modalToggle}
-          addTag={addTag}
-          tagList={tagList}
-          deleteTag={deleteTag}
-          category={category}
-          templateIdx={templateIdx}
-        />
-      )}
+      <ArticleModal
+        onChange={onChange}
+        onClick={onClickWriteBtn}
+        warning={warning}
+        toggle={toggle}
+        addTag={addTag}
+        tagList={tagList}
+        deleteTag={deleteTag}
+        category={category}
+        templateIdx={templateIdx}
+      />
     </>
   );
 };

@@ -62,11 +62,13 @@ const ArticleDetailContainer = ({ id }: Props) => {
 
   return (
     <>
-      {data.result.category && (
+      {data.result.category ? (
         <>
           <ArticleDetail data={data} id={id} />
           <FloatingBanner scrap={data.scrap} />
         </>
+      ) : (
+        <p>로딩중 ...</p>
       )}
     </>
   );

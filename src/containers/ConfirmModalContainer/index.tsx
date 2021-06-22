@@ -3,7 +3,7 @@ import ConfirmModal from '#components/ConfirmModal';
 
 interface Props {
   type: string;
-  callApi: () => void;
+  callApi: () => Promise<void>;
   toggle: () => void;
 }
 
@@ -22,6 +22,11 @@ const Msg: { [key: string]: MsgSet } = {
   delete: {
     header: '회고글을 삭제할까요?',
     body: '회고글은 한 번 삭제하면 되돌릴 수 없으므로 신중하게 확인해주세요.',
+    btnMsg: '삭제',
+  },
+  comment: {
+    header: '댓글을 삭제할까요?',
+    body: '댓글은 한 번 삭제하면 되돌릴 수 없으므로 신중하게 확인해주세요.',
     btnMsg: '삭제',
   },
 };

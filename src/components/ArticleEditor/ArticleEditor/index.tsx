@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { Editor } from '@toast-ui/react-editor';
 import TitleInput from '#components/ArticleEditor/ArticleEditor/TitleInput';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import TempSaveBtn from './TempSaveBtn';
-import ArticleModalContainer from '#containers/ArticleModalContainer';
 import { uploadImage } from '#apis/articleEditorApi';
+import ControlButtons from './ControlButtons';
 
 interface Props {
   onChangeTitle: (title: string) => void;
@@ -18,7 +17,7 @@ const StyledArticleCard = styled.div`
   background-color: #fefefe;
   box-shadow: 0px 5px 20px rgba(205, 204, 198, 0.25);
   border-radius: 29px;
-  padding: 56px 200px 64px 100px;
+  padding: 112px 200px 64px 100px;
   margin: 0 0 100px 0;
   height: auto;
   width: 1128px;
@@ -51,6 +50,7 @@ const StyledViewer = styled.div`
 const ArticleEditor = ({ onChangeTitle, editorRef, onClickSaveBtn, initialValue }: Props) => {
   return (
     <StyledArticleCard>
+      <ControlButtons onClick={onClickSaveBtn} />
       <TitleInput onChangeTitle={onChangeTitle} initialValue={initialValue} />
       <StyledViewer>
         <Editor
@@ -72,8 +72,6 @@ const ArticleEditor = ({ onChangeTitle, editorRef, onClickSaveBtn, initialValue 
           }}
         />
       </StyledViewer>
-      <ArticleModalContainer />
-      <TempSaveBtn onClick={onClickSaveBtn} />
     </StyledArticleCard>
   );
 };

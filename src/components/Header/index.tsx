@@ -19,7 +19,10 @@ import { useAppDispatch } from '#hooks/useAppDispatch';
 export default function Header() {
   const [isShowedSignInModal, setIsShowedSignInModal] = useState(false);
   const [isShowedMenu, setIsShowedMenu] = useState(false);
-  const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(true);
+
+  const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(false);
+  const showQuickWriteToggle = () => setIsShowedQuickWrite(!isShowedQuickWrite);
+
   const [isLogined, setIsLogined] = useState(false);
   const history = useHistory();
 
@@ -60,13 +63,13 @@ export default function Header() {
     }
   }, []);
 
-  useEffect(() => {
-    if (category) {
-      setIsShowedQuickWrite(false);
-    } else {
-      setIsShowedQuickWrite(true);
-    }
-  }, [category]);
+  // useEffect(() => {
+  //   if (category) {
+  //     setIsShowedQuickWrite(false);
+  //   } else {
+  //     setIsShowedQuickWrite(true);
+  //   }
+  // }, [category]);
 
   return (
     <>
@@ -74,7 +77,13 @@ export default function Header() {
         <Logo to="/">돌아보다,</Logo>
         {isLogined ? (
           <S.LoginAfter>
-            {isShowedQuickWrite && <ArticleModalContainer />}
+            {!category && (
+              <Button buttonColor={{ background: 'gray' }} onClick={showQuickWriteToggle}>
+                바로 회고하기
+                <IconWrapper icon={IconPaths.Writing} />
+              </Button>
+            )}
+            {isShowedQuickWrite && <ArticleModalContainer toggle={showQuickWriteToggle} />}
             <HamburgerWrapper onClick={handleClickHamburger}>
               <Hamburger />
             </HamburgerWrapper>
@@ -143,4 +152,5 @@ const Logo = styled(Link)`
 
 const HamburgerWrapper = styled.div`
   cursor: pointer;
+  margin-left: 24px;
 `;
