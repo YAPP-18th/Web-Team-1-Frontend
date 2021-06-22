@@ -24,6 +24,11 @@ const Msg: { [key: string]: MsgSet } = {
     body: '회고글은 한 번 삭제하면 되돌릴 수 없으므로 신중하게 확인해주세요.',
     btnMsg: '삭제',
   },
+  comment: {
+    header: '댓글을 삭제할까요?',
+    body: '댓글은 한 번 삭제하면 되돌릴 수 없으므로 신중하게 확인해주세요.',
+    btnMsg: '삭제',
+  },
 };
 
 const ConfirmModalContainer = ({ type, callApi, toggle }: Props) => {
