@@ -27,7 +27,7 @@ export function fetchCards(): AppThunk {
   return async (dispatch, getState) => {
     const { categoryCheckedState } = getState().conditionReducer;
     const query = getQuery(categoryCheckedState);
-    const cards = await fetchCardList({ query });
-    dispatch(setCards(cards));
+    const { result } = await fetchCardList({ query });
+    dispatch(setCards(result));
   };
 }
