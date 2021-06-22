@@ -104,17 +104,20 @@ const CommentInput = ({ callApi }: Props) => {
   const [content, setContent] = useState('');
   const { profile } = useAppSelector((state) => state.userReducer);
   const [warning, setWarning] = useState(false);
+  const [blocking, setBlocking] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
 
-  const onClick = async () => {
+  const handleClick = async () => {
+    setBlocking(true);
     const result = await callApi(content);
     if (result) {
       // 성공
       setContent('');
     }
+    setBlocking(false);
   };
 
   useEffect(() => {
@@ -134,8 +137,8 @@ const CommentInput = ({ callApi }: Props) => {
           <Warning visible={warning}>로그인이 필요한 서비스입니다.</Warning>
           <button
             type="button"
-            onClick={() => onClick()}
-            disabled={content === '' || !window.localStorage.getItem('accessToken')}
+            onClick={handleClick}
+            disabled={content === '' || !window.localStorage.getItem('accessToken') || blocking}
           >
             완료
           </button>
