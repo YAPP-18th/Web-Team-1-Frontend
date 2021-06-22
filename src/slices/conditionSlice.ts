@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { isAllDisable } from '../utils';
 
 const initialCheckedState = {
   total: true,
@@ -17,21 +18,32 @@ const { actions, reducer: conditionReducer } = createSlice({
   },
   reducers: {
     setCategories(state, { payload: { id, checked } }) {
-      if (id === 'total') {
+      const newCategories = {
+        ...state.categoryCheckedState,
+        [id]: checked,
+      };
+
+      if (isAllDisable(newCategories)) {
+        if (id === 'total') {
+          return {
+            ...state,
+            categoryCheckedState: {
+              ...initialCheckedState,
+            },
+          };
+        }
         return {
           ...state,
           categoryCheckedState: {
-            ...initialCheckedState,
+            ...newCategories,
+            total: false,
           },
         };
       }
-
       return {
         ...state,
         categoryCheckedState: {
-          ...state.categoryCheckedState,
-          total: false,
-          [id]: checked,
+          ...initialCheckedState,
         },
       };
     },

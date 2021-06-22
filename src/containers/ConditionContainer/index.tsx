@@ -9,8 +9,10 @@ import { setCategories } from '../../slices/conditionSlice';
 
 export default function ConditionContainer() {
   const dispatch = useAppDispatch();
+
   const handleChangeCategory = ({ id, checked }: { id: string; checked: boolean }) => {
     dispatch(setCategories({ id, checked }));
+    dispatch(loadCards());
   };
 
   const handleClickSearch = () => {
