@@ -6,6 +6,7 @@ import { useAppDispatch } from '#hooks/useAppDispatch';
 import Cards from '#components/Cards';
 
 import { loadCards, loadNextPage } from '../../slices/cardsSlice';
+import { isEmpty } from '../../utils';
 
 interface Props {
   onClickCard: (postIdx: number) => void;
@@ -27,18 +28,18 @@ export default function CardsContainer({ onClickCard }: Props) {
           }
         });
       }),
-    [loadCards],
+    [loadNextPage],
   );
 
   useEffect(() => {
-    if (cards.length === 0) return;
+    if (isEmpty(cards)) return;
     if (!ref.current) return;
     const el = ref.current;
     observer.observe(el);
     return () => {
       observer.unobserve(el);
     };
-  }, [observer, cards.length]);
+  }, [observer, cards]);
 
   useEffect(() => {
     dispatch(loadCards());

@@ -25,17 +25,6 @@ export const { setCards } = actions;
 export default cardsReducer;
 
 export function loadCards(): AppThunk {
-  return async (dispatch) => {
-    const { result, next } = await fetchCardList({ postIdx: 0 });
-    const nextPageIndex = isEmpty(result) ? 0 : result[result.length - 1].postIdx;
-
-    dispatch(setPageIndex(nextPageIndex));
-    dispatch(setNext(next));
-    dispatch(setCards(result));
-  };
-}
-
-export function loadCardsWithSearchQuery(): AppThunk {
   return async (dispatch, getState) => {
     const { categoryCheckedState } = getState().conditionReducer;
     const query = getQuery(categoryCheckedState);
