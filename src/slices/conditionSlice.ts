@@ -15,6 +15,7 @@ const { actions, reducer: conditionReducer } = createSlice({
     categoryCheckedState: initialCheckedState,
     pageIndex: 0,
     next: true,
+    keyword: '',
   },
   reducers: {
     setCategories(state, { payload: { id, checked } }) {
@@ -59,8 +60,14 @@ const { actions, reducer: conditionReducer } = createSlice({
         next,
       };
     },
+    setKeyword(state, { payload: keyword }) {
+      return {
+        ...state,
+        keyword,
+      };
+    },
   },
 });
 
-export const { setCategories, setPageIndex, setNext } = actions;
+export const { setCategories, setPageIndex, setNext, setKeyword } = actions;
 export default conditionReducer;

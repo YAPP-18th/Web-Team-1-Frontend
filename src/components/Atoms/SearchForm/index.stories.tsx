@@ -9,6 +9,12 @@ export default {
 } as Meta;
 
 const SearchTemplate: Story<Props> = () => {
-  return <SearchForm handleClickSearch={action('onClick')} />;
+  return (
+    <SearchForm
+      handleClickSearch={action('onClick')}
+      handleChangeKeyword={action('onChange')}
+      keyword="text"
+    />
+  );
 };
 export const BasicSearch = SearchTemplate.bind({});

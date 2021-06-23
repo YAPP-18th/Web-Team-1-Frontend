@@ -4,18 +4,19 @@ import * as S from './style';
 
 export interface Props {
   handleClickSearch: () => void;
+  handleChangeKeyword: (text: string) => void;
+  keyword: string;
 }
 
-export default function SearchForm({ handleClickSearch }: Props) {
+export default function SearchForm({ handleClickSearch, handleChangeKeyword, keyword }: Props) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState({
     isOpen: false,
-    text: '',
     defaultOption: '제목+내용',
     options: ['제목+내용', '제목', '내용'],
   });
 
-  const { isOpen, text, defaultOption, options } = state;
+  const { isOpen, defaultOption, options } = state;
 
   const toggling = () => {
     setState({
@@ -32,9 +33,11 @@ export default function SearchForm({ handleClickSearch }: Props) {
     });
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setState({ ...state, text: value });
+  const handleChange = () => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      handleChangeKeyword(value);
+    };
   };
 
   useEffect(() => {
@@ -67,8 +70,8 @@ export default function SearchForm({ handleClickSearch }: Props) {
         <input
           type="text"
           placeholder="어떤 글을 찾으시나요?"
-          onChange={handleChange}
-          value={text}
+          onChange={handleChange()}
+          value={keyword}
         />
         <IconWrapper icon={IconPaths.Search} onClick={handleClickSearch} />
       </S.SearchField>
