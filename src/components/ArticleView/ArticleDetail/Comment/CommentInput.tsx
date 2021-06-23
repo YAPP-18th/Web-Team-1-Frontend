@@ -34,10 +34,6 @@ const MemberImg = styled(ImgColumn)<ImgProps>`
   background-image: url(${(props) => props.imgSrc});
 `;
 
-const NonMemberImg = styled(ImgColumn)<ImgProps>`
-  background-image: ${(props) => props.imgSrc};
-`;
-
 const TextColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -129,7 +125,7 @@ const CommentInput = ({ callApi }: Props) => {
   }, []);
   return (
     <StyledCommentInput>
-      {profile ? <MemberImg imgSrc={profile} /> : <NonMemberImg imgSrc={thumbnail} />}
+      <MemberImg imgSrc={profile || thumbnail} />
       <TextColumn>
         <InputBox>
           {/* <RecommentNickname>@빈센조 까사노</RecommentNickname> */}
