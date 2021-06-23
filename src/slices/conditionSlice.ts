@@ -15,7 +15,11 @@ const { actions, reducer: conditionReducer } = createSlice({
     categoryCheckedState: initialCheckedState,
     pageIndex: 0,
     next: true,
-    keyword: '',
+    searchState: {
+      keyword: '',
+      defaultOption: 'all',
+      options: ['all', 'title', 'contents'],
+    },
   },
   reducers: {
     setCategories(state, { payload: { id, checked } }) {
@@ -63,11 +67,23 @@ const { actions, reducer: conditionReducer } = createSlice({
     setKeyword(state, { payload: keyword }) {
       return {
         ...state,
-        keyword,
+        searchState: {
+          ...state.searchState,
+          keyword,
+        },
+      };
+    },
+    setDropdown(state, { payload: option }) {
+      return {
+        ...state,
+        searchState: {
+          ...state.searchState,
+          defaultOption: option,
+        },
       };
     },
   },
 });
 
-export const { setCategories, setPageIndex, setNext, setKeyword } = actions;
+export const { setCategories, setPageIndex, setNext, setKeyword, setDropdown } = actions;
 export default conditionReducer;

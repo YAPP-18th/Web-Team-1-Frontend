@@ -13,7 +13,8 @@ const SearchTemplate: Story<Props> = () => {
     <SearchForm
       handleClickSearch={action('onClick')}
       handleChangeKeyword={action('onChange')}
-      keyword="text"
+      handleChangeDropdown={action('onChange')}
+      searchState={{ keyword: 'test', defaultOption: 'all', options: [] }}
     />
   );
 };

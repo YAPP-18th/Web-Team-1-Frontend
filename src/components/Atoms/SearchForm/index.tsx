@@ -5,32 +5,36 @@ import * as S from './style';
 export interface Props {
   handleClickSearch: () => void;
   handleChangeKeyword: (text: string) => void;
-  keyword: string;
+  handleChangeDropdown: (option: string) => void;
+  searchState: { keyword: string; defaultOption: string; options: string[] };
 }
 
-export default function SearchForm({ handleClickSearch, handleChangeKeyword, keyword }: Props) {
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const [state, setState] = useState({
-    isOpen: false,
-    defaultOption: '제목+내용',
-    options: ['제목+내용', '제목', '내용'],
-  });
+const optionsMapper: { [key: string]: string } = {
+  all: '제목+내용',
+  title: '제목',
+  contents: '내용',
+};
 
-  const { isOpen, defaultOption, options } = state;
+export default function SearchForm({
+  handleClickSearch,
+  handleChangeKeyword,
+  handleChangeDropdown,
+  searchState,
+}: Props) {
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { keyword, defaultOption, options } = searchState;
 
   const toggling = () => {
-    setState({
-      ...state,
-      isOpen: !isOpen,
-    });
+    setIsOpen(!isOpen);
   };
 
   const handleClickOption = (option: string) => {
-    setState({
-      ...state,
-      defaultOption: option,
-      isOpen: false,
-    });
+    return () => {
+      setIsOpen(false);
+      handleChangeDropdown(option);
+    };
   };
 
   const handleChange = () => {
@@ -43,7 +47,7 @@ export default function SearchForm({ handleClickSearch, handleChangeKeyword, key
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent): void => {
       if (dropdownRef && !dropdownRef.current?.contains(event.target as Node)) {
-        setState({ ...state, isOpen: false });
+        setIsOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -55,12 +59,12 @@ export default function SearchForm({ handleClickSearch, handleChangeKeyword, key
   return (
     <S.SearchBox>
       <S.Dropdown ref={dropdownRef}>
-        <S.DropdownHeader onClick={toggling}>{defaultOption}</S.DropdownHeader>
+        <S.DropdownHeader onClick={toggling}>{optionsMapper[defaultOption]}</S.DropdownHeader>
         {isOpen && (
           <S.DropdownList>
             {options.map((option) => (
-              <S.ListItem key={option} onClick={() => handleClickOption(option)}>
-                {option}
+              <S.ListItem key={option} onClick={handleClickOption(option)}>
+                {optionsMapper[option]}
               </S.ListItem>
             ))}
           </S.DropdownList>

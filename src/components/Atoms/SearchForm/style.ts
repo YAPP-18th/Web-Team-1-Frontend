@@ -31,7 +31,7 @@ export const DropdownList = styled.ul`
   padding: 10px;
 `;
 
-export const ListItem = styled.li<{ onClick: () => void }>`
+export const ListItem = styled.li`
   text-align: center;
   font-size: 18px;
   user-select: none;

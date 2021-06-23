@@ -5,7 +5,7 @@ import { Categories, SearchForm } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 import { useAppSelector } from '#hooks/useAppSelector';
 
-import { setCategories, setKeyword } from '../../slices/conditionSlice';
+import { setCategories, setKeyword, setDropdown } from '../../slices/conditionSlice';
 
 export default function ConditionContainer() {
   const dispatch = useAppDispatch();
@@ -23,7 +23,11 @@ export default function ConditionContainer() {
     dispatch(setKeyword(text));
   };
 
-  const { categoryCheckedState, keyword } = useAppSelector((state) => state.conditionReducer);
+  const handleChangeDropdown = (option: string) => {
+    dispatch(setDropdown(option));
+  };
+
+  const { categoryCheckedState, searchState } = useAppSelector((state) => state.conditionReducer);
 
   return (
     <Conditions>
@@ -34,7 +38,8 @@ export default function ConditionContainer() {
       <SearchForm
         handleClickSearch={handleClickSearch}
         handleChangeKeyword={handleChangeKeyword}
-        keyword={keyword}
+        handleChangeDropdown={handleChangeDropdown}
+        searchState={searchState}
       />
     </Conditions>
   );
