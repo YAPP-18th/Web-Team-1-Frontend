@@ -128,7 +128,11 @@ export default function Header() {
           </Button>
         )}
       </HeaderWrapper>
-      <LoginModal isShowed={isShowedSignInModal} onCloseModal={handleClickSignInButton} />
+      <LoginModal
+        isShowed={isShowedSignInModal}
+        onCloseModal={handleClickSignInButton}
+        showQuickWriteToggle={showQuickWriteToggle}
+      />
     </>
   );
 }

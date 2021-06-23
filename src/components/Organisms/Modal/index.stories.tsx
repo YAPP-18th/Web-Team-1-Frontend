@@ -10,13 +10,19 @@ export default {
 // 일반적인 버튼인 경우
 const LoginModalTemplate: Story<Props> = () => {
   const [isShowedModal, setIsShowedModal] = useState(false);
+  const [isShowedQuickWrite, setIsShowedQuickWrite] = useState(false);
+  const showQuickWriteToggle = () => setIsShowedQuickWrite(!isShowedQuickWrite);
   const click = () => setIsShowedModal((prev) => !prev);
   return (
     <>
       <button onClick={click} type="button">
         모달 출력 버튼
       </button>
-      <LoginModal isShowed={isShowedModal} onCloseModal={click} />
+      <LoginModal
+        isShowed={isShowedModal}
+        onCloseModal={click}
+        showQuickWriteToggle={showQuickWriteToggle}
+      />
     </>
   );
 };
