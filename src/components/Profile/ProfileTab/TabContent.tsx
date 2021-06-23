@@ -9,11 +9,14 @@ interface Props {
 
 const TabContent = ({ api }: Props) => {
   const history = useHistory();
+
   const onClickCard = (postIdx: number) => {
     const url = `/articleDetail/${postIdx}`;
     history.push(url);
   };
+
   const [cards, setCards] = useState<Card[]>([]);
+
   const callApi = async () => {
     const result = await api();
     if (result) {

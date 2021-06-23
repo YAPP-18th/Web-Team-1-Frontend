@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { getMyLists, getRecentlyViewedLists, getLikedList } from '#apis/userApi';
 import TabContent from './TabContent';
+import TabContentWithCursor from './TabContentWithCursor';
 
 export interface TabItemProps {
   active: boolean;
@@ -52,7 +53,7 @@ const ProfileTab = () => {
       {activeTab === 1 && <TabContent api={getMyLists} />}
       {/* {activeTab === 2 && <TabContent api={getMyLists} />} */}
       {activeTab === 3 && <TabContent api={getRecentlyViewedLists} />}
-      {activeTab === 4 && <TabContent api={getLikedList} />}
+      {activeTab === 4 && <TabContentWithCursor api={getLikedList} />}
     </>
   );
 };

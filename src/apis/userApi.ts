@@ -2,7 +2,16 @@
 import { UserState } from 'slices/userSlice';
 import { tokenInstance, instance } from '#apis/common';
 import { Card } from '#components/Cards';
+import { CardWithLikeIdx } from '#components/Profile/ProfileTab/TabContentWithCursor';
 /* eslint-disable no-console */
+// interface Data {
+//   result: Card[];
+//   next: boolean;
+// }
+interface LikeData {
+  result: CardWithLikeIdx[];
+  next: boolean;
+}
 
 export const getMyLists = async (): Promise<Card[] | null> => {
   try {
@@ -24,9 +33,12 @@ export const getRecentlyViewedLists = async (): Promise<Card[] | null> => {
   }
 };
 
-export const getLikedList = async (): Promise<Card[] | null> => {
+export const getLikedList = async (
+  cursorIdx: number,
+  pageSize: number,
+): Promise<LikeData | null> => {
   try {
-    const res = await tokenInstance.get(`/likes/lists?page=0&pageSize=${20}`);
+    const res = await tokenInstance.get(`/likes/lists?cursorIdx=${cursorIdx}&pageSize=${pageSize}`);
     return res.data.data;
   } catch (error) {
     console.log(error);
