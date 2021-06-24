@@ -12,7 +12,7 @@ export interface CardWithLikeIdx {
   nickname: string;
   profile: string;
   scrap: boolean;
-  tag: string;
+  tagList: Array<{ tag: string }>;
   view: number;
   created_at: string;
   commentCnt: number;

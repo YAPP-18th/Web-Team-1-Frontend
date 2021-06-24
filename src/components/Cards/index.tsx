@@ -10,7 +10,7 @@ export interface Card {
   nickname: string;
   profile: string;
   scrap: boolean;
-  tag: string;
+  tagList: Array<{ tag: string }>;
   view: number;
   created_at: string;
   commentCnt: number;
@@ -21,6 +21,13 @@ interface Props {
   cards: Card[];
   onClickCard: (postIdx: number) => void;
 }
+
+const categoriesText: { [key: string]: string } = {
+  plan: '기획',
+  marketing: '마케팅',
+  develop: '개발',
+  design: '디자인',
+};
 
 export default function Cards({ cards, onClickCard }: Props) {
   const handleClick = (idx: number) => {
@@ -46,7 +53,7 @@ export default function Cards({ cards, onClickCard }: Props) {
             nickname,
             profile,
             scrap,
-            tag,
+            tagList,
             created_at,
             commentCnt,
             scrapCnt,
@@ -55,10 +62,15 @@ export default function Cards({ cards, onClickCard }: Props) {
               <S.CardLink href={`/articleDetail/${postIdx}`} onClick={handleClick(postIdx)}>
                 <article>
                   <S.Title>{title}</S.Title>
-                  <S.Category category={category}>{category}</S.Category>
+                  <S.Category category={category}>{categoriesText[category]}</S.Category>
                   <S.Content>{contents.replace(/(<([^>]+)>)/gi, '')}</S.Content>
                   <S.CardFooter>
-                    <div className="tag">{tag}</div>
+                    <div className="tags">
+                      {tagList
+                        .slice(0, 2)
+                        .map(({ tag }) => `#${tag}`)
+                        .join(' ')}
+                    </div>
                     <div className="comment-and-scrap">
                       <div>
                         <IconWrapper icon={IconPaths.Commant} />
