@@ -9,6 +9,7 @@ export interface Card {
   contents: string;
   nickname: string;
   profile: string;
+  scrap: boolean;
   tag: string;
   view: number;
   created_at: string;
@@ -44,6 +45,7 @@ export default function Cards({ cards, onClickCard }: Props) {
             contents,
             nickname,
             profile,
+            scrap,
             tag,
             created_at,
             commentCnt,
@@ -63,7 +65,11 @@ export default function Cards({ cards, onClickCard }: Props) {
                         {commentCnt}
                       </div>
                       <div>
-                        <IconWrapper icon={IconPaths.Bookmark} />
+                        {scrap ? (
+                          <IconWrapper icon={IconPaths.ScrapTrue} />
+                        ) : (
+                          <IconWrapper icon={IconPaths.ScrapFalse} />
+                        )}
                         {scrapCnt}
                       </div>
                     </div>

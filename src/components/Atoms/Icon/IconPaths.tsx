@@ -8,9 +8,10 @@ import Bulb from './SVG/Bulb.svg';
 import Laptop from './SVG/Laptop.svg';
 import Palette from './SVG/Palette.svg';
 import Search from './SVG/Search.svg';
-import Bookmark from './SVG/Bookmark.svg';
+import ScrapFalse from './SVG/ScrapFalse.svg';
 import Commant from './SVG/Commant.svg';
 import PolygonBottom from './SVG/PolygonBottom.svg';
+import ScrapTrue from './SVG/ScrapTrue.svg';
 
 type Icon =
   | 'Exit'
@@ -22,9 +23,10 @@ type Icon =
   | 'Laptop'
   | 'Palette'
   | 'Search'
-  | 'Bookmark'
+  | 'ScrapFalse'
   | 'Commant'
-  | 'PolygonBottom';
+  | 'PolygonBottom'
+  | 'ScrapTrue';
 
 type IconPathKey = {
   [key in Icon]: FunctionComponent;
@@ -40,9 +42,10 @@ const IconPaths: IconPathKey = {
   Laptop,
   Palette,
   Search,
-  Bookmark,
+  ScrapFalse,
   Commant,
   PolygonBottom,
+  ScrapTrue,
 };
 
 export default IconPaths;
