@@ -11,6 +11,7 @@ export interface CardWithLikeIdx {
   contents: string;
   nickname: string;
   profile: string;
+  scrap: boolean;
   tag: string;
   view: number;
   created_at: string;
