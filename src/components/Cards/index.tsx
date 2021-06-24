@@ -68,7 +68,7 @@ export default function Cards({ cards, onClickCard }: Props) {
                         {scrap ? (
                           <IconWrapper icon={IconPaths.ScrapTrue} />
                         ) : (
-                          <IconWrapper icon={IconPaths.Bookmark} />
+                          <IconWrapper icon={IconPaths.ScrapFalse} />
                         )}
                         {scrapCnt}
                       </div>
