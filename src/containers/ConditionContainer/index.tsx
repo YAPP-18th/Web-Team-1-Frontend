@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { loadCards } from 'slices/cardsSlice';
-import { Categories, SearchForm } from '#components/Atoms';
+import { Categories } from '#components/Atoms';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 import { useAppSelector } from '#hooks/useAppSelector';
 
@@ -15,10 +15,6 @@ export default function ConditionContainer() {
     dispatch(loadCards());
   };
 
-  const handleClickSearch = () => {
-    dispatch(loadCards());
-  };
-
   const { categoryCheckedState } = useAppSelector((state) => state.conditionReducer);
 
   return (
@@ -27,7 +23,6 @@ export default function ConditionContainer() {
         handleChangeCategory={handleChangeCategory}
         categoryCheckedState={categoryCheckedState}
       />
-      <SearchForm handleClickSearch={handleClickSearch} />
     </Conditions>
   );
 }
