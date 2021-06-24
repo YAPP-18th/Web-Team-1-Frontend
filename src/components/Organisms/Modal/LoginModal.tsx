@@ -10,24 +10,34 @@ export interface Props {
   className?: string[];
   isShowed: boolean;
   onCloseModal: (e: unknown) => void;
+  showQuickWriteToggle: () => void;
 }
 
-const LoginModal = ({ className = [], isShowed = false, onCloseModal }: Props) => {
+const LoginModal = ({
+  className = [],
+  isShowed = false,
+  onCloseModal,
+  showQuickWriteToggle,
+}: Props) => {
   const location = useLocation();
   const history = useHistory();
   const [, setCookie] = useCookies(['JWT-Refresh-Token']);
 
   // 쿼리스트링으로 받은 token들을 local storage에 추가
   useEffect(() => {
-    const { accessToken, refreshToken } = qs.parse(location.search, {
+    const { accessToken, refreshToken, isNew } = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
     if (!accessToken || !refreshToken) return;
     localStorage.setItem('accessToken', accessToken as string);
     setCookie('JWT-Refresh-Token', refreshToken, { maxAge: 3600 * 24 * 30 });
     history.push('/');
+
     return () => {
       onCloseModal(false);
+      if (isNew) {
+        showQuickWriteToggle();
+      }
     };
   }, []);
 
