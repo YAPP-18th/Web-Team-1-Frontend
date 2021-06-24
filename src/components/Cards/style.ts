@@ -59,15 +59,16 @@ export const Category = styled.span<{ category: string }>`
 `;
 
 export const CardFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-family: Helvetica Neue;
   font-size: 12px;
   letter-spacing: -0.04em;
   color: #666666;
   padding-bottom: 16px;
   border-bottom: 1px solid #eeeeee;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   & .comment-and-scrap,
   div {
     display: flex;

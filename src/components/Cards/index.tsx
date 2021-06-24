@@ -10,7 +10,7 @@ export interface Card {
   nickname: string;
   profile: string;
   scrap: boolean;
-  tag: string;
+  tagList: Array<{ tag: string }>;
   view: number;
   created_at: string;
   commentCnt: number;
@@ -53,7 +53,7 @@ export default function Cards({ cards, onClickCard }: Props) {
             nickname,
             profile,
             scrap,
-            tag,
+            tagList,
             created_at,
             commentCnt,
             scrapCnt,
@@ -65,7 +65,12 @@ export default function Cards({ cards, onClickCard }: Props) {
                   <S.Category category={category}>{categoriesText[category]}</S.Category>
                   <S.Content>{contents.replace(/(<([^>]+)>)/gi, '')}</S.Content>
                   <S.CardFooter>
-                    <div className="tag">{tag}</div>
+                    <div className="tags">
+                      {tagList
+                        .slice(0, 2)
+                        .map(({ tag }) => `#${tag}`)
+                        .join(' ')}
+                    </div>
                     <div className="comment-and-scrap">
                       <div>
                         <IconWrapper icon={IconPaths.Commant} />
