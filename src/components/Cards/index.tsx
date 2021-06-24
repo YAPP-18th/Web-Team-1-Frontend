@@ -22,6 +22,13 @@ interface Props {
   onClickCard: (postIdx: number) => void;
 }
 
+const categoriesText: { [key: string]: string } = {
+  plan: '기획',
+  marketing: '마케팅',
+  develop: '개발',
+  design: '디자인',
+};
+
 export default function Cards({ cards, onClickCard }: Props) {
   const handleClick = (idx: number) => {
     return (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -55,7 +62,7 @@ export default function Cards({ cards, onClickCard }: Props) {
               <S.CardLink href={`/articleDetail/${postIdx}`} onClick={handleClick(postIdx)}>
                 <article>
                   <S.Title>{title}</S.Title>
-                  <S.Category category={category}>{category}</S.Category>
+                  <S.Category category={category}>{categoriesText[category]}</S.Category>
                   <S.Content>{contents.replace(/(<([^>]+)>)/gi, '')}</S.Content>
                   <S.CardFooter>
                     <div className="tag">{tag}</div>
