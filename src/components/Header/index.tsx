@@ -51,8 +51,20 @@ export default function Header() {
     setIsShowedMenu((prev) => !prev);
   }, []);
 
+  // 닉네임 클릭 -> 마이페이지로 이동
   const handleClickNickname = useCallback(() => {
-    history.push('/me');
+    history.push('/me', {
+      activeTabIdx: 1,
+    });
+    setIsShowedMenu((prev) => !prev);
+  }, []);
+
+  // 메뉴 아이템들 클릭 -> 마이페이지의 해당 탭으로 이동
+  const handleClickMypageShortCut = useCallback((activeTabIdx: number) => {
+    history.push('/me', {
+      activeTabIdx,
+    });
+    setIsShowedMenu((prev) => !prev);
   }, []);
 
   // access token 유무 체크
@@ -62,14 +74,6 @@ export default function Header() {
       setIsLogined(true);
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (category) {
-  //     setIsShowedQuickWrite(false);
-  //   } else {
-  //     setIsShowedQuickWrite(true);
-  //   }
-  // }, [category]);
 
   return (
     <>
@@ -104,18 +108,36 @@ export default function Header() {
                   type="button"
                   className="menu-item"
                   onClick={() => {
-                    dispatch(startAlert('테스트다 🚀'));
+                    handleClickMypageShortCut(1);
                   }}
                 >
                   작성한 회고
                 </button>
-                <button type="button" className="menu-item">
+                {/* <button
+                  type="button"
+                  className="menu-item"
+                  onClick={() => {
+                    handleClickMypageShortCut(4);
+                  }}
+                >
                   작성 중인 회고
-                </button>
-                <button type="button" className="menu-item">
+                </button> */}
+                <button
+                  type="button"
+                  className="menu-item"
+                  onClick={() => {
+                    handleClickMypageShortCut(3);
+                  }}
+                >
                   최근 읽은 회고
                 </button>
-                <button type="button" className="menu-item">
+                <button
+                  type="button"
+                  className="menu-item"
+                  onClick={() => {
+                    handleClickMypageShortCut(4);
+                  }}
+                >
                   스크랩한 회고
                 </button>
               </S.MenuWrapper>

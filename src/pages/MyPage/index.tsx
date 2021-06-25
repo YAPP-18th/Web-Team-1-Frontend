@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import * as S from './style';
 import { useAppSelector } from '#hooks/useAppSelector';
 import Edit from './Edit';
@@ -11,11 +12,15 @@ const job: { [key: string]: string } = {
   plan: '기획자 💡',
   develop: '개발자 💻',
 };
+interface LocationState {
+  activeTabIdx: number;
+}
 
 const MyPage = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const userData = useAppSelector((state) => state.userReducer);
+  const location = useLocation<LocationState>();
 
   return (
     <div>
@@ -35,7 +40,7 @@ const MyPage = () => {
               <p>{userData.intro}</p>
             </div>
           </S.ProfileWrapper>
-          <ProfileTab />
+          <ProfileTab activeTabIdx={location.state.activeTabIdx} />
         </>
       )}
     </div>

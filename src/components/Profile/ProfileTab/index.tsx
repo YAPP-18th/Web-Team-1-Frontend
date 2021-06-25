@@ -4,6 +4,10 @@ import { getMyArticleLists, getRecentlyViewedLists, getLikedList } from '#apis/u
 import TabContentWithPageIdx from './TabContentWithPageIdx';
 import TabContentWithCursor from './TabContentWithCursor';
 
+interface Props {
+  activeTabIdx: number | undefined;
+}
+
 export interface TabItemProps {
   active: boolean;
 }
@@ -27,9 +31,8 @@ const TabItem = styled.li<TabItemProps>`
   font-weight: ${(props) => (props.active ? `bold` : 'normal')};
 `;
 
-const ProfileTab = () => {
-  const [activeTab, setActiveTab] = useState<number>(1);
-
+const ProfileTab = ({ activeTabIdx }: Props) => {
+  const [activeTab, setActiveTab] = useState<number>(activeTabIdx || 1);
   const handleClick = (id: number) => {
     setActiveTab(id);
   };
