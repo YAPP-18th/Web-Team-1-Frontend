@@ -206,7 +206,9 @@ const ProfileModal = ({
                 <br />
                 800*800 이상의 JPG, PNG 이미지를 권장해요
               </HelpText>
-              <WithdrawalButton type="button">더 이상 돌아보지 않기</WithdrawalButton>
+              <WithdrawalButton type="button" onClick={confirmToggle}>
+                더 이상 돌아보지 않기
+              </WithdrawalButton>
               {modal && (
                 <ConfirmModalContainer
                   type="withdrawal"
