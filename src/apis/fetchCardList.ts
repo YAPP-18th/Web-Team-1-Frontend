@@ -14,7 +14,7 @@ interface Card {
   scrapCnt: number;
 }
 
-interface Data {
+export interface Data {
   result: Card[];
   next: boolean;
 }

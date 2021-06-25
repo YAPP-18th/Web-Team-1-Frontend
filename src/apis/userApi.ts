@@ -4,18 +4,19 @@ import { tokenInstance, instance } from '#apis/common';
 import { Card } from '#components/Cards';
 import { CardWithLikeIdx } from '#components/Profile/ProfileTab/TabContentWithCursor';
 /* eslint-disable no-console */
-// interface Data {
-//   result: Card[];
-//   next: boolean;
-// }
+export interface Data {
+  result: Card[];
+  next: boolean;
+}
+
 interface LikeData {
   result: CardWithLikeIdx[];
   next: boolean;
 }
 
-export const getMyLists = async (): Promise<Card[] | null> => {
+export const getMyArticleLists = async (page: number, pageSize: number): Promise<Card[] | null> => {
   try {
-    const res = await tokenInstance.get(`/lists`);
+    const res = await tokenInstance.get(`/lists?page=${page}&pageSize=${pageSize}`);
     return res.data.data;
   } catch (error) {
     console.log(error);
@@ -23,22 +24,22 @@ export const getMyLists = async (): Promise<Card[] | null> => {
   }
 };
 
-export const getRecentlyViewedLists = async (): Promise<Card[] | null> => {
-  try {
-    const res = await tokenInstance.get(`/lists/recent`);
-    return res.data.data;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};
-
-export const getLikedList = async (
-  cursorIdx: number,
+export const getRecentlyViewedLists = async (
+  page: number,
   pageSize: number,
 ): Promise<LikeData | null> => {
   try {
-    const res = await tokenInstance.get(`/likes/lists?page=${cursorIdx}&pageSize=${pageSize}`);
+    const res = await tokenInstance.get(`/lists/recent?page=${page}&pageSize=${pageSize}`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getLikedList = async (page: number, pageSize: number): Promise<LikeData | null> => {
+  try {
+    const res = await tokenInstance.get(`/likes/lists?page=${page}&pageSize=${pageSize}`);
     return res.data.data;
   } catch (error) {
     console.log(error);

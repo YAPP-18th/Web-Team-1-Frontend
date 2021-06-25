@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import Cards from '#components/Cards';
 import { isEmpty } from '../../../utils';
 /* eslint-disable no-console */
-export interface CardWithLikeIdx {
+
+export interface Card {
   postIdx: number;
-  likeIdx: number;
   title: string;
   category: string;
   contents: string;
@@ -19,40 +19,30 @@ export interface CardWithLikeIdx {
   scrapCnt: number;
 }
 
-interface Data {
-  result: CardWithLikeIdx[];
-  next: boolean;
-}
 interface Props {
-  api: (page: number, pageSize: number) => Promise<Data | null>;
+  api: (page: number, pageSize: number) => Promise<Card[] | null>;
 }
 
 interface ListData {
-  next: boolean;
-  nextCursorIdx: number | null;
-  cards: CardWithLikeIdx[];
+  page: number | null;
+  cards: Card[];
 }
 
-const TabContentWithCursor = ({ api }: Props) => {
+const TabContentWithPageIdx = ({ api }: Props) => {
   const history = useHistory();
   const [listData, setListData] = useState<ListData>({
-    next: false,
-    nextCursorIdx: 0,
+    page: 0,
     cards: [],
   });
 
   const ref = useRef<HTMLDivElement>(null);
 
   const callApi = async () => {
-    if (listData.nextCursorIdx !== null) {
-      const resultData = await api(listData.nextCursorIdx, 8);
-      if (resultData) {
-        const { next, result } = resultData;
+    if (listData.page !== null) {
+      const result = await api(listData.page, 8);
+      if (result) {
         setListData({
-          next,
-          nextCursorIdx: isEmpty(result)
-            ? null
-            : result[result.length - 1].likeIdx || result[result.length - 1].postIdx,
+          page: result.length < 8 ? null : listData.page + 1,
           cards: [...listData.cards, ...result],
         });
       }
@@ -95,11 +85,11 @@ const TabContentWithCursor = ({ api }: Props) => {
       {listData.cards.length > 0 && (
         <>
           <Cards onClickCard={onClickCard} cards={listData.cards} />
-          {listData.next && <div ref={ref} />}
+          {listData.page && <div ref={ref} />}
         </>
       )}
     </>
   );
 };
 
-export default TabContentWithCursor;
+export default TabContentWithPageIdx;

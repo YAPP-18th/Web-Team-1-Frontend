@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { getMyLists, getRecentlyViewedLists, getLikedList } from '#apis/userApi';
-import TabContent from './TabContent';
+import { getMyArticleLists, getRecentlyViewedLists, getLikedList } from '#apis/userApi';
+import TabContentWithPageIdx from './TabContentWithPageIdx';
 import TabContentWithCursor from './TabContentWithCursor';
 
 export interface TabItemProps {
@@ -50,9 +50,9 @@ const ProfileTab = () => {
           스크랩한 회고
         </TabItem>
       </StyledProfileTab>
-      {activeTab === 1 && <TabContent api={getMyLists} />}
+      {activeTab === 1 && <TabContentWithPageIdx api={getMyArticleLists} />}
       {/* {activeTab === 2 && <TabContent api={getMyLists} />} */}
-      {activeTab === 3 && <TabContent api={getRecentlyViewedLists} />}
+      {activeTab === 3 && <TabContentWithCursor api={getRecentlyViewedLists} />}
       {activeTab === 4 && <TabContentWithCursor api={getLikedList} />}
     </>
   );
