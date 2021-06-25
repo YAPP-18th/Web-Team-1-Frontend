@@ -38,7 +38,7 @@ export const getLikedList = async (
   pageSize: number,
 ): Promise<LikeData | null> => {
   try {
-    const res = await tokenInstance.get(`/likes/lists?cursorIdx=${cursorIdx}&pageSize=${pageSize}`);
+    const res = await tokenInstance.get(`/likes/lists?page=${cursorIdx}&pageSize=${pageSize}`);
     return res.data.data;
   } catch (error) {
     console.log(error);

@@ -40,9 +40,9 @@ const CommentContainer = () => {
   const callCommentListApi = useCallback(async () => {
     let result;
     if (window.localStorage.getItem('accessToken')) {
-      result = await getCommentListWithToken(index, 0, 10);
+      result = await getCommentListWithToken(index, 0, 100);
     } else {
-      result = await getCommentList(index, 0, 10);
+      result = await getCommentList(index, 0, 100);
     }
     if (result) {
       setCommentList(result.data);
