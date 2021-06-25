@@ -31,6 +31,10 @@ const ProfileModalContainer = ({ modal, setModal }: Props) => {
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
+    setWarning({
+      isWarning: false,
+      warningMessage: '',
+    });
     setUser({
       ...user,
       [e.target.name]: e.target.value,

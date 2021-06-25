@@ -158,9 +158,10 @@ interface Props {
 
 const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Props) => {
   const [blocking, setBlocking] = useState(false);
-  const handleClick = () => {
+  const handleClick = async () => {
     setBlocking(true);
-    onClick();
+    await onClick();
+    setBlocking(false);
   };
   return (
     <>
@@ -196,7 +197,7 @@ const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Pr
               <textarea name="intro" value={user.intro} onChange={onChange} />
               <Warning visible={warning.isWarning}>{warning.warningMessage}</Warning>
 
-              <Button onClick={handleClick} disabled={blocking}>
+              <Button onClick={handleClick} disabled={warning.isWarning || blocking}>
                 프로필 변경 완료
               </Button>
             </Column>
