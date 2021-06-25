@@ -27,7 +27,7 @@ export const getMyArticleLists = async (page: number, pageSize: number): Promise
 export const getRecentlyViewedLists = async (
   page: number,
   pageSize: number,
-): Promise<LikeData | null> => {
+): Promise<Card[] | null> => {
   try {
     const res = await tokenInstance.get(`/lists/recent?page=${page}&pageSize=${pageSize}`);
     return res.data.data;
@@ -107,6 +107,16 @@ export const checkDuplicatedNickname = async (nickname: string): Promise<boolean
   try {
     const res = await instance.get(`/users?nickname=${nickname}`);
     return res.data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const withdraw = async (): Promise<boolean | null> => {
+  try {
+    await tokenInstance.get(`/users/profiles`);
+    return true;
   } catch (error) {
     console.log(error);
     return null;

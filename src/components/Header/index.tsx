@@ -72,8 +72,10 @@ export default function Header() {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       setIsLogined(true);
+    } else {
+      setIsLogined(false);
     }
-  }, []);
+  }, [userData.nickname]);
 
   return (
     <>

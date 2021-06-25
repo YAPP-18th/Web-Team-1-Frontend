@@ -29,6 +29,11 @@ const Msg: { [key: string]: MsgSet } = {
     body: '댓글은 한 번 삭제하면 되돌릴 수 없으므로 신중하게 확인해주세요.',
     btnMsg: '삭제',
   },
+  withdrawal: {
+    header: '정말 탈퇴하시겠습니까?',
+    body: '계정은 한 번 탈퇴하면 되돌릴 수 없으므로 신중하게 확인해주세요.',
+    btnMsg: '탈퇴',
+  },
 };
 
 const ConfirmModalContainer = ({ type, callApi, toggle }: Props) => {

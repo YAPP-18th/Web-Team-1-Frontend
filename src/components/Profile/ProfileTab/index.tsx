@@ -55,7 +55,7 @@ const ProfileTab = ({ activeTabIdx }: Props) => {
       </StyledProfileTab>
       {activeTab === 1 && <TabContentWithPageIdx api={getMyArticleLists} />}
       {/* {activeTab === 2 && <TabContent api={getMyLists} />} */}
-      {activeTab === 3 && <TabContentWithCursor api={getRecentlyViewedLists} />}
+      {activeTab === 3 && <TabContentWithPageIdx api={getRecentlyViewedLists} />}
       {activeTab === 4 && <TabContentWithCursor api={getLikedList} />}
     </>
   );

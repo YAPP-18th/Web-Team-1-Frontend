@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { UserState } from 'slices/userSlice';
 import zIndex from '#styles/zIndex';
 import ImageDrop from './ImageDrop';
+import ConfirmModalContainer from '#containers/ConfirmModalContainer';
 
 export interface Warning {
   isWarning: boolean;
@@ -70,6 +71,7 @@ const ModalBody = styled.div`
 `;
 
 const Column = styled.div`
+  position: relative;
   width: 280px;
   display: flex;
   flex-direction: column;
@@ -138,6 +140,20 @@ const Button = styled.button`
   }
 `;
 
+const WithdrawalButton = styled.button`
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  text-decoration-line: underline;
+
+  color: #999999;
+
+  cursor: pointer;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+`;
 // const categoryIndex: { [key: string]: number } = {
 //   marketing: 1,
 //   design: 2,
@@ -154,10 +170,21 @@ interface Props {
   onClick: () => Promise<void>;
   setImage: React.Dispatch<React.SetStateAction<null | File>>;
   warning: Warning;
+  onClickWithdraw: () => Promise<void>;
 }
 
-const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Props) => {
+const ProfileModal = ({
+  toggle,
+  user,
+  onChange,
+  onClick,
+  setImage,
+  warning,
+  onClickWithdraw,
+}: Props) => {
   const [blocking, setBlocking] = useState(false);
+  const [modal, setModal] = useState(false);
+  const confirmToggle = () => setModal(!modal);
   const handleClick = async () => {
     setBlocking(true);
     await onClick();
@@ -168,7 +195,7 @@ const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Pr
       <StyledModalContainer>
         <StyledModal>
           <CloseBtn onClick={toggle}>X</CloseBtn>
-          <ModalHeader>프로필 변경</ModalHeader>
+          <ModalHeader>프로필 설정</ModalHeader>
           <ModalBody>
             <Column>
               <Label>프로필 사진(선택)</Label>
@@ -179,6 +206,14 @@ const ProfileModal = ({ toggle, user, onChange, onClick, setImage, warning }: Pr
                 <br />
                 800*800 이상의 JPG, PNG 이미지를 권장해요
               </HelpText>
+              <WithdrawalButton type="button">더 이상 돌아보지 않기</WithdrawalButton>
+              {modal && (
+                <ConfirmModalContainer
+                  type="withdrawal"
+                  toggle={confirmToggle}
+                  callApi={onClickWithdraw}
+                />
+              )}
             </Column>
             <Column>
               <Label>별명</Label>

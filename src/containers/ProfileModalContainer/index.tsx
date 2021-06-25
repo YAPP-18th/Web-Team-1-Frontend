@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { startAlert } from 'slices/alertSlice';
-import { fetchProfile } from 'slices/userSlice';
+import { fetchProfile, userActions } from 'slices/userSlice';
+import { useHistory } from 'react-router';
+import { useCookies } from 'react-cookie';
 import ProfileModal, { Warning } from '#components/Profile/ProfileModal';
 import { useAppSelector } from '#hooks/useAppSelector';
-import { checkDuplicatedNickname, updateMyProfile, uploadProfileImage } from '#apis/userApi';
+import {
+  checkDuplicatedNickname,
+  updateMyProfile,
+  uploadProfileImage,
+  withdraw,
+} from '#apis/userApi';
 import { useAppDispatch } from '#hooks/useAppDispatch';
 
 interface Props {
@@ -11,6 +18,8 @@ interface Props {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const ProfileModalContainer = ({ modal, setModal }: Props) => {
+  const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
+  const history = useHistory();
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.userReducer);
   const [user, setUser] = useState(userData);
@@ -39,6 +48,19 @@ const ProfileModalContainer = ({ modal, setModal }: Props) => {
       ...user,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleClickWithdrawalButton = async () => {
+    const result = await withdraw();
+
+    if (result) {
+      // 삭제하려면
+      removeCookie('JWT-Refresh-Token');
+      window.localStorage.removeItem('accessToken');
+      dispatch(userActions.clearProfile());
+      history.push('/');
+      dispatch(startAlert('정상적으로 탈퇴되었습니다. 🙇🏻'));
+    }
   };
 
   const onClick = async () => {
@@ -106,6 +128,7 @@ const ProfileModalContainer = ({ modal, setModal }: Props) => {
           onClick={onClick}
           setImage={setImage}
           warning={warning}
+          onClickWithdraw={handleClickWithdrawalButton}
         />
       )}
     </>
