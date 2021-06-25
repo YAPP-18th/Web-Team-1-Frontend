@@ -115,7 +115,7 @@ export const checkDuplicatedNickname = async (nickname: string): Promise<boolean
 
 export const withdraw = async (): Promise<boolean | null> => {
   try {
-    await tokenInstance.get(`/users/profiles`);
+    await tokenInstance.delete(`/users/profiles`);
     return true;
   } catch (error) {
     console.log(error);
