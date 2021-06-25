@@ -209,13 +209,6 @@ const ProfileModal = ({
               <WithdrawalButton type="button" onClick={confirmToggle}>
                 더 이상 돌아보지 않기
               </WithdrawalButton>
-              {modal && (
-                <ConfirmModalContainer
-                  type="withdrawal"
-                  toggle={confirmToggle}
-                  callApi={onClickWithdraw}
-                />
-              )}
             </Column>
             <Column>
               <Label>별명</Label>
@@ -241,6 +234,9 @@ const ProfileModal = ({
           </ModalBody>
         </StyledModal>
       </StyledModalContainer>
+      {modal && (
+        <ConfirmModalContainer type="withdrawal" toggle={confirmToggle} callApi={onClickWithdraw} />
+      )}
     </>
   );
 };
