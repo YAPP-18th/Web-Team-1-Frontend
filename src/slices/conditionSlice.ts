@@ -3,10 +3,10 @@ import { isAllDisable } from '../utils';
 
 const initialCheckedState = {
   total: true,
-  marketing: false,
-  design: false,
-  plan: false,
-  develop: false,
+  marketing: true,
+  design: true,
+  plan: true,
+  develop: true,
 };
 
 const { actions, reducer: conditionReducer } = createSlice({
@@ -22,28 +22,22 @@ const { actions, reducer: conditionReducer } = createSlice({
         ...state.categoryCheckedState,
         [id]: checked,
       };
+      const { design, develop, marketing, plan } = newCategories;
 
-      if (isAllDisable(newCategories)) {
-        if (id === 'total') {
-          return {
-            ...state,
-            categoryCheckedState: {
-              ...initialCheckedState,
-            },
-          };
-        }
+      if (id === 'total' || (design && develop && marketing && plan)) {
         return {
           ...state,
-          categoryCheckedState: {
-            ...newCategories,
-            total: false,
-          },
+          categoryCheckedState: initialCheckedState,
         };
+      }
+      if (isAllDisable(newCategories)) {
+        return state;
       }
       return {
         ...state,
         categoryCheckedState: {
-          ...initialCheckedState,
+          ...newCategories,
+          total: false,
         },
       };
     },
