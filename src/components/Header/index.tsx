@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { userActions } from 'slices/userSlice';
@@ -25,6 +25,7 @@ export default function Header() {
 
   const [isLogined, setIsLogined] = useState(false);
   const history = useHistory();
+  const location = useLocation();
 
   const [, , removeCookie] = useCookies(['JWT-Refresh-Token']);
   const { category } = useAppSelector((state) => state.articleEditorReducer);
@@ -106,16 +107,18 @@ export default function Header() {
                     </button>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  className="menu-item"
-                  onClick={() => {
-                    handleClickMypageShortCut(1);
-                  }}
-                >
-                  작성한 회고
-                </button>
-                {/* <button
+                {location.pathname !== '/me' && (
+                  <>
+                    <button
+                      type="button"
+                      className="menu-item"
+                      onClick={() => {
+                        handleClickMypageShortCut(1);
+                      }}
+                    >
+                      작성한 회고
+                    </button>
+                    {/* <button
                   type="button"
                   className="menu-item"
                   onClick={() => {
@@ -124,24 +127,26 @@ export default function Header() {
                 >
                   작성 중인 회고
                 </button> */}
-                <button
-                  type="button"
-                  className="menu-item"
-                  onClick={() => {
-                    handleClickMypageShortCut(3);
-                  }}
-                >
-                  최근 읽은 회고
-                </button>
-                <button
-                  type="button"
-                  className="menu-item"
-                  onClick={() => {
-                    handleClickMypageShortCut(4);
-                  }}
-                >
-                  스크랩한 회고
-                </button>
+                    <button
+                      type="button"
+                      className="menu-item"
+                      onClick={() => {
+                        handleClickMypageShortCut(3);
+                      }}
+                    >
+                      최근 읽은 회고
+                    </button>
+                    <button
+                      type="button"
+                      className="menu-item"
+                      onClick={() => {
+                        handleClickMypageShortCut(4);
+                      }}
+                    >
+                      스크랩한 회고
+                    </button>
+                  </>
+                )}
               </S.MenuWrapper>
             )}
           </S.LoginAfter>

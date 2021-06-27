@@ -196,6 +196,8 @@ const ArticleModal = ({
             <Label>해시태그</Label>
             <HashTagBox addTag={addTag} tagList={tagList} deleteTag={deleteTag} />
             <HelpText>
+              Enter 로 태그를 등록할 수 있습니다.
+              <br />
               회고 양식 해시태그는 자동으로 맨 앞에 위치합니다.
               <br />
               해시태그는 최대 3개, 최대 16자까지만 노출됩니다.
