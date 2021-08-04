@@ -37,7 +37,7 @@ const StyledShareOption = styled.div`
 
 const ShareOption = () => {
   const location = useLocation();
-  const domain = 'http://doraboda.com';
+  const domain = 'https://doraboda.com';
   const dispatch = useAppDispatch();
 
   const handleClickUrl = () => dispatch(startAlert('클립보드에 링크를 복사했습니다. 🔗'));
